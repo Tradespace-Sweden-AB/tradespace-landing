@@ -240,10 +240,10 @@
                     body: JSON.stringify({ email, secret: SECRET })
                 });
                 input.value = '';
-                tsToast('Tack, du är nu i listan.', true);
+                tsToast('Tack! Vi meddelar när det är dags att revolutionera B2B-handeln.', true);
             } catch (err) {
                 console.error(err);
-                tsToast('Oops—kunde inte spara din e-postadress.', false);
+                tsToast('Vänligen kontrollera e-postadressen.', false);
             } finally { btn.disabled = false; btn.style.opacity = '1'; }
         });
     });
