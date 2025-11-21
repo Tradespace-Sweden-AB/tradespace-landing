@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -17,44 +18,44 @@
             --blur: 38px;
         }
 
-        * { box-sizing: border-box; }
-        html, body {
-            height: 100%;
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
             margin: 0;
             padding: 0;
+            width: 100%;
+            overflow-x: hidden;
         }
 
         body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            min-height: 100vh;
             font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial;
             color: var(--text);
             background: var(--bg-900);
-            overflow: hidden;
             position: relative;
         }
 
         /* base gradient backdrop */
         body::before {
             content: "";
-            position: absolute;
+            position: fixed;
             inset: 0;
-            background: radial-gradient(1200px 800px at 75% -10%, rgba(32,147,198,0.18), transparent 60%),
-            radial-gradient(900px 600px at -10% 90%, rgba(32,147,198,0.16), transparent 60%),
+            background: radial-gradient(1200px 800px at 75% -10%, rgba(32, 147, 198, 0.18), transparent 60%),
+            radial-gradient(900px 600px at -10% 90%, rgba(32, 147, 198, 0.16), transparent 60%),
             linear-gradient(180deg, var(--bg-800), var(--bg-900));
             z-index: 0;
         }
 
         /* moving light blobs */
         .bg-light {
-            position: absolute;
+            position: fixed;
             width: 800px;
             height: 800px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(32,147,198,0.45) 0%, rgba(108,200,236,0.15) 60%, transparent 100%);
+            background: radial-gradient(circle, rgba(32, 147, 198, 0.45) 0%, rgba(108, 200, 236, 0.15) 60%, transparent 100%);
             filter: blur(500px);
             animation: moveLight 16s ease-in-out infinite alternate;
             z-index: 0;
@@ -62,23 +63,38 @@
 
         /* second and third blobs for depth */
         .bg-light:nth-child(2) {
-            background: radial-gradient(circle, rgba(108,200,236,0.5) 0%, rgba(32,147,198,0.2) 60%, transparent 100%);
+            background: radial-gradient(circle, rgba(108, 200, 236, 0.5) 0%, rgba(32, 147, 198, 0.2) 60%, transparent 100%);
             animation-delay: 6s;
             animation-duration: 20s;
         }
+
         .bg-light:nth-child(3) {
-            background: radial-gradient(circle, rgba(32,147,198,0.3) 0%, rgba(108,200,236,0.1) 70%, transparent 100%);
+            background: radial-gradient(circle, rgba(32, 147, 198, 0.3) 0%, rgba(108, 200, 236, 0.1) 70%, transparent 100%);
             animation-delay: 10s;
             animation-duration: 26s;
         }
 
         /* movement path keyframes */
         @keyframes moveLight {
-            0%   { transform: translate(-30%, -20%) scale(1); }
-            25%  { transform: translate(40%, -10%) scale(1.1); }
-            50%  { transform: translate(20%, 40%) scale(1); }
-            75%  { transform: translate(-25%, 30%) scale(1.4); }
-            100% { transform: translate(-40%, -20%) scale(1); }
+            0% {
+                transform: translate(-30%, -20%) scale(1);
+            }
+
+            25% {
+                transform: translate(40%, -10%) scale(1.1);
+            }
+
+            50% {
+                transform: translate(20%, 40%) scale(1);
+            }
+
+            75% {
+                transform: translate(-25%, 30%) scale(1.4);
+            }
+
+            100% {
+                transform: translate(-40%, -20%) scale(1);
+            }
         }
 
         /* make sure content sits on top of lights */
@@ -95,7 +111,10 @@
             margin-bottom: 1rem;
         }
 
-        header img { height: 40px; filter: drop-shadow(0 0 10px rgba(32,147,198,0.35)); }
+        header img {
+            height: 40px;
+            filter: drop-shadow(0 0 10px rgba(32, 147, 198, 0.35));
+        }
 
         h1 {
             font-weight: 100;
@@ -105,6 +124,24 @@
             margin: 0.5rem 0 3rem;
             text-align: center;
             color: white;
+        }
+
+        h2 {
+            font-weight: 70;
+            font-size: clamp(24px, 3vw, 36px);
+            line-height: 1.3;
+            letter-spacing: 0.2px;
+            text-align: center;
+            color: white;
+        }
+
+        h3 {
+            font-weight: 25;
+            font-size: clamp(16.8px, 2.1vw, 25.2px);
+            line-height: 1.3;
+            letter-spacing: 0.2px;
+            color: white;
+            text-align: center;
         }
 
         p.tagline {
@@ -136,10 +173,14 @@
             padding: 12px 16px;
             border-radius: 999px;
             color: white;
-            background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.06));
         }
 
-        input::placeholder { color: #c9d8e2; opacity: .7; font-weight: 100; }
+        input::placeholder {
+            color: #c9d8e2;
+            opacity: .7;
+            font-weight: 100;
+        }
 
         .btn {
             border: none;
@@ -149,16 +190,18 @@
             color: white;
             font-weight: 100;
             letter-spacing: .2px;
-            background:  var(--ts-primary);
+            background: var(--ts-primary);
             transition: transform .12s ease, box-shadow .12s ease, filter .2s ease;
         }
 
         .btn:hover {
             transform: translateY(-1px);
-            box-shadow: 0 14px 36px rgba(32,147,198,0.45);
+            box-shadow: 0 14px 36px rgba(32, 147, 198, 0.45);
         }
 
-        .btn:active { transform: translateY(0); }
+        .btn:active {
+            transform: translateY(0);
+        }
 
         .legal {
             text-align: center;
@@ -173,6 +216,103 @@
             text-decoration: none;
         }
 
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            z-index: 10;
+            animation: fadeInOut 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator-text {
+            color: white;
+            font-size: 14px;
+            font-weight: 100;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
+        .scroll-indicator-arrow {
+            width: 24px;
+            height: 24px;
+            color: var(--ts-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-indicator-arrow svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        @keyframes fadeInOut {
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Scroll to top section */
+        .scroll-to-top-section {
+            padding: 12px;
+            padding-bottom: 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .scroll-to-top {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            animation: fadeInOut 2s ease-in-out infinite;
+        }
+
+        .scroll-to-top-text {
+            color: white;
+            font-size: 14px;
+            font-weight: 100;
+            letter-spacing: 0.5px;
+            margin: 0;
+            text-align: center;
+        }
+
+        .scroll-to-top-btn {
+            background: var(--ts-primary);
+            border: none;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 999px;
+            font-weight: 100;
+            letter-spacing: .2px;
+            cursor: pointer;
+            transition: transform .12s ease, box-shadow .12s ease;
+            font-size: 14px;
+        }
+
+        .scroll-to-top-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 36px rgba(32, 147, 198, 0.45);
+        }
+
         .content {
             z-index: 10;
         }
@@ -185,13 +325,529 @@
         }
 
         .blur {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: 1;
             backdrop-filter: blur(3px);
+        }
+
+        /* Main container */
+        .main-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Hero section (email input) */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Video section - bottom */
+        .video-section {
+            padding: 40px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .video-section-title {
+            text-align: center;
+            font-weight: 100;
+            font-size: clamp(24px, 3vw, 36px);
+            line-height: 1.3;
+            letter-spacing: 0.2px;
+            margin: 0 0 1.5rem;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .video-section-title .large-text {
+            font-size: clamp(40px, 6vw, 48px);
+            line-height: 1.1;
+            display: block;
+            margin-bottom: -1em;
+        }
+
+        .video-section-title br {
+            display: block;
+            margin: -1.2em 0;
+            line-height: 0;
+        }
+
+        .video-content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        .video-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .about-text {
+            z-index: 2;
+            position: relative;
+        }
+
+        .about-text h2 {
+            font-weight: 100;
+            font-size: clamp(40px, 6vw, 70px);
+            line-height: 1.1;
+            letter-spacing: 0.2px;
+            margin: 0 0 1.5rem;
+            color: white;
+        }
+
+        .about-text p {
+            font-size: clamp(16px, 2vw, 18px);
+            line-height: 1.7;
+            color: var(--text-dim);
+        }
+
+        /* Video player section - in content area */
+        .video-upload-section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            position: relative;
+        }
+
+        /* Logo container */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 100%;
+            min-height: 300px;
+            border-radius: 0px;
+            overflow: hidden;
+            background: rgba(10, 15, 26, 0);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0);
+        }
+
+        .section-logo {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            filter: drop-shadow(0 0 5px rgba(32, 147, 198, 0.2));
+            -webkit-mask-image: radial-gradient(ellipse at center, white 70%, transparent 100%);
+            mask-image: radial-gradient(ellipse at center, white 70%, transparent 100%);
+        }
+
+        /* Video player */
+        .video-player-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: rgba(10, 15, 26, 0.9);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            display: none;
+        }
+
+        .video-player-container.active {
+            display: block;
+        }
+
+        .video-player {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #000;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, transparent, rgba(10, 15, 26, 0.95));
+            padding: 12px;
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-btn {
+            background: rgba(32, 147, 198, 0.9);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+
+        .video-btn:hover {
+            background: var(--ts-primary);
+            transform: scale(1.1);
+        }
+
+        .video-btn:active {
+            transform: scale(0.95);
+        }
+
+        .video-btn.fullscreen {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .video-btn.fullscreen:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+
+        /* Fullscreen video */
+        .video-fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-fullscreen.active {
+            display: flex;
+        }
+
+        .video-fullscreen video {
+            max-width: 95vw;
+            max-height: 95vh;
+            border-radius: 8px;
+        }
+
+        .close-fullscreen {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.2s ease;
+        }
+
+        .close-fullscreen:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* About Us Extended Sections */
+        .about-section {
+            padding: 80px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-section-title {
+            font-weight: 100;
+            font-size: clamp(40px, 6vw, 70px);
+            line-height: 1.1;
+            letter-spacing: 0.2px;
+            margin: 0 0 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .about-section-text {
+            font-size: clamp(16px, 2vw, 18px);
+            line-height: 1.7;
+            color: var(--text-dim);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        /* Feature Cards */
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            margin: 4rem 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(32, 147, 198, 0.2);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 20px;
+            color: var(--ts-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .feature-card h3 {
+            font-weight: 100;
+            font-size: clamp(20px, 2.5vw, 24px);
+            color: white;
+            margin: 0 0 12px;
+            letter-spacing: 0.2px;
+        }
+
+        .feature-card p {
+            font-size: clamp(14px, 1.5vw, 16px);
+            line-height: 1.6;
+            color: var(--text-dim);
+            margin: 0;
+        }
+
+        /* Values Section */
+        .values-section {
+            margin: 4rem 0;
+        }
+
+        .value-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 32px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .value-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .value-card.reverse {
+            direction: rtl;
+        }
+
+        .value-card.reverse>* {
+            direction: ltr;
+        }
+
+        .value-content h3 {
+            font-weight: 100;
+            font-size: clamp(30px, 3vw, 40px);
+            line-height: 1.1;
+            letter-spacing: 0.2px;
+            margin: 0 0 20px;
+            color: white;
+        }
+
+        .value-content p {
+            font-size: clamp(16px, 2vw, 18px);
+            line-height: 1.7;
+            color: var(--text-dim);
+            margin: 0 0 16px;
+        }
+
+        .value-image {
+            position: relative;
+            width: 100%;
+            min-height: 260px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(10, 15, 26, 0.7);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+            cursor: zoom-in;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .value-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .value-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .value-image-magnifier {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 54px;
+            height: 54px;
+            border-radius: 999px;
+            background: rgba(10, 15, 26, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            transform: translate(30%, -30%) scale(0.85);
+            opacity: 0.65;
+            transition: transform 0.3s ease, opacity 0.3s ease, background 0.3s ease;
+        }
+
+        .value-image:hover .value-image-magnifier {
+            opacity: 1;
+            transform: translate(0, 0) scale(1);
+            background: rgba(32, 147, 198, 0.85);
+        }
+
+        .image-fullscreen {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 8, 16, 0.92);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+
+        .image-fullscreen.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .image-fullscreen img {
+            width: 100%;
+            max-width: min(1100px, 95vw);
+            max-height: calc(100vh - 140px);
+            object-fit: contain;
+            border-radius: 16px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+            transform: scale(0.96);
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .image-fullscreen.active img {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .close-image-fullscreen {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 999px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .close-image-fullscreen:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .video-content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .video-section {
+                padding: 60px 24px;
+            }
+
+            .video-player-container {
+                max-width: 100%;
+            }
+
+            .about-text {
+                order: 2;
+            }
+
+            .video-upload-section {
+                order: 1;
+            }
+
+            .feature-cards {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .value-card {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .value-card.reverse {
+                direction: ltr;
+            }
         }
     </style>
 </head>
@@ -217,56 +873,434 @@
     }
 
 
-    // Attach handler after DOM paints
+    // Video upload and player functionality
     window.addEventListener('DOMContentLoaded', () => {
+        // Email form handler
         const form = document.querySelector('#notify-form');
-        if (!form) return;
+        if (form) {
+            const EMAIL_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw8xy92QQxTxXHmh6uM-7QNX2JQ-zI0TpBDVzYKboJKqSBGuzej20xJ-x9DUrIQnWHW/exec';
+            const SECRET = 'Tradespace';
 
+            form.addEventListener('submit', async (ev) => {
+                ev.preventDefault();
+                const input = form.querySelector('input[type="email"]');
+                const btn = form.querySelector('button');
+                const email = (input?.value || '').trim();
+                if (!email) return;
+                btn.disabled = true; btn.style.opacity = '.7';
+                try {
+                    await fetch(EMAIL_ENDPOINT, {
+                        method: 'POST',
+                        body: JSON.stringify({ email, secret: SECRET })
+                    });
+                    input.value = '';
+                    tsToast('Tack! Vi meddelar när det är dags att revolutionera B2B-handeln.', true);
+                } catch (err) {
+                    console.error(err);
+                    tsToast('Vänligen kontrollera e-postadressen.', false);
+                } finally { btn.disabled = false; btn.style.opacity = '1'; }
+            });
+        }
 
-        const EMAIL_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw8xy92QQxTxXHmh6uM-7QNX2JQ-zI0TpBDVzYKboJKqSBGuzej20xJ-x9DUrIQnWHW/exec';
-        const SECRET = 'Tradespace'; // optional
+        // Video player functionality - commented out since we replaced video with logo
+        /*
+        const videoPlayerContainer = document.getElementById('video-player-container');
+        const videoPlayer = document.getElementById('video-player');
+        const playBtn = document.getElementById('play-btn');
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        const videoFullscreen = document.getElementById('video-fullscreen');
+        const fullscreenVideo = document.getElementById('fullscreen-video');
+        const closeFullscreen = document.getElementById('close-fullscreen');
 
+        // Auto-load video from project folder on page load
+        function tryLoadVideo(filename) {
+            return new Promise((resolve) => {
+                const testVideo = document.createElement('video');
+                testVideo.preload = 'metadata';
+                testVideo.src = filename;
 
-        form.addEventListener('submit', async (ev) => {
-            ev.preventDefault();
-            const input = form.querySelector('input[type="email"]');
-            const btn = form.querySelector('button');
-            const email = (input?.value || '').trim();
-            if (!email) return;
-            btn.disabled = true; btn.style.opacity = '.7';
-            try {
-                await fetch(EMAIL_ENDPOINT, {
-                    method: 'POST',
-                    body: JSON.stringify({ email, secret: SECRET })
+                testVideo.addEventListener('loadedmetadata', () => {
+                    resolve(filename);
                 });
-                input.value = '';
-                tsToast('Tack! Vi meddelar när det är dags att revolutionera B2B-handeln.', true);
-            } catch (err) {
-                console.error(err);
-                tsToast('Vänligen kontrollera e-postadressen.', false);
-            } finally { btn.disabled = false; btn.style.opacity = '1'; }
+
+                testVideo.addEventListener('error', () => {
+                    resolve(null);
+                });
+
+                // Timeout after 2 seconds
+                setTimeout(() => resolve(null), 2000);
+            });
+        }
+
+        // Try to find and load video file
+        (async () => {
+            const videoFiles = [
+                'video.mp4', 'video.mov', 'video.webm', 'video.ogg',
+                'tradespace video.mp4', 'tradespace video.mov', 'tradespace video.webm'
+            ];
+
+            for (const filename of videoFiles) {
+                const result = await tryLoadVideo(filename);
+                if (result) {
+                    videoPlayer.src = result;
+                    fullscreenVideo.src = result;
+                    videoPlayerContainer.classList.add('active');
+                    break;
+                }
+            }
+        })();
+
+
+        // Play button
+        playBtn.addEventListener('click', () => {
+            if (videoPlayer.paused) {
+                videoPlayer.play();
+                playBtn.textContent = '⏸';
+            } else {
+                videoPlayer.pause();
+                playBtn.textContent = '▶';
+            }
         });
+
+        // Update play button when video plays/pauses
+        videoPlayer.addEventListener('play', () => {
+            playBtn.textContent = '⏸';
+        });
+
+        videoPlayer.addEventListener('pause', () => {
+            playBtn.textContent = '▶';
+        });
+
+        // Fullscreen button
+        fullscreenBtn.addEventListener('click', () => {
+            videoFullscreen.classList.add('active');
+            fullscreenVideo.currentTime = videoPlayer.currentTime;
+            if (!videoPlayer.paused) {
+                fullscreenVideo.play();
+            }
+        });
+
+        // Close fullscreen
+        closeFullscreen.addEventListener('click', () => {
+            videoFullscreen.classList.remove('active');
+            videoPlayer.currentTime = fullscreenVideo.currentTime;
+            if (!fullscreenVideo.paused) {
+                videoPlayer.play();
+            } else {
+                videoPlayer.pause();
+            }
+        });
+
+        // Close fullscreen on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && videoFullscreen.classList.contains('active')) {
+                closeFullscreen.click();
+            }
+        });
+        */
+
+        // Scroll animations for feature cards and value cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all feature cards and value cards
+        document.querySelectorAll('.feature-card, .value-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Scroll indicator click handler
+        const scrollIndicator = document.getElementById('scroll-indicator');
+        if (scrollIndicator) {
+            scrollIndicator.addEventListener('click', () => {
+                const videoSection = document.querySelector('.video-section');
+                if (videoSection) {
+                    videoSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        }
+
+        // Scroll to top button functionality
+        const scrollToTopDiv = document.getElementById('scroll-to-top');
+        const scrollToTopBtn = document.querySelector('.scroll-to-top-btn');
+        
+        const scrollToTop = () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+        
+        if (scrollToTopDiv) {
+            scrollToTopDiv.addEventListener('click', scrollToTop);
+        }
+        if (scrollToTopBtn) {
+            scrollToTopBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent double-firing
+                scrollToTop();
+            });
+        }
+
+        // Value image fullscreen viewer
+        const imageFullscreen = document.getElementById('image-fullscreen');
+        const fullscreenImage = document.getElementById('image-fullscreen-img');
+        const closeImageFullscreen = document.getElementById('close-image-fullscreen');
+
+        const closeImageOverlay = () => {
+            if (!imageFullscreen) return;
+            imageFullscreen.classList.remove('active');
+            imageFullscreen.setAttribute('aria-hidden', 'true');
+            if (fullscreenImage) {
+                fullscreenImage.removeAttribute('src');
+                fullscreenImage.removeAttribute('alt');
+            }
+        };
+
+        document.querySelectorAll('.value-image').forEach((cardImage) => {
+            cardImage.addEventListener('click', () => {
+                const source = cardImage.dataset.image || cardImage.querySelector('img')?.getAttribute('src');
+                const description = cardImage.querySelector('img')?.getAttribute('alt') || 'Tradespace exempel';
+                if (!source || !imageFullscreen || !fullscreenImage) return;
+                fullscreenImage.src = source;
+                fullscreenImage.alt = description;
+                imageFullscreen.classList.add('active');
+                imageFullscreen.setAttribute('aria-hidden', 'false');
+            });
+        });
+
+        closeImageFullscreen?.addEventListener('click', closeImageOverlay);
+
+        imageFullscreen?.addEventListener('click', (event) => {
+            if (event.target === imageFullscreen) {
+                closeImageOverlay();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && imageFullscreen?.classList.contains('active')) {
+                closeImageOverlay();
+            }
+        });
+
     });
 </script>
+
 <body>
 <div class="bg-light"></div>
 
 <div class="blur"></div>
 
-<main class="card">
-    <div class="content">
-        <h1>Vi omdefinierar hur </br>svenska företag gör affärer!</h1>
-        <p class="tagline">Var först med att veta när vi lanserar</p>
+<div class="main-container">
+    <!-- Hero Section (Email Input) -->
+    <section class="hero-section">
+        <main class="card">
+            <div class="content">
+                <h1>Vi omdefinierar hur svenska  <br> företag gör affärer!</h1>
+                <h2>Snart kan du vara med på Sveriges tryggaste B2B-marknadsplats</h2>
+                <p class="tagline">Missa inte starten. Få 25% rabatt på alla annonser första året och gratis lanseringsannonser:</p>
 
-        <form id="notify-form" onsubmit="return false;">
-            <div class="input-wrap">
-                <input type="email" placeholder="Ange din e-postadress" required />
-                <button class="btn" type="submit">Meddela mig</button>
+                <form id="notify-form" onsubmit="return false;">
+                    <div class="input-wrap">
+                        <input type="email" placeholder="Ange din e-postadress" required />
+                        <button class="btn" type="submit">Meddela mig</button>
+                    </div>
+                </form>
+                <div class="legal">Vi respekterar din integritet</div>
             </div>
-        </form>
-        <div class="legal">Vi respekterar din integritet</div>
-    </div>
-</main>
-<img class="logo" src="logo.svg" alt="Tradespace logo" />
+        </main>
+        <img class="logo" src="logo.svg" alt="Tradespace logo" />
+        <div class="scroll-indicator" id="scroll-indicator">
+            <p class="scroll-indicator-text">Läs mer</p>
+            <div class="scroll-indicator-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <div class="video-content-wrapper">
+            <div class="about-text">
+                <h2>Vårt uppdrag</h2>
+                <p><b>Vi bygger plattformen som svensk B2B har saknat.</b> Här möts företag för att handla med allt från produkter till tjänster och skapa värdefulla affärsrelationer i sin bransch. 
+                    <br><br>
+                    Vår filosofi är att den trygga och robusta lösningen inte behöver vara komplicerad och vi har utformat sidan med våra svenska företag i fokus. Alla funktioner för annonsering eller nätverkande är bara ett klick ifrån.
+                    </p>
+            </div>
+
+            
+            <div class="video-column">
+               <!-- <h2 class="video-section-title">Upptäck hur Tradespace </br>gör handel och nätverkande </br>enklare
+                    än någonsin!</h2>-->
+                <div class="video-upload-section">
+                    <!--<div class="video-player-container" id="video-player-container">
+                        <video id="video-player" class="video-player"></video>
+                        <div class="video-controls">
+                            <button class="video-btn" id="play-btn" title="Spela upp">▶</button>
+                            <button class="video-btn fullscreen" id="fullscreen-btn" title="Fullskärm">⛶</button>
+                        </div>-->
+                    <div class="logo-container">
+                        <img src="TS_Logo_White_SVG.svg" alt="Tradespace logo" class="section-logo" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Extended Section -->
+    <section class="about-section">
+        <h2 class="about-section-title">Mer än bara annonser - ett ekosystem</h2>
+        <p class="about-section-text">Vi har tröttnat på stökig B2B-handel. Tradespace samlar allt på ett ställe: sälj överskottslager, hyr ut stillastående maskiner eller hitta nya leverantörer. Vi gör ditt företags resurser till likvida medel, i en miljö där alla är verifierade.
+        </p>
+
+        <!-- Feature Cards -->
+        <div class="feature-cards">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="M21 21l-4.35-4.35" />
+                    </svg>
+                </div>
+                <h3>Endast Verifierade Företag</h3>
+                <p>Slut på bedrägerier och oseriösa aktörer. Vi verifierar alla bolag via API och alla användare med BankID. Ni gör affärer med riktiga företag, punkt.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                </div>
+                <h3>Bygg ditt nätverk</h3>
+                <p>Stora som små, nystartade eller etablerade sedan länge - alla bolag är en del av gemenskapen som kommer hjälpa er att skapa relationer och hitta partners för framtiden.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <polyline points="3 17 9 11 13 15 21 7" stroke-width="2" />
+                        <polyline points="16 7 21 7 21 12" stroke-width="2" />
+                    </svg>
+                </div>
+                <h3>Verktyg för Tillväxt</h3>
+                <p>Kraftfulla verktyg som hjälper er att nå ut till leverantörer eller kunder som just ert företag behöver. Vi värnar om  er upplevelse oavsett vilken sida av affären ni är på.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        <path d="M9 12l2 2 4-4" />
+                    </svg>
+                </div>
+                <h3>Teknik & Säkerhet</h3>
+                <p>Vi har utformat tjänsten med högsta säkerhetsstandard. Blixtsnabb, krypterad och GDPR-säkrad. Vi sköter tekniken så att du kan fokusera på affären.</p>
+            </div>
+        </div>
+
+        <!-- Values Section -->
+        <div class="values-section">
+            <div class="value-card">
+                <div class="value-content">
+                    <h3>Total överblick från start</h3>
+                    <p>Vi har skalat bort röran. Med en kraftfull sökfunktion, 
+                        branschanpassade kategorier och ett intelligent flöde hittar du snabbt det du söker.</p>
+                    <p>Hantera dina bevakningar, meddelanden och annonser direkt från startvyn. 
+                        Oavsett om du ska hyra en lokal eller köpa en lastbil - här börjar din nästa affär.</p>
+                </div>
+                <div class="value-image" data-image="Exempelbild1.JPG">
+                    <img src="Exempelbild1.JPG" alt="Överblick av Tradespace-gränssnitt" loading="lazy" />
+                    <div class="value-image-magnifier" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <line x1="16.65" y1="16.65" x2="22" y2="22"></line>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="value-card reverse">
+                <div class="value-content">
+                    <h3>Företagsprofilen - Ditt space</h3>
+                    <p>Kärnan för Tradespace är inte annonserna - utan ni som företagare. 
+                        Därför hjälper vi er att synas genom attraktiva, anpassningsbara profiler som ni kan utforma efter
+                         ert företags behov. </p>
+                    <p>Publicera inlägg och evenemang för andra företagare, understryk annonser 
+                        genom att fästa dem högst upp och lägg till kontaktpersoner för företaget och ange deras roller. 
+                        Lär känna era affärspartners på bästa sätt oavsett om du är köpare eller säljare.</p>
+                </div>
+                <div class="value-image" data-image="Exempelbild2.JPG">
+                    <img src="Exempelbild2.JPG" alt="Anpassningsbar företagsprofil i Tradespace" loading="lazy" />
+                    <div class="value-image-magnifier" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <line x1="16.65" y1="16.65" x2="22" y2="22"></line>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            
+                <div class="value-card">
+                    <div class="value-content">
+                        <h3>Annonsering anpassad för verkligheten</h3>
+                        <p>Tydlig kommunikation med högt antal bilder, tydliga upplägg och prissättningsalternativ. 
+                            Allt detta gör Tradespace till den överlägset bästa sidan för både annonsering och sökning. </p>
+                        <p>Oavsett om det är ett leasingsavtal på maskiner med månadspris, 
+                            ett fordon med fast kostnad eller ett tonpris på makadamm så finns inga kompromisser i annonserna.</p>
+                    </div>
+                <div class="value-image" data-image="Exempelbild3.JPG">
+                    <img src="Exempelbild3.JPG" alt="Tradespace-annonsexempel" loading="lazy" />
+                    <div class="value-image-magnifier" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <line x1="16.65" y1="16.65" x2="22" y2="22"></line>
+                        </svg>
+                    </div>
+                </div>
+                </div>
+            
+        </div>
+    </section>
+
+    <!-- Scroll to top section -->
+    <section class="scroll-to-top-section">
+        <div class="scroll-to-top" id="scroll-to-top">
+            <p class="scroll-to-top-text">Är du redo?</p>
+            <button class="scroll-to-top-btn">Meddela mig</button>
+            <br><br>
+        </div>
+    </section>
+</div>
+
+<!-- Value image fullscreen -->
+<div class="image-fullscreen" id="image-fullscreen" aria-hidden="true">
+    <button class="close-image-fullscreen" id="close-image-fullscreen" title="Stäng bild">×</button>
+    <img src="" alt="" id="image-fullscreen-img" />
+</div>
+
+<!-- Fullscreen Video -->
+<div class="video-fullscreen" id="video-fullscreen">
+    <button class="close-fullscreen" id="close-fullscreen" title="Stäng">×</button>
+    <video id="fullscreen-video" controls></video>
+</div>
 </body>
+
 </html>
