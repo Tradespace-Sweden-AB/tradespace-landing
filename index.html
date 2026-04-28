@@ -1204,6 +1204,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding-top: 8px;
         }
 
         #sib-form .ts-captcha-reveal .sib-captcha {
@@ -1230,6 +1231,14 @@
         #sib-form .ts-captcha-reveal iframe[src*="recaptcha"] {
             margin-left: auto;
             margin-right: auto;
+        }
+
+        .ts-hero-signup-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 2px;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1575,76 +1584,72 @@
       <div></div>
       <div id="sib-container" class="sib-container--large sib-container--horizontal" style="text-align:center; background-color:rgba(255,255,255,0.0); border-radius:20px; border-width:0px; border-color:#cacaca; border-style:solid; direction:ltr">
         <form id="sib-form" method="POST" action="https://cbebf07e.sibforms.com/serve/MUIFAM3QB9NpbUFFEYbcbr59Z0T2GS7cF0h7TyLkppvlYd96ksAjCXQLPZLhzYboPzDIP_UA_f6VTeZfp6_qK2Fb5S1UuMEmWUDrw1JeOMOr4KfGjynMkN4JD0YzpEaGJRDaSyWzwLmYFnW1ptn5UGcMYjpI0hTxDMdEtDwyfOXZClHRAklILUr4Kq3BDJqoPchwAUQ3ntfy9OzRpg==" data-type="subscription">
-          <div style="padding: 2px 0;">
-            <div class="sib-input sib-form-block">
-              <div class="form__entry entry_block">
-                <div class="form__label-row form__label-row--horizontal">
-                  <div class="entry__field" style="width:100%;">
-                    <div class="input-wrap" style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 999px; justify-content: center; max-width: fit-content; margin: 0 auto;">
-                      <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="Ange din e-postadress" data-required="true" required style="width: min(420px, 62vw); border: none; outline: none; font-size: 15px; padding: 10px 16px; border-radius: 13px; color: white; background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.06)); height: 41px; box-sizing: border-box;" />
-                      <button class="sib-form-block__button sib-form-block__button-with-loader" style="font-size:16px; text-align:center; font-weight:700; font-family:Helvetica, sans-serif; color:#FFFFFF; background-color:#2093c6; border-radius:13px; border-width:0px; padding: 10px 18px; height: 41px; box-sizing: border-box;" form="sib-form" type="submit">
-                        <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512">
-                          <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
-                        </svg>
-                        Meddela mig
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#d63838; background-color:#ffeded00; border-radius:3px; border-color:#ff49495e;">
-                </label>
-              </div>
-            </div>
-
-            <div class="ts-captcha-reveal" id="ts-captcha-reveal" aria-hidden="true">
-              <div class="ts-captcha-reveal__inner">
-                <div class="ts-captcha-reveal__pad" style="padding: 8px 0 0;">
-                  <div class="sib-captcha sib-form-block">
-                    <div class="form__entry entry_block">
-                      <div class="form__label-row form__label-row--horizontal">
-                        <script>
-                          function handleCaptchaResponse() {
-                            var el = document.getElementById('sib-captcha');
-                            if (el) el.dispatchEvent(new Event('captchaChange'));
-                            var form = document.getElementById('sib-form');
-                            if (!form) return;
-                            document.querySelectorAll('textarea[name="g-recaptcha-response"]').forEach(function (ta) {
-                              if (!form.contains(ta)) form.appendChild(ta);
-                            });
-                          }
-                        </script>
-                        <div class="g-recaptcha sib-visible-recaptcha" id="sib-captcha" data-sitekey="6LdPBc8sAAAAAIH9MBICliII_KKSjQCqtCGeiunQ" data-callback="handleCaptchaResponse" style="direction:ltr"></div>
+          <div style="padding: 8px 0;">
+            <div class="ts-hero-signup-stack">
+              <div class="sib-input sib-form-block">
+                <div class="form__entry entry_block">
+                  <div class="form__label-row form__label-row--horizontal">
+                    <div class="entry__field" style="width:100%;">
+                      <div class="input-wrap ts-hero-email-wrap" style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 999px; justify-content: center; max-width: fit-content; margin: 0 auto;">
+                        <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="Ange din e-postadress" data-required="true" required style="width: min(420px, 62vw); border: none; outline: none; font-size: 15px; padding: 10px 16px; border-radius: 13px; color: white; background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.06)); height: 41px; box-sizing: border-box;" />
+                        <button class="sib-form-block__button sib-form-block__button-with-loader" style="font-size:16px; text-align:center; font-weight:700; font-family:Helvetica, sans-serif; color:#FFFFFF; background-color:#2093c6; border-radius:13px; border-width:0px; padding: 10px 18px; height: 41px; box-sizing: border-box;" type="submit">
+                          <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512">
+                            <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
+                          </svg>
+                          Meddela mig
+                        </button>
                       </div>
-                      <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#d63838; background-color:#ffeded00; border-radius:3px; border-color:#ff49495e;">
-                      </label>
+                    </div>
+                  </div>
+                  <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#d63838; background-color:#ffeded00; border-radius:3px; border-color:#ff49495e;">
+                  </label>
+                </div>
+              </div>
+
+              <div class="ts-captcha-reveal" id="ts-captcha-reveal" aria-hidden="true">
+                <div class="ts-captcha-reveal__inner">
+                  <div class="ts-captcha-reveal__pad">
+                    <div class="sib-captcha sib-form-block">
+                      <div class="form__entry entry_block">
+                        <div class="form__label-row form__label-row--horizontal">
+                          <script>
+                            function handleCaptchaResponse() {
+                              document.getElementById('sib-captcha').dispatchEvent(new Event('captchaChange'));
+                            }
+                          </script>
+                          <div class="g-recaptcha sib-visible-recaptcha" id="sib-captcha" data-sitekey="6LdPBc8sAAAAAIH9MBICliII_KKSjQCqtCGeiunQ" data-callback="handleCaptchaResponse" style="direction:ltr"></div>
+                        </div>
+                        <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#661d1d; background-color:#ffeded; border-radius:3px; border-color:#ff4949;">
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div class="sib-optin sib-form-block" data-required="true" style="padding: 8px 16px; margin-top: 8px;">
+          <div style="padding: 8px 0;">
+            <div class="sib-optin sib-form-block" data-required="true">
               <div class="form__entry entry_mcq">
                 <div class="form__label-row form__label-row--horizontal">
-                  <div class="entry__choice" style="">
+                  <div class="entry__choice">
                     <label>
                       <input type="checkbox" class="input_replaced" value="1" id="OPT_IN" name="OPT_IN" required />
-                      <span class="checkbox checkbox_tick_positive"
-              style="margin-left:0px;"
-              ></span><span style="font-size:14px; text-align:left; font-family:Helvetica, sans-serif; color:#979797; background-color:transparent;"><p>Jag godkänner att ta emot nyheter från Tradespace Sweden AB och integritetspolicyn enligt GDPR.&nbsp;</p><span data-required="*" style="display: inline;" class="entry__label entry__label_optin"></span></span> </label>
+                      <span class="checkbox checkbox_tick_positive" style="margin-left:0px;"></span>
+                      <span style="font-size:14px; text-align:left; font-family:Helvetica, sans-serif; color:#979797; background-color:transparent;"><p>Jag godkänner att ta emot nyheter från Tradespace Sweden AB och integritetspolicyn enligt GDPR.&nbsp;</p><span data-required="*" style="display: inline;" class="entry__label entry__label_optin"></span></span>
+                    </label>
                   </div>
                 </div>
-                <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#d63838; background-color:#ffeded00; border-radius:3px; border-color:#ff49495e;">
+                <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#661d1d; background-color:#ffeded; border-radius:3px; border-color:#ff4949;">
                 </label>
                 <label class="entry__specification" style="font-size:12px; text-align:left; font-family:Helvetica, sans-serif; color:#666; text-align:left">
                   Du kan avbryta när som helst genom länken i våra mailutskick.
                 </label>
               </div>
             </div>
-            <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#d63838; background-color:#ffeded00; border-radius:3px; border-color:#ff49495e; margin-top: 8px;">
-            </label>
           </div>
-  
+
           <input type="text" name="email_address_check" value="" class="input--hidden">
           <input type="hidden" name="locale" value="en">
         </form>
@@ -1657,7 +1662,7 @@
     window.LOCALE = 'en';
     window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "Den angivna informationen stämmer inte. Vänligen titta igenom.";
   
-    window.REQUIRED_ERROR_MESSAGE = "Var vänlig fyll i din e-post och godkänn integritetspolicyn.";
+    window.REQUIRED_ERROR_MESSAGE = "Detta fält kan inte vara tomt. ";
   
     window.GENERIC_INVALID_MESSAGE = "Den angivna informationen stämmer inte. Vänligen titta igenom.";
   
@@ -1676,19 +1681,11 @@
     var AUTOHIDE = Boolean(0);
   </script>
   
-  <script src="https://www.google.com/recaptcha/api.js?hl=sv" defer></script>
   <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js?hl=sv"></script>
 
   <script>
     (function () {
-      function ensureCaptchaResponseInForm() {
-        var form = document.getElementById('sib-form');
-        if (!form) return;
-        document.querySelectorAll('textarea[name="g-recaptcha-response"]').forEach(function (ta) {
-          if (!form.contains(ta)) form.appendChild(ta);
-        });
-      }
-
       function tryRevealCaptcha() {
         var email = document.querySelector('#sib-form #EMAIL');
         var wrap = document.getElementById('ts-captcha-reveal');
@@ -1697,26 +1694,17 @@
         wrap.classList.add('is-visible');
         wrap.setAttribute('aria-hidden', 'false');
         requestAnimationFrame(function () {
-          ensureCaptchaResponseInForm();
           wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         });
       }
 
       function bind() {
-        var form = document.getElementById('sib-form');
         var email = document.querySelector('#sib-form #EMAIL');
         if (!email) return;
         email.addEventListener('input', tryRevealCaptcha);
         email.addEventListener('focus', function () {
           if (email.value.trim()) tryRevealCaptcha();
         });
-        if (form) {
-          form.addEventListener('submit', function () {
-            ensureCaptchaResponseInForm();
-          }, true);
-        }
-        var obs = new MutationObserver(ensureCaptchaResponseInForm);
-        if (form) obs.observe(form, { childList: true, subtree: true });
       }
 
       if (document.readyState === 'loading') {
