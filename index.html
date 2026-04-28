@@ -371,6 +371,48 @@
             align-items: center;
             justify-content: center;
             position: relative;
+            width: 100%;
+            max-width: 100vw;
+            box-sizing: border-box;
+            padding-inline: clamp(14px, 4vw, 28px);
+            overflow-x: hidden;
+        }
+
+        .hero-section .card {
+            width: 100%;
+            max-width: min(960px, 100%);
+            margin-inline: auto;
+            box-sizing: border-box;
+        }
+
+        .hero-section .content {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .hero-section h1,
+        .hero-section h2,
+        .hero-section .tagline {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+
+        @media (max-width: 600px) {
+            .hero-section h1 {
+                font-size: clamp(26px, 7vw, 48px);
+                margin-bottom: 1.25rem !important;
+            }
+
+            .hero-section h2 {
+                font-size: clamp(17px, 4.6vw, 28px);
+            }
+
+            .hero-section .tagline {
+                font-size: clamp(14px, 3.9vw, 17px);
+                line-height: 1.45;
+                padding-inline: 2px;
+            }
         }
 
         /* Video section - bottom */
@@ -1139,6 +1181,8 @@
             opacity: 1;
             transform: translateY(0);
             pointer-events: auto;
+            justify-items: center;
+            width: 100%;
         }
 
         .ts-captcha-reveal__inner {
@@ -1148,15 +1192,44 @@
 
         .ts-captcha-reveal.is-visible .ts-captcha-reveal__inner {
             overflow: visible;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        #sib-form .ts-captcha-reveal .ts-captcha-reveal__pad {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         #sib-form .ts-captcha-reveal .sib-captcha {
             margin-top: 10px;
             margin-bottom: 0;
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         #sib-form .ts-captcha-reveal .sib-captcha .form__label-row--horizontal {
             justify-content: center;
+            width: 100%;
+        }
+
+        #sib-form .ts-captcha-reveal .g-recaptcha {
+            display: flex;
+            justify-content: center;
+            transform-origin: top center;
+        }
+
+        #sib-form .ts-captcha-reveal iframe[src*="recaptcha"] {
+            margin-left: auto;
+            margin-right: auto;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1466,7 +1539,7 @@
 
 <div class="main-container">
     <!-- Hero Section (Email Input) -->
-    <section class="hero-section">
+    <section class="hero-section" lang="sv">
         <main class="card">
             <div class="content">
                 <h1>Vi omdefinierar hur svenska  <br> företag gör affärer!</h1>
@@ -1525,7 +1598,7 @@
 
             <div class="ts-captcha-reveal" id="ts-captcha-reveal" aria-hidden="true">
               <div class="ts-captcha-reveal__inner">
-                <div style="padding: 8px 0 0;">
+                <div class="ts-captcha-reveal__pad" style="padding: 8px 0 0;">
                   <div class="sib-captcha sib-form-block">
                     <div class="form__entry entry_block">
                       <div class="form__label-row form__label-row--horizontal">
@@ -1535,7 +1608,7 @@
                             document.getElementById('sib-captcha').dispatchEvent(ev);
                           }
                         </script>
-                        <div class="g-recaptcha sib-visible-recaptcha" id="sib-captcha" data-sitekey="6LfQ_s4sAAAAAMhbf037HWCdgTa8ycymkhAnoUbT" data-callback="handleCaptchaResponse" style="direction:ltr"></div>
+                        <div class="g-recaptcha sib-visible-recaptcha" id="sib-captcha" data-sitekey="6LdPBc8sAAAAAIH9MBICliII_KKSjQCqtCGeiunQ" data-callback="handleCaptchaResponse" style="direction:ltr"></div>
                       </div>
                       <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#d63838; background-color:#ffeded00; border-radius:3px; border-color:#ff49495e;">
                       </label>
