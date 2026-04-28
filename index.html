@@ -1063,6 +1063,29 @@
             padding: 0 12px 0 12px !important;
         }
 
+        /* Brevo sib-styles: vit bakgrund + ljus ram/box-shadow på .entry__field — hero ska vara ren mot mörk bakgrund */
+        #sib-form .sib-input .entry__field,
+        #sib-form .sib-input .form__entry.entry_block,
+        #sib-form .sib-input .form__label-row,
+        #sib-form .sib-input {
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        #sib-form .sib-input .input-wrap {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        #sib-form .sib-input input.input,
+        #sib-form .sib-input #EMAIL {
+            border: none !important;
+            box-shadow: none !important;
+        }
+
         .checkbox_tick_positive {
             background: transparent !important;
             border-color: #666 !important;
@@ -1090,6 +1113,56 @@
             top: 1px !important;
             transform-origin: 80% 45% !important;
             width: 50% !important;
+        }
+
+        /*
+         Brevo reCAPTCHA: dold tills minst ett tecken fyllts i #EMAIL; .ts-captcha-reveal får .is-visible via JS.
+        */
+        #sib-form {
+            position: relative;
+        }
+
+        .ts-captcha-reveal {
+            display: grid;
+            grid-template-rows: 0fr;
+            opacity: 0;
+            transform: translateY(-8px);
+            transition:
+                grid-template-rows 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.4s ease,
+                transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+            pointer-events: none;
+        }
+
+        .ts-captcha-reveal.is-visible {
+            grid-template-rows: 1fr;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .ts-captcha-reveal__inner {
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        .ts-captcha-reveal.is-visible .ts-captcha-reveal__inner {
+            overflow: visible;
+        }
+
+        #sib-form .ts-captcha-reveal .sib-captcha {
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+
+        #sib-form .ts-captcha-reveal .sib-captcha .form__label-row--horizontal {
+            justify-content: center;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ts-captcha-reveal {
+                transition: none;
+            }
         }
     </style>
 <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
@@ -1400,10 +1473,8 @@
                 <h2>Snart kan du vara med på Sveriges tryggaste B2B-marknadsplats</h2>
                 <p class="tagline">Missa inte starten. Få 25% rabatt på alla annonser första året och gratis lanseringsannonser:</p>
 
-                <!-- Begin Brevo Form -->
+                <!-- Begin Brevo Form (Captcha animeras in när användaren skriver i e-postfältet) -->
 
-  
-  <!-- START - We recommend to place the below code where you want the form in your website html  -->
   <div class="sib-form" style="text-align: center;
            background-color: #28282800;                                 ">
     <div id="sib-form-container" class="sib-form-container">
@@ -1432,15 +1503,48 @@
       <div id="sib-container" class="sib-container--large sib-container--horizontal" style="text-align:center; background-color:rgba(255,255,255,0.0); border-radius:20px; border-width:0px; border-color:#cacaca; border-style:solid; direction:ltr">
         <form id="sib-form" method="POST" action="https://cbebf07e.sibforms.com/serve/MUIFAM3QB9NpbUFFEYbcbr59Z0T2GS7cF0h7TyLkppvlYd96ksAjCXQLPZLhzYboPzDIP_UA_f6VTeZfp6_qK2Fb5S1UuMEmWUDrw1JeOMOr4KfGjynMkN4JD0YzpEaGJRDaSyWzwLmYFnW1ptn5UGcMYjpI0hTxDMdEtDwyfOXZClHRAklILUr4Kq3BDJqoPchwAUQ3ntfy9OzRpg==" data-type="subscription">
           <div style="padding: 2px 0;">
-            <div class="input-wrap" style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 999px; justify-content: center; max-width: fit-content; margin: 0 auto;">
-              <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="Ange din e-postadress" data-required="true" required style="width: min(420px, 62vw); border: none; outline: none; font-size: 15px; padding: 10px 16px; border-radius: 13px; color: white; background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.06)); height: 41px; box-sizing: border-box;" />
-              <button class="sib-form-block__button sib-form-block__button-with-loader" style="font-size:16px; text-align:center; font-weight:700; font-family:Helvetica, sans-serif; color:#FFFFFF; background-color:#2093c6; border-radius:13px; border-width:0px; padding: 10px 18px; height: 41px; box-sizing: border-box;" form="sib-form" type="submit">
-                <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512" style="">
-                  <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
-                </svg>
-                Meddela mig
-              </button>
+            <div class="sib-input sib-form-block">
+              <div class="form__entry entry_block">
+                <div class="form__label-row form__label-row--horizontal">
+                  <div class="entry__field" style="width:100%;">
+                    <div class="input-wrap" style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 999px; justify-content: center; max-width: fit-content; margin: 0 auto;">
+                      <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="Ange din e-postadress" data-required="true" required style="width: min(420px, 62vw); border: none; outline: none; font-size: 15px; padding: 10px 16px; border-radius: 13px; color: white; background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.06)); height: 41px; box-sizing: border-box;" />
+                      <button class="sib-form-block__button sib-form-block__button-with-loader" style="font-size:16px; text-align:center; font-weight:700; font-family:Helvetica, sans-serif; color:#FFFFFF; background-color:#2093c6; border-radius:13px; border-width:0px; padding: 10px 18px; height: 41px; box-sizing: border-box;" form="sib-form" type="submit">
+                        <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512">
+                          <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
+                        </svg>
+                        Meddela mig
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#d63838; background-color:#ffeded00; border-radius:3px; border-color:#ff49495e;">
+                </label>
+              </div>
             </div>
+
+            <div class="ts-captcha-reveal" id="ts-captcha-reveal" aria-hidden="true">
+              <div class="ts-captcha-reveal__inner">
+                <div style="padding: 8px 0 0;">
+                  <div class="sib-captcha sib-form-block">
+                    <div class="form__entry entry_block">
+                      <div class="form__label-row form__label-row--horizontal">
+                        <script>
+                          function handleCaptchaResponse() {
+                            var ev = new Event('captchaChange');
+                            document.getElementById('sib-captcha').dispatchEvent(ev);
+                          }
+                        </script>
+                        <div class="g-recaptcha sib-visible-recaptcha" id="sib-captcha" data-sitekey="6LfQ_s4sAAAAAMhbf037HWCdgTa8ycymkhAnoUbT" data-callback="handleCaptchaResponse" style="direction:ltr"></div>
+                      </div>
+                      <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#d63838; background-color:#ffeded00; border-radius:3px; border-color:#ff49495e;">
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="sib-optin sib-form-block" data-required="true" style="padding: 8px 16px; margin-top: 8px;">
               <div class="form__entry entry_mcq">
                 <div class="form__label-row form__label-row--horizontal">
@@ -1449,7 +1553,7 @@
                       <input type="checkbox" class="input_replaced" value="1" id="OPT_IN" name="OPT_IN" required />
                       <span class="checkbox checkbox_tick_positive"
               style="margin-left:0px;"
-              ></span><span style="font-size:14px; text-align:left; font-family:Helvetica, sans-serif; color:#979797; background-color:transparent;"><p>Jag godkänner att ta emot nyheter från Tradespace Sweden AB och integritetspolicyn.&nbsp;</p><span data-required="*" style="display: inline;" class="entry__label entry__label_optin"></span></span> </label>
+              ></span><span style="font-size:14px; text-align:left; font-family:Helvetica, sans-serif; color:#979797; background-color:transparent;"><p>Jag godkänner att ta emot nyheter från Tradespace Sweden AB och integritetspolicyn enligt GDPR.&nbsp;</p><span data-required="*" style="display: inline;" class="entry__label entry__label_optin"></span></span> </label>
                   </div>
                 </div>
                 <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#d63838; background-color:#ffeded00; border-radius:3px; border-color:#ff49495e;">
@@ -1469,9 +1573,7 @@
       </div>
     </div>
   </div>
-  <!-- END - We recommend to place the above code where you want the form in your website html  -->
-  
-  <!-- START - We recommend to place the below code in footer or bottom of your website html  -->
+
   <script>
     window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
     window.LOCALE = 'en';
@@ -1497,9 +1599,41 @@
   </script>
   
   <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
-  
-  
-  <!-- END - We recommend to place the above code in footer or bottom of your website html  -->
+  <script src="https://www.google.com/recaptcha/api.js?hl=sv" defer></script>
+
+  <script>
+    (function () {
+      function tryRevealCaptcha() {
+        var email = document.querySelector('#sib-form #EMAIL');
+        var wrap = document.getElementById('ts-captcha-reveal');
+        if (!email || !wrap || wrap.classList.contains('is-visible')) return;
+        if (!email.value.trim()) return;
+        wrap.classList.add('is-visible');
+        wrap.setAttribute('aria-hidden', 'false');
+        requestAnimationFrame(function () {
+          if (typeof grecaptcha !== 'undefined' && grecaptcha.reset) {
+            try { grecaptcha.reset(); } catch (e) { /* noop */ }
+          }
+          wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+      }
+
+      function bind() {
+        var email = document.querySelector('#sib-form #EMAIL');
+        if (!email) return;
+        email.addEventListener('input', tryRevealCaptcha);
+        email.addEventListener('focus', function () {
+          if (email.value.trim()) tryRevealCaptcha();
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bind);
+      } else {
+        bind();
+      }
+    })();
+  </script>
   <!-- End Brevo Form -->
               
             </div>
