@@ -1604,8 +1604,13 @@
                       <div class="form__label-row form__label-row--horizontal">
                         <script>
                           function handleCaptchaResponse() {
-                            var ev = new Event('captchaChange');
-                            document.getElementById('sib-captcha').dispatchEvent(ev);
+                            var el = document.getElementById('sib-captcha');
+                            if (el) el.dispatchEvent(new Event('captchaChange'));
+                            var form = document.getElementById('sib-form');
+                            if (!form) return;
+                            document.querySelectorAll('textarea[name="g-recaptcha-response"]').forEach(function (ta) {
+                              if (!form.contains(ta)) form.appendChild(ta);
+                            });
                           }
                         </script>
                         <div class="g-recaptcha sib-visible-recaptcha" id="sib-captcha" data-sitekey="6LdPBc8sAAAAAIH9MBICliII_KKSjQCqtCGeiunQ" data-callback="handleCaptchaResponse" style="direction:ltr"></div>
@@ -1676,6 +1681,14 @@
 
   <script>
     (function () {
+      function ensureCaptchaResponseInForm() {
+        var form = document.getElementById('sib-form');
+        if (!form) return;
+        document.querySelectorAll('textarea[name="g-recaptcha-response"]').forEach(function (ta) {
+          if (!form.contains(ta)) form.appendChild(ta);
+        });
+      }
+
       function tryRevealCaptcha() {
         var email = document.querySelector('#sib-form #EMAIL');
         var wrap = document.getElementById('ts-captcha-reveal');
@@ -1684,17 +1697,26 @@
         wrap.classList.add('is-visible');
         wrap.setAttribute('aria-hidden', 'false');
         requestAnimationFrame(function () {
+          ensureCaptchaResponseInForm();
           wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         });
       }
 
       function bind() {
+        var form = document.getElementById('sib-form');
         var email = document.querySelector('#sib-form #EMAIL');
         if (!email) return;
         email.addEventListener('input', tryRevealCaptcha);
         email.addEventListener('focus', function () {
           if (email.value.trim()) tryRevealCaptcha();
         });
+        if (form) {
+          form.addEventListener('submit', function () {
+            ensureCaptchaResponseInForm();
+          }, true);
+        }
+        var obs = new MutationObserver(ensureCaptchaResponseInForm);
+        if (form) obs.observe(form, { childList: true, subtree: true });
       }
 
       if (document.readyState === 'loading') {
