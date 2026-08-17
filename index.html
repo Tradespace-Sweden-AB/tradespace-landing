@@ -1,25 +1,92 @@
 <!doctype html>
-<html lang="en">
+<html lang="sv">
 
 <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tradespace - Coming soon</title>
+    <title>Tradespace | Handla med förtroende.</title>
+    <meta name="description" content="Verifierad B2B-marknadsplats för svenska företag. Publik beta öppnar 14 september. Säkra er plats och få 20 gratis annonser samt 25% rabatt året ut." />
+    <link rel="canonical" href="https://tradespace.se/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="sv_SE" />
+    <meta property="og:url" content="https://tradespace.se/" />
+    <meta property="og:site_name" content="Tradespace" />
+    <meta property="og:title" content="Tradespace | Handla med förtroende." />
+    <meta property="og:description" content="Verifierad B2B-marknadsplats för svenska företag. Publik beta öppnar 14 september. Säkra er plats och få 20 gratis annonser samt 25% rabatt året ut." />
+    <meta property="og:image" content="https://tradespace.se/assets/images/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Tradespace. Handla med förtroende. Verifierad B2B-marknadsplats för svenska företag." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Tradespace | Handla med förtroende." />
+    <meta name="twitter:description" content="Verifierad B2B-marknadsplats för svenska företag. Publik beta öppnar 14 september. Säkra er plats och få 20 gratis annonser samt 25% rabatt året ut." />
+    <meta name="twitter:image" content="https://tradespace.se/assets/images/og-image.png" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-30SEFBVGXZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-30SEFBVGXZ');
+    </script>
     <style>
         :root {
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            --font-inter-tight: "interTight", "Inter Tight", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial;
+            --default-font-family: var(--font-inter-tight);
+            --default-mono-font-family: var(--font-mono);
             --ts-primary: #2093C6;
             --ts-primary-600: #0f74a0;
             --ts-primary-300: #6cc8ec;
-            --bg-900: #0a0f1a;
-            --bg-800: #0c1322;
-            --text: #EAF2F7;
-            --text-dim: #B8C7D4;
+            --background: #050b14;
+            --background-deep: #07111d;
+            --text-primary: #f1f3f5;
+            --text-secondary: #9fb0bf;
+            --text-tertiary: #8296a7;
+            --border-primary: #24435a;
+            --border-secondary: #193247;
+            --base: #0f1d2b;
+            --link: var(--ts-primary);
+            --link-50: #2093c680;
+            --link-10: #2093c61a;
+            --blue-accent: #2093C6;
+            --blue-accent-50: #2093c680;
+            --blue-accent-10: #2093c61a;
+            --bg-900: var(--background-deep);
+            --bg-800: #07111d;
+            --text: var(--text-primary);
+            --text-dim: var(--text-secondary);
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 600;
+            --leading-tight: 1.25;
+            --leading-normal: 1.5;
             --blur: 38px;
+            --radius: 10px;
+        }
+
+        @font-face {
+            font-family: "interTight";
+            src: url("assets/fonts/InterTight-VariableFont_wght.ttf") format("truetype");
+            font-weight: 100 900;
+            font-style: normal;
+            font-display: swap;
         }
 
         * {
             box-sizing: border-box;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
 
         html,
@@ -27,77 +94,25 @@
             margin: 0;
             padding: 0;
             width: 100%;
-            overflow-x: hidden;
+            overflow-x: clip;
         }
 
         body {
             min-height: 100vh;
-            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial;
+            font-family: var(--default-font-family);
             color: var(--text);
-            background: var(--bg-900);
+            background: var(--background-deep);
             position: relative;
+            -webkit-text-size-adjust: 100%;
+            tab-size: 4;
+            font-feature-settings: var(--default-font-feature-settings, normal);
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: geometricPrecision;
+            font-synthesis: none;
         }
 
-        /* base gradient backdrop */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(1200px 800px at 75% -10%, rgba(32, 147, 198, 0.18), transparent 60%),
-            radial-gradient(900px 600px at -10% 90%, rgba(32, 147, 198, 0.16), transparent 60%),
-            linear-gradient(180deg, var(--bg-800), var(--bg-900));
-            z-index: 0;
-        }
-
-        /* moving light blobs */
-        .bg-light {
-            position: fixed;
-            width: 800px;
-            height: 800px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(32, 147, 198, 0.45) 0%, rgba(108, 200, 236, 0.15) 60%, transparent 100%);
-            filter: blur(500px);
-            animation: moveLight 16s ease-in-out infinite alternate;
-            z-index: 0;
-        }
-
-        /* second and third blobs for depth */
-        .bg-light:nth-child(2) {
-            background: radial-gradient(circle, rgba(108, 200, 236, 0.5) 0%, rgba(32, 147, 198, 0.2) 60%, transparent 100%);
-            animation-delay: 6s;
-            animation-duration: 20s;
-        }
-
-        .bg-light:nth-child(3) {
-            background: radial-gradient(circle, rgba(32, 147, 198, 0.3) 0%, rgba(108, 200, 236, 0.1) 70%, transparent 100%);
-            animation-delay: 10s;
-            animation-duration: 26s;
-        }
-
-        /* movement path keyframes */
-        @keyframes moveLight {
-            0% {
-                transform: translate(-30%, -20%) scale(1);
-            }
-
-            25% {
-                transform: translate(40%, -10%) scale(1.1);
-            }
-
-            50% {
-                transform: translate(20%, 40%) scale(1);
-            }
-
-            75% {
-                transform: translate(-25%, 30%) scale(1.4);
-            }
-
-            100% {
-                transform: translate(-40%, -20%) scale(1);
-            }
-        }
-
-        /* make sure content sits on top of lights */
+        /* make sure content sits on top */
         .card {
             position: relative;
             z-index: 2;
@@ -117,7 +132,7 @@
         }
 
         h1 {
-            font-weight: 100;
+            font-weight: var(--font-weight-semibold);
             font-size: clamp(40px, 6vw, 70px);
             line-height: 1.1;
             letter-spacing: 0.2px;
@@ -127,7 +142,7 @@
         }
 
         h2 {
-            font-weight: 70;
+            font-weight: var(--font-weight-semibold);
             font-size: clamp(24px, 3vw, 36px);
             line-height: 1.3;
             letter-spacing: 0.2px;
@@ -136,7 +151,7 @@
         }
 
         h3 {
-            font-weight: 25;
+            font-weight: var(--font-weight-semibold);
             font-size: clamp(16.8px, 2.1vw, 25.2px);
             line-height: 1.3;
             letter-spacing: 0.2px;
@@ -162,7 +177,7 @@
             align-items: center;
             gap: 10px;
             padding: 8px;
-            border-radius: 999px;
+            border-radius: var(--radius);
             width: 100%;
             max-width: 600px;
         }
@@ -178,7 +193,7 @@
             outline: none;
             font-size: 15px;
             padding: 12px 16px;
-            border-radius: 999px;
+            border-radius: var(--radius);
             color: white;
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.06));
             flex: 1;
@@ -189,7 +204,7 @@
             border: none;
             cursor: pointer;
             padding: 12px 18px;
-            border-radius: 999px;
+            border-radius: var(--radius);
             color: white;
             font-weight: 100;
             letter-spacing: .2px;
@@ -209,7 +224,7 @@
             border: none;
             cursor: pointer;
             padding: 12px 18px;
-            border-radius: 999px;
+            border-radius: var(--radius);
             color: white;
             font-weight: 100;
             letter-spacing: .2px;
@@ -239,41 +254,50 @@
             text-decoration: none;
         }
 
-        /* Scroll indicator */
+        /* Bottom hero CTA */
         .scroll-indicator {
             position: absolute;
-            bottom: 40px;
+            bottom: 54px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 20px;
             cursor: pointer;
-            z-index: 10;
-            animation: fadeInOut 2s ease-in-out infinite;
+            z-index: 6;
+            width: min(220px, calc(100vw - 40px));
+            text-align: center;
         }
 
         .scroll-indicator-text {
             color: white;
-            font-size: 14px;
-            font-weight: 100;
-            letter-spacing: 0.5px;
+            font-size: clamp(18px, 1.45vw, 24px);
+            font-weight: 500;
+            line-height: 1;
+            letter-spacing: 0;
             margin: 0;
+            text-shadow: 0 18px 40px rgba(0, 0, 0, 0.62);
         }
 
         .scroll-indicator-arrow {
-            width: 24px;
-            height: 24px;
-            color: var(--ts-primary);
             display: flex;
             align-items: center;
             justify-content: center;
+            min-width: min(176px, 100%);
+            min-height: 44px;
+            padding: 0 18px;
+            border-radius: var(--radius);
+            background: var(--ts-primary-600);
+            color: white;
+            box-shadow: 0 10px 24px rgba(32, 147, 198, 0.2);
+            font-size: clamp(13px, 0.92vw, 15px);
+            font-weight: 500;
+            letter-spacing: 0;
         }
 
         .scroll-indicator-arrow svg {
-            width: 100%;
-            height: 100%;
+            display: none;
         }
 
         @keyframes fadeInOut {
@@ -319,11 +343,11 @@
         }
 
         .scroll-to-top-btn {
-            background: var(--ts-primary);
+            background: var(--ts-primary-600);
             border: none;
             color: white;
             padding: 12px 18px;
-            border-radius: 999px;
+            border-radius: var(--radius);
             font-weight: 100;
             letter-spacing: .2px;
             cursor: pointer;
@@ -347,16 +371,6 @@
             height: 80%;
         }
 
-        .blur {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            backdrop-filter: blur(3px);
-        }
-
         /* Main container */
         .main-container {
             min-height: 100vh;
@@ -366,29 +380,143 @@
 
         /* Hero section (email input) */
         .hero-section {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            min-height: max(1420px, 155vh);
+            display: grid;
+            grid-template-rows: auto 1fr;
+            align-items: stretch;
+            justify-content: stretch;
             position: relative;
             width: 100%;
             max-width: 100vw;
             box-sizing: border-box;
-            padding-inline: clamp(14px, 4vw, 28px);
-            overflow-x: hidden;
+            padding: 24px clamp(18px, 5vw, 96px) 0;
+            overflow: hidden;
+            background: linear-gradient(180deg, var(--background) 0%, var(--background) 72%, var(--background-deep) 100%);
+        }
+
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(820px 520px at 50% 32%, rgba(32, 147, 198, 0.12), transparent 62%),
+                linear-gradient(180deg, rgba(5, 11, 20, 0.12), rgba(2, 7, 19, 0.92) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero-section::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 50% 43%, rgba(2, 7, 19, 0) 0%, rgba(2, 7, 19, 0.08) 44%, rgba(2, 7, 19, 0.62) 100%),
+                linear-gradient(90deg, rgba(2, 7, 19, 0.72) 0%, rgba(2, 7, 19, 0) 18%, rgba(2, 7, 19, 0) 82%, rgba(2, 7, 19, 0.72) 100%),
+                linear-gradient(180deg, rgba(2, 7, 19, 0.52) 0%, rgba(2, 7, 19, 0) 22%, rgba(2, 7, 19, 0) 68%, var(--background-deep) 98%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .hero-bottom-fade {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: min(30vh, 340px);
+            z-index: 4;
+            background: linear-gradient(180deg, rgba(2, 7, 19, 0), var(--background-deep) 72%);
+            pointer-events: none;
+        }
+
+        .hero-map {
+            position: absolute;
+            inset: -8vh -4vw auto;
+            width: 108vw;
+            height: min(100vh, 930px);
+            opacity: 0.49;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-map canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .hero-nav {
+            position: relative;
+            z-index: 5;
+            width: min(1480px, 100%);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .hero-brand {
+            display: inline-flex;
+            align-items: center;
+            width: clamp(112px, 10vw, 154px);
+            height: 42px;
+        }
+
+        .hero-brand img {
+            width: 100%;
+            height: 34px;
+            object-fit: contain;
+            object-position: left center;
+            filter: drop-shadow(0 0 14px rgba(32, 147, 198, 0.45));
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hero-nav-btn {
+            height: 48px;
+            border: 0;
+            border-radius: var(--radius);
+            color: white;
+            background: rgba(20, 42, 62, 0.9);
+            font: inherit;
+        }
+
+        .hero-nav-btn {
+            padding: 0 26px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .hero-nav-btn.primary {
+            color: white;
+            background: var(--ts-primary-600);
+            min-width: 166px;
+            box-shadow: 0 12px 30px rgba(32, 147, 198, 0.35);
         }
 
         .hero-section .card {
+            position: relative;
+            z-index: 4;
             width: 100%;
-            max-width: min(960px, 100%);
-            margin-inline: auto;
+            max-width: min(1180px, 100%);
+            margin: 0 auto;
             box-sizing: border-box;
+            align-self: start;
+            padding: clamp(172px, 23vh, 252px) 0 18vh;
         }
 
         .hero-section .content {
             width: 100%;
             max-width: 100%;
             box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
         .hero-section h1,
@@ -398,14 +526,611 @@
             word-wrap: break-word;
         }
 
-        @media (max-width: 600px) {
+        .hero-section h1 {
+            max-width: min(1360px, 100%);
+            margin: 28px 0 24px;
+            font-family: var(--font-inter-tight);
+            font-size: clamp(60px, 7.4vw, 118px);
+            line-height: 1;
+            font-weight: var(--font-weight-semibold);
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            white-space: nowrap;
+        }
+
+        html.hero-intro-active,
+        html.hero-intro-active body {
+            overflow: hidden;
+            height: 100%;
+        }
+
+        html.hero-intro-active .hero-badges,
+        html.hero-intro-active .hero-section h2,
+        html.hero-intro-active .hero-section .tagline,
+        html.hero-intro-active .hero-section .sib-form,
+        html.hero-intro-active .hero-social-card,
+        html.hero-intro-active .scroll-indicator {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        html.hero-intro-active.hero-intro-badges .hero-badges,
+        html.hero-intro-active.hero-intro-copy .hero-section h2,
+        html.hero-intro-active.hero-intro-copy .hero-section .tagline,
+        html.hero-intro-active.hero-intro-copy .hero-section .sib-form {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .hero-map,
+        .hero-nav,
+        .hero-badges,
+        .hero-section h2,
+        .hero-section .tagline,
+        .hero-section .sib-form,
+        .hero-social-card,
+        .scroll-indicator {
+            transition: opacity 0.38s var(--ease-out, cubic-bezier(0, 0, .2, 1));
+        }
+
+        html.hero-intro-active .hero-section h1:not(.is-split) {
+            visibility: hidden;
+        }
+
+        .hero-title-char {
+            display: inline-block;
+            white-space: pre;
+        }
+
+        .hero-title-break {
+            display: none;
+        }
+
+        .hero-title-rest {
+            display: inline;
+        }
+
+        html.hero-intro-active .hero-title-char {
+            opacity: 0;
+            filter: blur(10px);
+            animation: hero-char-in 0.48s cubic-bezier(.22, 1, .36, 1) both;
+            animation-delay: calc(var(--char-index) * 28ms);
+        }
+
+        @keyframes hero-char-in {
+            0% {
+                opacity: 0;
+                filter: blur(10px);
+            }
+
+            100% {
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+
+        .hero-section h2 {
+            max-width: 830px;
+            margin: 0;
+            font-size: clamp(18px, 1.6vw, 24px);
+            line-height: 1.33;
+            font-weight: var(--font-weight-normal);
+            color: var(--text-secondary);
+            letter-spacing: 0;
+        }
+
+        .hero-section .tagline {
+            margin: 26px 0 10px;
+            max-width: 640px;
+            color: var(--text-primary);
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        .hero-badges {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 44px;
+            padding: 8px 18px 8px 9px;
+            border-radius: var(--radius);
+            color: var(--text-primary);
+            background: var(--base);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+            font-size: 16px;
+            font-weight: var(--font-weight-medium);
+            letter-spacing: 0;
+        }
+
+        .hero-badge-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: rgba(32, 147, 198, 0.25);
+            color: var(--ts-primary-300);
+            flex: 0 0 auto;
+        }
+
+        .hero-badge-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .hero-ad-feed {
+            --hero-ad-gap: clamp(24px, 2vw, 32px);
+            position: absolute;
+            top: clamp(720px, 86vh, 880px);
+            left: clamp(24px, 3.4vw, 72px);
+            right: clamp(24px, 3.4vw, 72px);
+            z-index: 3;
+            max-width: 1360px;
+            margin: 0 auto;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: var(--hero-ad-gap);
+            pointer-events: none;
+        }
+
+        .hero-ad-column {
+            flex: 0 1 390px;
+            display: flex;
+            flex-direction: column;
+            gap: var(--hero-ad-gap);
+            min-width: 0;
+        }
+
+        .hero-ad-column.center {
+            margin-top: calc(var(--hero-ad-gap) * 1.5);
+        }
+
+        .hero-social-card {
+            position: relative;
+            display: block;
+            width: 100%;
+            margin: 0;
+            opacity: 0;
+            transform: translateY(24px);
+            min-height: 0;
+            border-radius: 32px;
+            padding: 20px;
+            overflow: hidden;
+            background:
+                linear-gradient(180deg, rgba(19, 55, 82, 0.95), rgba(7, 22, 37, 0.95)),
+                var(--base);
+            border: 1px solid rgba(71, 161, 212, 0.16);
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+            text-align: left;
+            transition:
+                opacity 0.72s cubic-bezier(.22, 1, .36, 1),
+                transform 0.72s cubic-bezier(.22, 1, .36, 1);
+        }
+
+        .hero-social-card.is-revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-social-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(420px 220px at 50% -12%, rgba(32, 147, 198, 0.22), transparent 64%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 38%);
+            pointer-events: none;
+        }
+
+        .hero-social-card.example-mark::after {
+            content: '*';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            left: auto;
+            z-index: 2;
+            font-family: var(--font-inter-tight);
+            font-size: 12px;
+            font-weight: var(--font-weight-semibold);
+            line-height: 1;
+            color: rgba(234, 242, 247, 0.72);
+            pointer-events: none;
+        }
+
+        .hero-social-card>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-social-head {
+            display: grid;
+            grid-template-columns: 46px 1fr;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .hero-avatar {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            color: white;
+            background: linear-gradient(135deg, rgba(108, 200, 236, 0.92), rgba(32, 147, 198, 0.62));
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0;
+            box-shadow: inset 0 1px 8px rgba(255, 255, 255, 0.16);
+        }
+
+        .hero-social-name {
+            display: block;
+            font-weight: 700;
+            color: white;
+            font-size: 15px;
+            line-height: 1.2;
+        }
+
+        .hero-social-meta {
+            display: block;
+            margin-top: 3px;
+            color: rgba(234, 242, 247, 0.56);
+            font-size: 14px;
+            line-height: 1.25;
+        }
+
+        .hero-ad-chip {
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            margin-bottom: 12px;
+            padding: 5px 10px;
+            border-radius: var(--radius);
+            background: rgba(32, 147, 198, 0.14);
+            color: var(--ts-primary-300);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .hero-social-card p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 15px;
+            line-height: 1.42;
+        }
+
+        .hero-ad-image {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            margin-top: 16px;
+            border-radius: 18px;
+            object-fit: cover;
+            background: rgba(3, 8, 20, 0.7);
+            border: 1px solid rgba(151, 211, 241, 0.14);
+        }
+
+        .hero-section #sib-form-container,
+        .hero-section #sib-container,
+        .hero-section .sib-form-container,
+        .hero-section .sib-container--large {
+            max-width: none !important;
+            width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .hero-section .sib-form {
+            width: min(410px, 92vw);
+            margin: 0 auto;
+            padding: 0 !important;
+        }
+
+        #sib-form .ts-hero-email-wrap {
+            width: min(410px, 92vw) !important;
+            max-width: none !important;
+            min-height: 56px;
+            margin: 0 auto !important;
+            padding: 5px !important;
+            border-radius: var(--radius) !important;
+            background: rgba(5, 11, 20, 0.72) !important;
+            border: 1px solid rgba(52, 111, 150, 0.82) !important;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18) !important;
+        }
+
+        #sib-form .ts-hero-email-wrap #EMAIL {
+            height: 46px !important;
+            width: auto !important;
+            min-width: 0 !important;
+            padding: 0 26px !important;
+            border-radius: var(--radius) !important;
+            background: transparent !important;
+            color: white !important;
+            font-size: 16px !important;
+            font-family: inherit !important;
+        }
+
+        #sib-form .ts-hero-email-wrap #EMAIL::placeholder {
+            color: rgba(234, 242, 247, 0.62) !important;
+            opacity: 1 !important;
+        }
+
+        #sib-form .ts-hero-email-wrap button[type="submit"] {
+            height: 46px !important;
+            min-width: 148px;
+            border-radius: var(--radius) !important;
+            background: var(--ts-primary-600) !important;
+            color: white !important;
+            padding: 0 24px !important;
+            font-family: inherit !important;
+            font-size: 14px !important;
+            font-weight: 700 !important;
+            box-shadow: 0 12px 30px rgba(32, 147, 198, 0.35);
+        }
+
+        #sib-form .ts-hero-email-wrap button[type="submit"] svg {
+            display: none;
+        }
+
+        .hero-section .entry__choice,
+        .hero-section .entry__specification {
+            display: none !important;
+        }
+
+        .hero-section .sib-optin {
+            height: 0;
+            overflow: hidden;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        /* iPad / tablet portrait: same card look as landscape, stacked in flow */
+        @media (min-width: 700px) and (max-width: 1100px) and (orientation: portrait) {
+            .hero-section {
+                min-height: auto;
+                display: flex;
+                flex-direction: column;
+                padding: 20px 24px 72px;
+                overflow: hidden;
+            }
+
+            .hero-section > main {
+                flex: 0 0 auto;
+            }
+
+            .hero-section .card {
+                padding: clamp(88px, 11vh, 140px) 0 28px;
+            }
+
             .hero-section h1 {
-                font-size: clamp(26px, 7vw, 48px);
+                white-space: normal;
+            }
+
+            .hero-ad-feed {
+                --hero-ad-gap: 20px;
+                position: relative;
+                top: auto;
+                bottom: auto;
+                left: auto;
+                right: auto;
+                width: 100%;
+                max-width: 980px;
+                margin: 0 auto 0;
+                padding: 0 4px;
+                gap: var(--hero-ad-gap);
+                align-items: flex-start;
+                justify-content: center;
+                flex: 0 0 auto;
+                /* Solid through row 1, fade from the start of row 2 */
+                -webkit-mask-image: linear-gradient(
+                    180deg,
+                    #000 0%,
+                    #000 52%,
+                    rgba(0, 0, 0, 0.5) 68%,
+                    transparent 100%
+                );
+                mask-image: linear-gradient(
+                    180deg,
+                    #000 0%,
+                    #000 52%,
+                    rgba(0, 0, 0, 0.5) 68%,
+                    transparent 100%
+                );
+            }
+
+            .hero-ad-column {
+                flex: 1 1 0;
+                max-width: none;
+                gap: var(--hero-ad-gap);
+            }
+
+            .hero-ad-column.center {
+                margin-top: calc(var(--hero-ad-gap) * 1.5);
+            }
+
+            .hero-social-card {
+                padding: 18px;
+                border-radius: 28px;
+                opacity: 1;
+                transform: none;
+                box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+            }
+
+            .hero-social-head {
+                grid-template-columns: 42px 1fr;
+                gap: 12px;
+                margin-bottom: 12px;
+            }
+
+            .hero-avatar {
+                width: 42px;
+                height: 42px;
+                font-size: 12px;
+            }
+
+            .hero-social-name {
+                font-size: 14px;
+            }
+
+            .hero-social-meta {
+                font-size: 13px;
+            }
+
+            .hero-ad-chip {
+                margin-bottom: 10px;
+                padding: 5px 10px;
+                font-size: 12px;
+            }
+
+            .hero-social-card p {
+                font-size: 14px;
+                line-height: 1.4;
+            }
+
+            .hero-ad-image {
+                aspect-ratio: 16 / 9;
+                margin-top: 14px;
+                border-radius: 16px;
+            }
+
+            .hero-social-card.example-mark::after {
+                top: 18px;
+                right: 18px;
+            }
+
+            .hero-bottom-fade {
+                display: block;
+                z-index: 5;
+                height: min(58vh, 640px);
+                background: linear-gradient(
+                    180deg,
+                    rgba(2, 7, 19, 0) 0%,
+                    rgba(2, 7, 19, 0.22) 22%,
+                    rgba(2, 7, 19, 0.7) 52%,
+                    var(--background-deep) 78%
+                );
+            }
+
+            .scroll-indicator {
+                position: absolute;
+                left: 50%;
+                bottom: clamp(180px, 22vh, 260px);
+                transform: translateX(-50%);
+                margin: 0;
+                gap: 16px;
+                z-index: 6;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-section {
+                min-height: auto;
+                display: flex;
+                flex-direction: column;
+                padding: 18px 20px 72px;
+                overflow: hidden;
+            }
+
+            .hero-map {
+                inset: 2vh -78vw auto;
+                width: 250vw;
+                height: 78vh;
+                opacity: 0.62;
+            }
+
+            .hero-nav {
+                width: 100%;
+                gap: 12px;
+                box-sizing: border-box;
+            }
+
+            .hero-brand {
+                width: 106px;
+                height: 34px;
+            }
+
+            .hero-brand img {
+                width: 100%;
+                height: 28px;
+            }
+
+            .hero-actions {
+                gap: 8px;
+            }
+
+            .hero-nav-btn {
+                height: 40px;
+            }
+
+            .hero-nav-btn {
+                padding: 0 14px;
+                font-size: 13px;
+            }
+
+            .hero-nav-btn.primary {
+                min-width: 0;
+            }
+
+            .hero-section > main {
+                flex: 0 0 auto;
+            }
+
+            .hero-section .card {
+                padding: 6vh 0 20px;
+            }
+
+            .hero-badges {
+                gap: 8px;
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            .hero-badge {
+                min-height: 30px;
+                padding: 4px 8px 4px 4px;
+                font-size: 11px;
+                gap: 6px;
+                white-space: nowrap;
+            }
+
+            .hero-badge-icon {
+                width: 20px;
+                height: 20px;
+            }
+
+            .hero-badge-icon svg {
+                width: 12px;
+                height: 12px;
+            }
+
+            .hero-section h1 {
+                font-size: clamp(42px, 11vw, 72px);
                 margin-bottom: 1.25rem !important;
+                white-space: normal;
+            }
+
+            .hero-title-break,
+            .hero-title-rest {
+                display: block;
             }
 
             .hero-section h2 {
-                font-size: clamp(17px, 4.6vw, 28px);
+                font-size: clamp(16px, 4.4vw, 20px);
             }
 
             .hero-section .tagline {
@@ -413,6 +1138,505 @@
                 line-height: 1.45;
                 padding-inline: 2px;
             }
+
+            .hero-section .sib-form {
+                width: min(410px, 100%);
+            }
+
+            #sib-form .ts-hero-email-wrap {
+                width: 100% !important;
+                max-width: 100% !important;
+                min-height: 52px;
+                flex-direction: row !important;
+                align-items: center !important;
+                gap: 6px !important;
+                padding: 4px !important;
+                border-radius: var(--radius) !important;
+            }
+
+            #sib-form .ts-hero-email-wrap #EMAIL {
+                width: auto !important;
+                flex: 1 1 auto !important;
+                min-width: 0 !important;
+                text-align: left;
+                padding: 0 14px !important;
+                font-size: 15px !important;
+            }
+
+            #sib-form .ts-hero-email-wrap button[type="submit"] {
+                width: auto !important;
+                flex: 0 0 auto;
+                min-width: 0;
+                padding: 0 14px !important;
+                font-size: 13px !important;
+            }
+
+            .hero-ad-feed {
+                --hero-ad-gap: 16px;
+                position: relative;
+                top: auto;
+                left: auto;
+                right: auto;
+                width: 100%;
+                max-width: 420px;
+                margin: 8px auto 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                gap: var(--hero-ad-gap);
+                align-items: stretch;
+                -webkit-mask-image: linear-gradient(
+                    180deg,
+                    #000 0%,
+                    #000 42%,
+                    rgba(0, 0, 0, 0.5) 68%,
+                    transparent 100%
+                );
+                mask-image: linear-gradient(
+                    180deg,
+                    #000 0%,
+                    #000 42%,
+                    rgba(0, 0, 0, 0.5) 68%,
+                    transparent 100%
+                );
+            }
+
+            .hero-ad-column {
+                flex: none;
+                width: 100%;
+                max-width: none;
+                gap: var(--hero-ad-gap);
+            }
+
+            .hero-ad-column.center {
+                margin-top: 0;
+            }
+
+            .hero-ad-column:not(:first-child) {
+                display: none;
+            }
+
+            .hero-social-card {
+                display: block;
+                padding: 16px;
+                border-radius: 24px;
+                opacity: 1;
+                transform: none;
+            }
+
+            .hero-bottom-fade {
+                display: block;
+                z-index: 5;
+                height: min(42vh, 360px);
+                background: linear-gradient(
+                    180deg,
+                    rgba(2, 7, 19, 0) 0%,
+                    rgba(2, 7, 19, 0.28) 28%,
+                    var(--background-deep) 78%
+                );
+            }
+
+            .scroll-indicator {
+                position: absolute;
+                left: 50%;
+                bottom: clamp(36px, 8vh, 64px);
+                transform: translateX(-50%);
+                gap: 16px;
+                width: min(210px, calc(100% - 40px));
+                z-index: 6;
+            }
+
+            .scroll-indicator-arrow {
+                min-height: 42px;
+                padding: 0 16px;
+            }
+        }
+
+        /* Scroll trust section */
+        .trust-scroll-section {
+            --trust-progress: 0;
+            --trust-match: 0;
+            --trust-logo-y: 160px;
+            --trust-logo-opacity: 0;
+            --trust-logo-tint: 0;
+            --trust-check: 0;
+            --trust-check-lift: 0px;
+            --trust-result: 0;
+            --trust-phone-y: 12px;
+            --trust-phone-scale: 0.96;
+            --trust-phone-opacity: 0.35;
+            --trust-privacy-opacity: 0.48;
+            --trust-copy-opacity: 0.52;
+            --trust-copy-y: 28px;
+            --trust-glow-opacity: 0.36;
+            --trust-glow-scale: 0.92;
+            height: 180vh;
+            min-height: 180vh;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            background: var(--background-deep);
+        }
+
+        .trust-sticky-stage {
+            height: 100vh;
+            min-height: 100vh;
+            max-height: 100vh;
+            position: sticky;
+            top: 0;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(340px, 430px) minmax(0, 1fr);
+            align-items: center;
+            gap: clamp(26px, 5vw, 82px);
+            padding: clamp(28px, 4.5vh, 52px) clamp(18px, 5vw, 72px);
+            overflow: visible;
+            box-sizing: border-box;
+        }
+
+        .trust-copy {
+            position: relative;
+            z-index: 3;
+        }
+
+        .trust-copy-left h2 {
+            margin: 0;
+            text-align: left;
+            font-family: var(--font-inter-tight);
+            font-size: clamp(28px, 3.4vw, 48px);
+            line-height: 1.08;
+            font-weight: var(--font-weight-semibold);
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+        }
+
+        .trust-copy-left h2 span {
+            display: block;
+            white-space: nowrap;
+        }
+
+        .trust-copy-left h2 span + span {
+            margin-top: 0.28em;
+        }
+
+        .trust-copy-left h2 span:last-child {
+            color: var(--ts-primary-300);
+            opacity: var(--trust-privacy-opacity);
+        }
+
+        .trust-copy-right {
+            max-width: 360px;
+            justify-self: start;
+            opacity: var(--trust-copy-opacity);
+            transform: translateY(var(--trust-copy-y));
+            transition: opacity 0.16s linear;
+        }
+
+        .trust-copy-right p {
+            margin: 0;
+            font-family: var(--font-inter-tight);
+            color: var(--text-dim);
+            font-size: clamp(16px, 2vw, 19px);
+            line-height: 1.7;
+            font-weight: var(--font-weight-normal);
+        }
+
+        .trust-device-area {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 0;
+            height: 100%;
+            isolation: isolate;
+            perspective: 1100px;
+            overflow: visible;
+            padding-bottom: 0;
+            box-sizing: border-box;
+        }
+
+        .trust-device-area::before {
+            content: "";
+            position: absolute;
+            width: clamp(260px, 35vw, 520px);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(108, 200, 236, 0.34), rgba(32, 147, 198, 0.09) 54%, transparent 70%);
+            filter: blur(34px);
+            opacity: var(--trust-glow-opacity);
+            transform: scale(var(--trust-glow-scale));
+            z-index: -2;
+        }
+
+        .trust-phone-wrap {
+            position: absolute;
+            transform: translateY(var(--trust-phone-y)) scale(var(--trust-phone-scale));
+            opacity: var(--trust-phone-opacity);
+            transition: transform 0.12s linear;
+            will-change: transform;
+            z-index: 1;
+            overflow: visible;
+            padding: 24px;
+            margin: -24px;
+        }
+
+        .trust-phone {
+            width: min(344px, 76vw, calc((100svh - 112px) * 9 / 18.6));
+            aspect-ratio: 9 / 18.6;
+            padding: 10px;
+            border-radius: 50px;
+            background:
+                linear-gradient(135deg, rgba(226, 245, 255, 0.7), rgba(70, 90, 110, 0.42) 18%, rgba(255, 255, 255, 0.12) 50%, rgba(195, 230, 245, 0.68)),
+                #05070d;
+            box-shadow:
+                0 28px 56px rgba(0, 0, 0, 0.48),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.34),
+                inset 0 0 0 4px rgba(6, 9, 16, 0.92);
+            position: relative;
+        }
+
+        .trust-phone::before {
+            content: "";
+            position: absolute;
+            top: 19px;
+            left: 50%;
+            width: 120px;
+            height: 31px;
+            border-radius: 0 0 22px 22px;
+            background: #04060a;
+            transform: translateX(-50%);
+            z-index: 4;
+            box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        .trust-phone::after {
+            content: "";
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #072545;
+            transform: translateX(-38px);
+            z-index: 5;
+            box-shadow: 0 0 9px rgba(32, 147, 198, 0.55);
+        }
+
+        .trust-phone-screen {
+            height: 100%;
+            border-radius: 40px;
+            overflow: hidden;
+            position: relative;
+            background:
+                radial-gradient(220px 280px at 50% 42%, rgba(32, 147, 198, 0.16), transparent 68%),
+                linear-gradient(180deg, #07111d 0%, #050b14 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .trust-phone-screen::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0.18), transparent 28%, transparent 70%, rgba(255, 255, 255, 0.08));
+            opacity: 0.28;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        .trust-phone-side {
+            position: absolute;
+            left: -8px;
+            width: 3px;
+            border-radius: 999px 0 0 999px;
+            background: linear-gradient(180deg, rgba(210, 234, 246, 0.72), rgba(71, 96, 112, 0.54));
+            box-shadow: -1px 0 1px rgba(255, 255, 255, 0.24);
+        }
+
+        .trust-phone-side.one {
+            top: 22%;
+            height: 34px;
+        }
+
+        .trust-phone-side.two {
+            top: 31%;
+            height: 56px;
+        }
+
+        .trust-phone-side.three {
+            top: 42%;
+            height: 56px;
+        }
+
+        .trust-phone-side.four {
+            left: auto;
+            right: -8px;
+            top: 34%;
+            height: 82px;
+            border-radius: 0 999px 999px 0;
+        }
+
+        .trust-merge-logo {
+            position: absolute;
+            left: 50%;
+            top: 42%;
+            z-index: 3;
+            width: min(210px, 78%);
+            pointer-events: none;
+            will-change: transform, opacity;
+            overflow: hidden;
+            border-radius: 12px;
+            filter:
+                drop-shadow(0 12px 24px rgba(0, 0, 0, 0.28))
+                drop-shadow(0 0 calc(var(--trust-logo-tint) * 28px) rgba(32, 147, 198, calc(var(--trust-logo-tint) * 0.55)));
+            opacity: var(--trust-logo-opacity);
+        }
+
+        .trust-merge-logo::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            background: rgba(32, 147, 198, calc(var(--trust-logo-tint) * 0.88));
+            box-shadow: inset 0 0 0 1px rgba(32, 147, 198, calc(var(--trust-logo-tint) * 0.42));
+            pointer-events: none;
+        }
+
+        .trust-merge-logo img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            opacity: calc(1 - (var(--trust-logo-tint) * 0.35));
+        }
+
+        .trust-merge-logo-bankid {
+            transform: translate(-50%, calc(-50% - var(--trust-logo-y)));
+        }
+
+        .trust-merge-logo-bolagsverket {
+            transform: translate(-50%, calc(-50% + var(--trust-logo-y)));
+        }
+
+        .trust-theatre {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0;
+            padding: calc(42% + min(105px, 39%)) 22px 36px;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .trust-check {
+            position: absolute;
+            left: 50%;
+            top: 42%;
+            z-index: 4;
+            width: min(210px, 78%);
+            transform: translate(-50%, calc(-50% - var(--trust-check-lift)));
+            display: grid;
+            place-items: center;
+            pointer-events: none;
+            opacity: var(--trust-check);
+            will-change: opacity, transform;
+        }
+
+        .trust-check-badge {
+            width: 100%;
+            aspect-ratio: 200 / 64;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: rgba(32, 147, 198, 0.12);
+            border: 1px solid rgba(32, 147, 198, 0.42);
+            color: var(--link);
+            transform: scale(calc(0.82 + (0.18 * var(--trust-check))));
+            box-shadow: 0 0 34px rgba(32, 147, 198, 0.2);
+        }
+
+        .trust-check svg {
+            width: 36px;
+            height: 36px;
+        }
+
+        .trust-check path {
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 1;
+            stroke-dashoffset: calc(1 - var(--trust-check));
+        }
+
+        .trust-result {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            max-width: 260px;
+            opacity: var(--trust-result);
+            transform: translateY(calc((1 - var(--trust-result)) * 18px));
+        }
+
+        .trust-result h3 {
+            margin: 0;
+            font-family: var(--font-inter-tight);
+            font-size: clamp(22px, 2.4vw, 28px);
+            font-weight: var(--font-weight-semibold);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+        }
+
+        .trust-result h3 span {
+            color: var(--link);
+        }
+
+        .trust-result p {
+            margin: 0;
+            font-family: var(--font-inter-tight);
+            font-size: 14px;
+            line-height: 1.45;
+            color: rgba(234, 242, 247, 0.7);
+        }
+
+        .trust-result-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+            margin-top: 6px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+        }
+
+        .trust-result-meta span {
+            font-family: var(--font-inter-tight);
+            font-size: 12px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .trust-result-meta span::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--link);
+            box-shadow: 0 0 10px rgba(32, 147, 198, 0.55);
+            flex-shrink: 0;
+        }
+
+        .trust-mobile-copy {
+            display: none;
         }
 
         /* Video section - bottom */
@@ -632,6 +1856,646 @@
             transform: scale(1.1);
         }
 
+        /* Network scale section */
+        .network-scale-section {
+            position: relative;
+            z-index: 3;
+            overflow: hidden;
+            margin-top: 0;
+            padding: 250px 24px 0;
+            width: 100%;
+            background: var(--background-deep);
+        }
+
+        .network-scale-inner {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 340px;
+        }
+
+        .network-scale-header {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 24px;
+            margin-bottom: 56px;
+        }
+
+        .network-scale-title {
+            font-family: var(--font-inter-tight);
+            font-weight: var(--font-weight-semibold);
+            font-size: clamp(36px, 4.5vw, 56px);
+            line-height: 1;
+            letter-spacing: -0.02em;
+            margin: 0;
+            color: var(--text-primary);
+            max-width: 18ch;
+        }
+
+        .network-scale-text {
+            font-family: var(--font-inter-tight);
+            font-size: clamp(16px, 2vw, 18px);
+            line-height: 1.7;
+            font-weight: var(--font-weight-normal);
+            color: var(--text-dim);
+            max-width: 720px;
+            margin: 0;
+        }
+
+        .network-scale-stats {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .network-scale-stat {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 12px;
+            white-space: nowrap;
+        }
+
+        .network-scale-value {
+            font-family: var(--font-inter-tight);
+            font-size: clamp(64px, 9vw, 120px);
+            font-weight: var(--font-weight-semibold);
+            line-height: 0.75;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .network-scale-labels {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 4px;
+            padding-bottom: 0.35em;
+            text-align: left;
+            font-family: var(--font-inter-tight);
+        }
+
+        .network-scale-label-primary {
+            margin: 0;
+            font-size: clamp(15px, 1.8vw, 18px);
+            font-weight: var(--font-weight-semibold);
+            line-height: 1;
+            letter-spacing: -0.01em;
+            color: var(--link);
+        }
+
+        .network-scale-label-secondary {
+            margin: 0;
+            font-size: clamp(15px, 1.8vw, 18px);
+            font-weight: var(--font-weight-medium);
+            line-height: 1;
+            letter-spacing: -0.01em;
+            color: var(--text-tertiary);
+        }
+
+        .network-flow-lines {
+            pointer-events: none;
+            position: absolute;
+            left: 50%;
+            top: 52%;
+            width: min(1440px, 140vw);
+            transform: translate(-50%, -50%);
+            color: rgba(32, 147, 198, 0.9);
+            opacity: 0.78;
+            z-index: 0;
+        }
+
+        .network-flow-lines svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            --network-particle-color: var(--ts-primary);
+        }
+
+        .network-flow-line {
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 0.5px;
+            opacity: 0.24;
+        }
+
+        .network-flow-line-accent {
+            opacity: 0.36;
+            stroke-width: 0.65px;
+        }
+
+        .network-flow-particle-soft {
+            opacity: 0.78;
+        }
+
+        @media (max-width: 639px) {
+            .network-scale-section {
+                padding: 96px 20px 88px;
+            }
+
+            .network-scale-header {
+                margin-bottom: 36px;
+            }
+
+            .network-flow-lines {
+                top: 74%;
+                width: min(1800px, 220vw);
+                transform: translate(-50%, -48%) scale(1.28);
+            }
+        }
+
+        @media (min-width: 640px) {
+            .network-scale-section {
+                padding: 250px 24px 0;
+            }
+
+            .network-scale-stats {
+                flex-direction: row;
+                align-items: stretch;
+                justify-content: space-between;
+                gap: 40px;
+                padding: 0 48px;
+            }
+
+            .network-scale-stat {
+                width: auto;
+            }
+        }
+
+        /* Why / mission strip */
+        .why-section {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            padding: 250px 24px 0;
+            background: var(--background-deep);
+        }
+
+        .why-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 56px;
+        }
+
+        .why-header {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .product-proof-title,
+        .why-title {
+            margin: 0;
+            font-family: var(--font-inter-tight);
+            font-weight: var(--font-weight-semibold);
+            font-size: clamp(32px, 4.2vw, 52px);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+        }
+
+        .why-lead {
+            margin: 0;
+            max-width: 58ch;
+            font-family: var(--font-inter-tight);
+            font-size: clamp(16px, 2vw, 19px);
+            line-height: 1.7;
+            color: var(--text-dim);
+        }
+
+        .why-lead strong {
+            color: var(--text-primary);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 28px 40px;
+        }
+
+        .why-item {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .why-item h3 {
+            margin: 0;
+            text-align: left;
+            font-family: var(--font-inter-tight);
+            font-size: clamp(18px, 2vw, 22px);
+            font-weight: var(--font-weight-semibold);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+        }
+
+        .why-item p {
+            margin: 0;
+            text-align: left;
+            font-family: var(--font-inter-tight);
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-dim);
+        }
+
+        /* Product proof */
+        .product-proof-section {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            padding: 250px 24px 0;
+            background: var(--background-deep);
+        }
+
+        .product-proof-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 88px;
+        }
+
+        .product-proof-header {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .product-proof-header p {
+            margin: 0;
+            max-width: 46ch;
+            font-family: var(--font-inter-tight);
+            font-size: clamp(15px, 1.8vw, 17px);
+            line-height: 1.6;
+            color: var(--text-dim);
+        }
+
+        .product-row {
+            display: grid;
+            grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+            align-items: center;
+            gap: clamp(28px, 5vw, 72px);
+        }
+
+        .product-row.reverse {
+            grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+        }
+
+        .product-row.reverse .product-copy {
+            order: 2;
+        }
+
+        .product-row.reverse .product-shot {
+            order: 1;
+        }
+
+        .product-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            max-width: 460px;
+        }
+
+        .product-copy h3 {
+            margin: 0;
+            text-align: left;
+            font-family: var(--font-inter-tight);
+            font-size: clamp(24px, 3vw, 34px);
+            font-weight: var(--font-weight-semibold);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+        }
+
+        .product-copy p {
+            margin: 0;
+            text-align: left;
+            font-family: var(--font-inter-tight);
+            font-size: clamp(15px, 1.7vw, 17px);
+            line-height: 1.65;
+            color: var(--text-dim);
+        }
+
+        .product-shot {
+            position: relative;
+            margin: 0;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(52, 111, 150, 0.35);
+            background: rgba(5, 11, 20, 0.72);
+            cursor: zoom-in;
+            isolation: isolate;
+        }
+
+        .product-shot img {
+            display: block;
+            width: 100%;
+            height: auto;
+            vertical-align: middle;
+            transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .product-shot:hover img {
+            transform: scale(1.02);
+        }
+
+        .product-shot-magnifier {
+            position: absolute;
+            right: 14px;
+            bottom: 14px;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius);
+            display: grid;
+            place-items: center;
+            background: rgba(5, 11, 20, 0.78);
+            border: 1px solid rgba(108, 200, 236, 0.35);
+            color: var(--ts-primary-300);
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            pointer-events: none;
+        }
+
+        .product-shot:hover .product-shot-magnifier {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 900px) {
+            .why-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .why-item {
+                padding: 22px 0;
+            }
+
+            .product-row,
+            .product-row.reverse {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .product-row.reverse .product-copy,
+            .product-row.reverse .product-shot {
+                order: initial;
+            }
+
+            .product-copy {
+                max-width: none;
+            }
+        }
+
+        @media (min-width: 700px) and (max-width: 1100px) and (orientation: portrait) {
+            .why-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .why-item {
+                padding: 40px 0;
+                align-items: center;
+            }
+
+            .why-item h3,
+            .why-item p {
+                text-align: center;
+            }
+
+            .product-copy {
+                align-items: center;
+                text-align: center;
+            }
+
+            .product-copy h3,
+            .product-copy p {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .why-section,
+            .product-proof-section {
+                padding: 96px 20px 0;
+            }
+
+            .beta-cta-section {
+                padding: 64px 20px 28px;
+            }
+
+            .footer {
+                padding: 36px 20px 40px;
+            }
+
+            .why-grid {
+                gap: 12px;
+            }
+
+            .why-item {
+                padding: 36px 0;
+                align-items: center;
+            }
+
+            .why-item h3,
+            .why-item p {
+                text-align: center;
+            }
+
+            .product-proof-inner {
+                gap: 72px;
+            }
+
+            .product-row,
+            .product-row.reverse {
+                gap: 16px;
+            }
+
+            .product-copy {
+                align-items: center;
+                text-align: center;
+            }
+
+            .product-copy h3,
+            .product-copy p {
+                text-align: center;
+            }
+
+            .product-shot.value-image {
+                min-height: 0;
+                aspect-ratio: 16 / 10;
+            }
+
+            .product-shot img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+
+        /* Beta launch CTA */
+        .beta-cta-section {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            padding: 250px 24px 96px;
+            background: var(--background-deep);
+        }
+
+        .beta-cta-inner {
+            max-width: 720px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 12px;
+        }
+
+        .beta-cta-title {
+            margin: 0;
+            font-family: var(--font-inter-tight);
+            font-weight: var(--font-weight-semibold);
+            font-size: clamp(28px, 3.6vw, 42px);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+        }
+
+        .beta-cta-title span {
+            color: var(--ts-primary);
+        }
+
+        .beta-cta-text {
+            margin: 0 0 10px;
+            font-family: var(--font-inter-tight);
+            font-size: clamp(15px, 1.8vw, 17px);
+            line-height: 1.5;
+            color: var(--text-dim);
+            max-width: 38ch;
+        }
+
+        .beta-cta-form {
+            width: min(410px, 92vw);
+        }
+
+        .beta-cta-field {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            min-height: 56px;
+            padding: 5px;
+            border-radius: var(--radius);
+            border: 1px solid rgba(52, 111, 150, 0.82);
+            background: rgba(5, 11, 20, 0.72);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+            box-sizing: border-box;
+        }
+
+        .beta-cta-field input {
+            flex: 1;
+            min-width: 0;
+            height: 46px;
+            border: 0;
+            outline: none;
+            background: transparent;
+            color: white;
+            font-family: inherit;
+            font-size: 16px;
+            line-height: 1.2;
+            padding: 0 26px;
+            border-radius: var(--radius);
+        }
+
+        .beta-cta-field input::placeholder {
+            color: rgba(234, 242, 247, 0.62);
+            opacity: 1;
+        }
+
+        .beta-cta-field button {
+            flex-shrink: 0;
+            height: 46px;
+            min-width: 148px;
+            border: 0;
+            border-radius: var(--radius);
+            padding: 0 24px;
+            background: var(--ts-primary-600);
+            color: white;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            cursor: pointer;
+            box-shadow: 0 12px 30px rgba(32, 147, 198, 0.35);
+            transition: transform 0.15s ease, filter 0.15s ease;
+        }
+
+        .beta-cta-field button:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.05);
+        }
+
+        @media (max-width: 640px) {
+            .beta-cta-title span {
+                display: block;
+            }
+
+            .beta-cta-form {
+                width: min(410px, 100%);
+            }
+
+            .beta-cta-field {
+                flex-direction: row;
+                align-items: center;
+                min-height: 52px;
+                padding: 4px;
+                border-radius: var(--radius);
+                gap: 6px;
+            }
+
+            .beta-cta-field input {
+                height: 44px;
+                padding: 0 14px;
+                text-align: left;
+                font-size: 15px;
+            }
+
+            .beta-cta-field button {
+                width: auto;
+                flex: 0 0 auto;
+                min-width: 0;
+                padding: 0 14px;
+                font-size: 13px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .network-flow-particle {
+                display: none;
+            }
+        }
+
         /* About Us Extended Sections */
         .about-section {
             padding: 80px 24px;
@@ -800,7 +2664,7 @@
             right: 16px;
             width: 54px;
             height: 54px;
-            border-radius: 999px;
+            border-radius: var(--radius);
             background: rgba(10, 15, 26, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.25);
             color: white;
@@ -864,7 +2728,7 @@
             color: white;
             width: 48px;
             height: 48px;
-            border-radius: 999px;
+            border-radius: var(--radius);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -919,7 +2783,7 @@
         }
 
         .privacy-content h3 {
-            font-weight: 100;
+            font-weight: var(--font-weight-semibold);
             font-size: clamp(24px, 3vw, 32px);
             line-height: 1.1;
             letter-spacing: 0.2px;
@@ -951,7 +2815,6 @@
         }
 
         .privacy-date {
-            font-style: italic;
             text-align: center;
             margin-top: 24px !important;
             opacity: 0.8;
@@ -966,7 +2829,7 @@
             color: white;
             width: 44px;
             height: 44px;
-            border-radius: 999px;
+            border-radius: var(--radius);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -995,34 +2858,306 @@
 
         /* Footer */
         .footer {
-            padding: 40px 24px;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
             position: relative;
-            z-index: 2;
-            text-align: center;
+            z-index: 3;
+            width: 100%;
+            margin: 0;
+            padding: 250px 24px 48px;
+            background: var(--background-deep);
+            text-align: left;
+            box-sizing: border-box;
         }
 
-        .footer-content {
-            margin-top: 20px;
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 72px;
+        }
+
+        .footer-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .footer-title {
+            margin: 0;
+            font-family: var(--font-inter-tight);
+            font-size: clamp(36px, 5vw, 64px);
+            font-weight: var(--font-weight-semibold);
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+        }
+
+        .footer-contact-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            min-height: 44px;
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            border: 0;
+            background: var(--ts-primary-600);
+            color: #fff;
+            font-family: var(--font-inter-tight);
+            font-size: 14px;
+            font-weight: var(--font-weight-semibold);
+            letter-spacing: -0.01em;
+            text-decoration: none;
+            box-shadow: 0 12px 30px rgba(32, 147, 198, 0.35);
+            transition: transform 0.15s ease, filter 0.15s ease;
+        }
+
+        .footer-contact-btn:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.05);
+        }
+
+        .footer-bottom {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 24px 40px;
+            padding-top: 8px;
+        }
+
+        .footer-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-note {
+            margin: 0;
+            font-family: var(--font-inter-tight);
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--text-dim);
         }
 
         .footer-company {
-            font-size: 14px;
+            margin: 0;
+            max-width: 42ch;
+            font-family: var(--font-inter-tight);
+            font-size: 13px;
+            line-height: 1.5;
+            font-weight: var(--font-weight-normal);
             color: var(--text-dim);
-            margin: 0 0 8px 0;
-            font-weight: 100;
         }
 
-        .footer-email {
-            font-size: 14px;
-            color: var(--text-dim);
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 10px 18px;
             margin: 0;
-            font-weight: 100;
+            padding: 0;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-family: var(--font-inter-tight);
+            font-size: 13px;
+            line-height: 1.4;
+            color: var(--text-dim);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .footer-links a:hover {
+            color: var(--ts-primary);
         }
 
         @media (max-width: 768px) {
+            .footer-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+            }
+
+            .footer-links {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer {
+                text-align: center;
+            }
+
+            .footer-inner {
+                align-items: center;
+                gap: 40px;
+            }
+
+            .footer-top {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-title {
+                text-align: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-meta {
+                align-items: center;
+            }
+
+            .footer-company {
+                max-width: 32ch;
+            }
+
+            .footer-links {
+                justify-content: center;
+            }
+        }
+
+        @media (min-width: 700px) and (max-width: 1100px) and (orientation: portrait) {
+            .trust-scroll-section {
+                height: 160vh;
+                min-height: 160vh;
+            }
+
+            .trust-sticky-stage {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "headline"
+                    "body"
+                    "phone";
+                gap: 16px 0;
+                align-content: start;
+                justify-items: center;
+                padding: 80px 28px 48px;
+            }
+
+            .trust-copy-left {
+                grid-area: headline;
+                width: 100%;
+            }
+
+            .trust-copy-left h2 {
+                text-align: center;
+            }
+
+            .trust-copy-left h2 span {
+                white-space: nowrap;
+            }
+
+            .trust-copy-right {
+                grid-area: body;
+                display: block;
+                width: 100%;
+                max-width: 520px;
+                justify-self: center;
+                text-align: center;
+            }
+
+            .trust-copy-right p {
+                text-align: center;
+            }
+
+            .trust-device-area {
+                grid-area: phone;
+                width: 100%;
+                min-height: 0;
+                padding-bottom: 0;
+                margin-top: 52px;
+            }
+
+            .trust-phone-wrap {
+                position: relative;
+                padding: 0;
+                margin: 0;
+                transform: translateY(0) scale(var(--trust-phone-scale));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .trust-scroll-section {
+                height: 160vh;
+                min-height: 160vh;
+            }
+
+            .trust-sticky-stage {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "headline"
+                    "phone";
+                grid-template-rows: auto auto;
+                gap: 28px;
+                align-content: start;
+                padding: 28px 18px 40px;
+            }
+
+            .trust-copy-left h2 {
+                text-align: center;
+                font-size: clamp(26px, 7vw, 36px);
+            }
+
+            .trust-copy-left h2 span {
+                white-space: nowrap;
+            }
+
+            .trust-copy-right {
+                display: none;
+            }
+
+            .trust-mobile-copy {
+                display: block;
+                max-width: 360px;
+                margin: 14px auto 0;
+                text-align: center;
+                font-family: var(--font-inter-tight);
+                color: var(--text-dim);
+                font-size: 15px;
+                line-height: 1.55;
+            }
+
+            .trust-device-area {
+                min-height: 0;
+                padding-bottom: 0;
+                overflow: visible;
+            }
+
+            .trust-phone-wrap {
+                position: relative;
+                padding: 0;
+                margin: 0;
+                transform: scale(var(--trust-phone-scale));
+            }
+
+            .trust-phone {
+                width: min(220px, 62vw);
+            }
+
+            .trust-merge-logo,
+            .trust-check {
+                width: min(168px, 74%);
+            }
+
+            .trust-result h3 {
+                font-size: 22px;
+            }
+
+            .trust-result p {
+                font-size: 13px;
+            }
+
             .video-content-wrapper {
                 grid-template-columns: 1fr;
                 gap: 32px;
@@ -1105,7 +3240,7 @@
             padding: 0 12px 0 12px !important;
         }
 
-        /* Brevo sib-styles: vit bakgrund + ljus ram/box-shadow på .entry__field — hero ska vara ren mot mörk bakgrund */
+        /* Brevo sib-styles: vit bakgrund + ljus ram/box-shadow på .entry__field. Hero ska vara ren mot mörk bakgrund. */
         #sib-form .sib-input .entry__field,
         #sib-form .sib-input .form__entry.entry_block,
         #sib-form .sib-input .form__label-row,
@@ -1241,7 +3376,129 @@
             gap: 2px;
         }
 
+        .hero-section #sib-form .sib-input .input-wrap.ts-hero-email-wrap {
+            width: min(410px, 92vw) !important;
+            max-width: none !important;
+            min-height: 56px !important;
+            margin: 0 auto !important;
+            padding: 5px !important;
+            border-radius: var(--radius) !important;
+            background: rgba(5, 11, 20, 0.72) !important;
+            border: 1px solid rgba(52, 111, 150, 0.82) !important;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18) !important;
+        }
+
+        .hero-section #sib-form .sib-input .input-wrap.ts-hero-email-wrap #EMAIL {
+            height: 46px !important;
+            width: auto !important;
+            min-width: 0 !important;
+            padding: 0 26px !important;
+            border-radius: var(--radius) !important;
+            background: transparent !important;
+            color: white !important;
+            font-size: 16px !important;
+            font-family: inherit !important;
+        }
+
+        .hero-section #sib-form .sib-input .input-wrap.ts-hero-email-wrap #EMAIL::placeholder {
+            color: rgba(234, 242, 247, 0.62) !important;
+            opacity: 1 !important;
+        }
+
+        .hero-section #sib-form .sib-input .input-wrap.ts-hero-email-wrap button[type="submit"] {
+            height: 46px !important;
+            min-width: 148px;
+            border-radius: var(--radius) !important;
+            background: var(--ts-primary-600) !important;
+            color: white !important;
+            padding: 0 24px !important;
+            font-family: inherit !important;
+            font-size: 14px !important;
+            font-weight: 700 !important;
+            box-shadow: 0 12px 30px rgba(32, 147, 198, 0.35);
+        }
+
+        .hero-section #sib-form .sib-input .input-wrap.ts-hero-email-wrap button[type="submit"] svg {
+            display: none;
+        }
+
+        .hero-section #sib-form,
+        .hero-section #sib-form *,
+        .hero-section .sib-form-message-panel,
+        .hero-section .sib-form-message-panel * {
+            font-family: var(--font-inter-tight) !important;
+        }
+
+        @media (max-width: 600px) {
+            .hero-section #sib-form .sib-input .input-wrap.ts-hero-email-wrap {
+                width: 100% !important;
+                max-width: 100% !important;
+                min-height: 52px !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                gap: 6px !important;
+                padding: 4px !important;
+                border-radius: var(--radius) !important;
+            }
+
+            .hero-section #sib-form .sib-input .input-wrap.ts-hero-email-wrap #EMAIL {
+                width: auto !important;
+                flex: 1 1 auto !important;
+                min-width: 0 !important;
+                text-align: left;
+                padding: 0 14px !important;
+                font-size: 15px !important;
+            }
+
+            .hero-section #sib-form .sib-input .input-wrap.ts-hero-email-wrap button[type="submit"] {
+                width: auto !important;
+                flex: 0 0 auto;
+                min-width: 0;
+                padding: 0 14px !important;
+                font-size: 13px !important;
+            }
+        }
+
         @media (prefers-reduced-motion: reduce) {
+            .trust-scroll-section {
+                --trust-match: 1;
+                --trust-logo-y: 0px;
+                --trust-logo-opacity: 0;
+                --trust-logo-tint: 1;
+                --trust-check: 1;
+                --trust-check-lift: 110px;
+                --trust-result: 1;
+                --trust-phone-y: 0px;
+                --trust-phone-scale: 1;
+                --trust-phone-opacity: 1;
+                --trust-privacy-opacity: 1;
+                --trust-copy-opacity: 1;
+                --trust-copy-y: 0px;
+                --trust-glow-opacity: 0.86;
+                --trust-glow-scale: 1.1;
+                min-height: auto;
+                height: auto;
+                padding: 40px 0;
+            }
+
+            .trust-sticky-stage {
+                position: relative;
+            }
+
+            .trust-phone-wrap,
+            .trust-copy-right,
+            .trust-merge-logo,
+            .trust-check,
+            .trust-result {
+                transition: none;
+            }
+
+            .hero-social-card {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+
             .ts-captcha-reveal {
                 transition: none;
             }
@@ -1250,6 +3507,8 @@
 <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
 </head>
 <script>
+    document.documentElement.classList.add('hero-intro-active');
+
     // --- Minimal helper for toast notifications ---
     function tsToast(msg, ok = true) {
         let t = document.getElementById('ts-toast');
@@ -1257,7 +3516,7 @@
             t = Object.assign(document.createElement('div'), { id: 'ts-toast' });
             Object.assign(t.style, {
                 position: 'fixed', left: '50%', bottom: '32px', transform: 'translateX(-50%)',
-                padding: '12px 16px', borderRadius: '999px', color: '#fff',
+                padding: '12px 16px', borderRadius: '10px', color: '#fff',
                 background: 'rgba(10,15,26,.9)', border: '1px solid rgba(255,255,255,.12)',
                 boxShadow: '0 10px 24px rgba(0,0,0,.35)', zIndex: 50, fontSize: '14px',
             });
@@ -1273,6 +3532,348 @@
 
     // Video upload and player functionality
     window.addEventListener('DOMContentLoaded', () => {
+        const setupHeroIntro = () => {
+            const root = document.documentElement;
+            const title = document.querySelector('.hero-section h1');
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (!title || reduceMotion) {
+                root.classList.remove('hero-intro-active', 'hero-intro-badges', 'hero-intro-copy');
+                return;
+            }
+
+            const originalText = title.textContent || '';
+            title.setAttribute('aria-label', originalText);
+            title.textContent = '';
+
+            const breakAt = originalText.indexOf('förtroende');
+
+            [...originalText].forEach((character, index) => {
+                if (index === breakAt && breakAt >= 0) {
+                    const lineBreak = document.createElement('br');
+                    lineBreak.className = 'hero-title-break';
+                    lineBreak.setAttribute('aria-hidden', 'true');
+                    title.appendChild(lineBreak);
+                }
+
+                const span = document.createElement('span');
+                span.className = 'hero-title-char';
+                span.style.setProperty('--char-index', index);
+                span.textContent = character;
+                span.setAttribute('aria-hidden', 'true');
+                title.appendChild(span);
+            });
+
+            title.classList.add('is-split');
+            window.scrollTo(0, 0);
+
+            const blockScroll = (event) => {
+                event.preventDefault();
+            };
+            const blockScrollKeys = (event) => {
+                const blockedKeys = [' ', 'PageDown', 'PageUp', 'End', 'Home', 'ArrowDown', 'ArrowUp'];
+                if (blockedKeys.includes(event.key)) {
+                    event.preventDefault();
+                }
+            };
+            const scrollOptions = { passive: false, capture: true };
+
+            window.addEventListener('wheel', blockScroll, scrollOptions);
+            window.addEventListener('touchmove', blockScroll, scrollOptions);
+            window.addEventListener('keydown', blockScrollKeys, true);
+
+            window.setTimeout(() => {
+                root.classList.add('hero-intro-badges');
+            }, 1060);
+
+            window.setTimeout(() => {
+                root.classList.add('hero-intro-copy');
+            }, 1420);
+
+            window.setTimeout(() => {
+                root.classList.remove('hero-intro-active', 'hero-intro-badges', 'hero-intro-copy');
+                window.removeEventListener('wheel', blockScroll, scrollOptions);
+                window.removeEventListener('touchmove', blockScroll, scrollOptions);
+                window.removeEventListener('keydown', blockScrollKeys, true);
+            }, 1920);
+        };
+
+        setupHeroIntro();
+
+        // Hero map: precomputed dots sampled from the original texture (same positions and intensity).
+        const setupHeroMapCanvas = () => {
+            const canvas = document.getElementById('hero-map-canvas');
+            const hero = document.querySelector('.hero-section');
+            if (!canvas || !hero) return;
+
+            const ctx = canvas.getContext('2d', { alpha: true });
+            if (!ctx) return;
+
+            const dotsSrc = canvas.dataset.dotsSrc;
+            if (!dotsSrc) return;
+
+            const dots = [];
+            const trails = [];
+            const mouse = { x: -9999, y: -9999, active: false };
+            let lastTrail = { x: -9999, y: -9999, time: 0 };
+            const wakeMomentum = { x: 0, y: 0, dirX: 1, dirY: 0, energy: 0, lastEmit: 0 };
+            const wakeGlow = { x: -9999, y: -9999, intensity: 0, target: 0 };
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            let mapSize = { width: 1672, height: 941 };
+            let imageReady = false;
+            let animationFrame = 0;
+            let previousFrameTime = 0;
+            let drawRect = { x: 0, y: 0, width: 0, height: 0 };
+
+            const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+            const resizeCanvas = () => {
+                const rect = canvas.getBoundingClientRect();
+                const dpr = clamp(window.devicePixelRatio || 1, 1, 2);
+                canvas.width = Math.max(1, Math.round(rect.width * dpr));
+                canvas.height = Math.max(1, Math.round(rect.height * dpr));
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                drawRect = getCoverRect(rect.width, rect.height, mapSize.width, mapSize.height);
+            };
+
+            const getCoverRect = (containerWidth, containerHeight, imageWidth, imageHeight) => {
+                const scale = Math.max(containerWidth / imageWidth, containerHeight / imageHeight);
+                const width = imageWidth * scale;
+                const height = imageHeight * scale;
+                return {
+                    x: (containerWidth - width) / 2,
+                    y: (containerHeight - height) / 2,
+                    width,
+                    height
+                };
+            };
+
+            const loadDots = async () => {
+                try {
+                    const response = await fetch(dotsSrc);
+                    if (!response.ok) throw new Error(response.statusText);
+                    const data = await response.json();
+                    const width = data[0];
+                    const height = data[1];
+                    mapSize = { width, height };
+                    for (let index = 2; index < data.length; index += 3) {
+                        const x = data[index];
+                        const y = data[index + 1];
+                        const intensity = data[index + 2];
+                        dots.push({
+                            x: x / width,
+                            y: y / height,
+                            intensity,
+                            jitter: ((x * 17 + y * 31) % 100) / 100
+                        });
+                    }
+                    imageReady = true;
+                    resizeCanvas();
+                } catch (error) {
+                    console.warn('Unable to load hero map dots:', dotsSrc, error);
+                }
+            };
+
+            const draw = (time = 0) => {
+                const rect = canvas.getBoundingClientRect();
+                ctx.clearRect(0, 0, rect.width, rect.height);
+                if (!imageReady) {
+                    animationFrame = requestAnimationFrame(draw);
+                    return;
+                }
+
+                const frameDelta = previousFrameTime ? clamp((time - previousFrameTime) / 16.67, 0.5, 2.5) : 1;
+                previousFrameTime = time;
+
+                const mx = mouse.x - rect.left;
+                const my = mouse.y - rect.top;
+                const activeTrails = reducedMotion.matches ? [] : trails;
+                if (mouse.active && !reducedMotion.matches && wakeMomentum.energy > 0.012 && time - wakeMomentum.lastEmit > 34) {
+                    trails.push({
+                        x: mouse.x - wakeMomentum.x * 0.22,
+                        y: mouse.y - wakeMomentum.y * 0.22,
+                        dirX: wakeMomentum.dirX,
+                        dirY: wakeMomentum.dirY,
+                        energy: wakeMomentum.energy,
+                        life: Math.max(0.34, wakeMomentum.energy * 0.9)
+                    });
+                    if (trails.length > 6) trails.shift();
+                    wakeMomentum.lastEmit = time;
+                }
+                wakeMomentum.energy *= Math.pow(0.965, frameDelta);
+                wakeMomentum.x *= Math.pow(0.94, frameDelta);
+                wakeMomentum.y *= Math.pow(0.94, frameDelta);
+                wakeGlow.target = Math.max(wakeGlow.target * Math.pow(0.965, frameDelta), wakeMomentum.energy * 0.5, activeTrails.length ? activeTrails[activeTrails.length - 1].life * activeTrails[activeTrails.length - 1].energy * 0.38 : 0);
+                wakeGlow.intensity += (wakeGlow.target - wakeGlow.intensity) * 0.12 * frameDelta;
+                if (mouse.active) {
+                    const targetGlowX = mx - wakeMomentum.x * 0.18;
+                    const targetGlowY = my - wakeMomentum.y * 0.18;
+                    if (wakeGlow.x < -9000) {
+                        wakeGlow.x = targetGlowX;
+                        wakeGlow.y = targetGlowY;
+                    } else {
+                        wakeGlow.x += (targetGlowX - wakeGlow.x) * 0.16 * frameDelta;
+                        wakeGlow.y += (targetGlowY - wakeGlow.y) * 0.16 * frameDelta;
+                    }
+                }
+
+                const rippleTime = time * 0.006;
+
+                if ((activeTrails.length > 0 || wakeGlow.intensity > 0.01) && !reducedMotion.matches) {
+                    ctx.save();
+                    ctx.globalCompositeOperation = 'screen';
+                    if (wakeGlow.intensity > 0.01) {
+                        const easedGlow = wakeGlow.intensity * wakeGlow.intensity;
+                        const steadyGlow = ctx.createRadialGradient(wakeGlow.x, wakeGlow.y, 0, wakeGlow.x, wakeGlow.y, 360);
+                        steadyGlow.addColorStop(0, `rgba(82, 218, 229, ${easedGlow * 0.04})`);
+                        steadyGlow.addColorStop(0.52, `rgba(32, 147, 198, ${easedGlow * 0.02})`);
+                        steadyGlow.addColorStop(1, 'rgba(32, 147, 198, 0)');
+                        ctx.fillStyle = steadyGlow;
+                        ctx.fillRect(wakeGlow.x - 360, wakeGlow.y - 360, 720, 720);
+                    }
+                    activeTrails.forEach((trail) => {
+                        const tx = trail.x - rect.left;
+                        const ty = trail.y - rect.top;
+                        const trailGlow = ctx.createRadialGradient(tx, ty, 0, tx, ty, 300);
+                        trailGlow.addColorStop(0, `rgba(82, 218, 229, ${trail.life * trail.energy * 0.032})`);
+                        trailGlow.addColorStop(0.58, `rgba(32, 147, 198, ${trail.life * trail.energy * 0.017})`);
+                        trailGlow.addColorStop(1, 'rgba(32, 147, 198, 0)');
+                        ctx.fillStyle = trailGlow;
+                        ctx.fillRect(tx - 300, ty - 300, 600, 600);
+                    });
+                    ctx.restore();
+                }
+
+                dots.forEach((dot) => {
+                    const x = drawRect.x + dot.x * drawRect.width;
+                    const y = drawRect.y + dot.y * drawRect.height;
+                    if (x < -4 || x > rect.width + 4 || y < -4 || y > rect.height + 4) return;
+
+                    let lift = 0;
+                    let ripple = 0;
+                    let offsetX = 0;
+                    let offsetY = 0;
+                    if (activeTrails.length > 0 && !reducedMotion.matches) {
+                        activeTrails.forEach((trail) => {
+                            const tx = trail.x - rect.left;
+                            const ty = trail.y - rect.top;
+                            const trailDx = x - tx;
+                            const trailDy = y - ty;
+                            if (Math.abs(trailDx) < 420 && Math.abs(trailDy) < 310) {
+                                const behind = -(trailDx * trail.dirX + trailDy * trail.dirY);
+                                if (behind > -34 && behind < 420) {
+                                    const side = Math.abs(trailDx * -trail.dirY + trailDy * trail.dirX);
+                                    if (side < 220) {
+                                        const lengthFalloff = 1 - behind / 420;
+                                        const sideFalloff = 1 - side / 220;
+                                        const wake = Math.max(0, lengthFalloff) * sideFalloff * sideFalloff * trail.life * trail.energy;
+                                        const trailWave = Math.sin(behind * 0.072 - rippleTime * 1.2 + side * 0.024);
+                                        const strength = wake * 0.9;
+                                        lift = Math.max(lift, strength * 0.82);
+                                        ripple += trailWave * strength;
+                                        offsetX += -trail.dirX * trailWave * strength * 17;
+                                        offsetY += -trail.dirY * trailWave * strength * 17;
+                                        offsetX += -trail.dirY * Math.sin(behind * 0.038 + rippleTime) * strength * 4.2;
+                                        offsetY += trail.dirX * Math.sin(behind * 0.038 + rippleTime) * strength * 4.2;
+                                    }
+                                }
+                            }
+                        });
+                    }
+
+                    const twinkle = Math.sin(time * 0.0012 + dot.jitter * 6.283) * 0.055;
+                    const alpha = clamp(dot.intensity * 0.58 + twinkle + lift * 0.64 + Math.abs(ripple) * 0.12, 0.24, 0.98);
+                    const size = 1.02 + dot.intensity * 0.24 + lift * 1.55 + Math.abs(ripple) * 0.32;
+                    const drawX = x + offsetX;
+                    const drawY = y + offsetY;
+
+                    ctx.fillStyle = `rgba(${30 + lift * 82}, ${196 + lift * 48}, ${179 + lift * 45}, ${alpha})`;
+                    ctx.fillRect(drawX, drawY, size, size);
+                });
+
+                for (let index = trails.length - 1; index >= 0; index -= 1) {
+                    trails[index].life *= Math.pow(0.94, frameDelta);
+                    if (trails[index].life < 0.03) trails.splice(index, 1);
+                }
+
+                animationFrame = requestAnimationFrame(draw);
+            };
+
+            window.addEventListener('resize', resizeCanvas);
+            window.addEventListener('pointermove', (event) => {
+                const heroRect = hero.getBoundingClientRect();
+                mouse.active = event.clientY >= heroRect.top && event.clientY <= heroRect.bottom;
+                mouse.x = event.clientX;
+                mouse.y = event.clientY;
+                if (mouse.active && !reducedMotion.matches) {
+                    if (lastTrail.x < -9000) {
+                        lastTrail = { x: event.clientX, y: event.clientY, time: event.timeStamp };
+                        return;
+                    }
+                    const deltaX = event.clientX - lastTrail.x;
+                    const deltaY = event.clientY - lastTrail.y;
+                    const moved = Math.hypot(deltaX, deltaY);
+                    const elapsed = event.timeStamp - lastTrail.time;
+                    if (moved > 18 || elapsed > 46) {
+                        const safeElapsed = Math.max(elapsed, 16);
+                        const energy = clamp(moved / safeElapsed / 0.82, 0.3, 1.18);
+                        const dirX = moved > 0.001 ? deltaX / moved : 1;
+                        const dirY = moved > 0.001 ? deltaY / moved : 0;
+                        trails.push({ x: event.clientX, y: event.clientY, dirX, dirY, energy, life: 1 });
+                        wakeMomentum.x = wakeMomentum.x * 0.44 + deltaX * 0.56;
+                        wakeMomentum.y = wakeMomentum.y * 0.44 + deltaY * 0.56;
+                        wakeMomentum.dirX = dirX;
+                        wakeMomentum.dirY = dirY;
+                        wakeMomentum.energy = Math.max(wakeMomentum.energy, energy);
+                        lastTrail = { x: event.clientX, y: event.clientY, time: event.timeStamp };
+                        if (trails.length > 6) trails.shift();
+                    }
+                }
+            }, { passive: true });
+
+            window.addEventListener('pointerleave', () => {
+                mouse.active = false;
+                lastTrail = { x: -9999, y: -9999, time: 0 };
+                wakeMomentum.energy = 0;
+                wakeGlow.target = 0;
+            });
+
+            loadDots();
+            resizeCanvas();
+            animationFrame = requestAnimationFrame(draw);
+        };
+
+        setupHeroMapCanvas();
+
+        const setupHeroAdReveal = () => {
+            const cards = [...document.querySelectorAll('.hero-social-card')];
+            if (cards.length === 0) return;
+
+            const revealCard = (card) => {
+                card.classList.add('is-revealed');
+            };
+
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+                cards.forEach(revealCard);
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    revealCard(entry.target);
+                    observer.unobserve(entry.target);
+                });
+            }, {
+                rootMargin: '0px 0px -12% 0px',
+                threshold: 0.18
+            });
+
+            cards.forEach((card) => observer.observe(card));
+        };
+
+        setupHeroAdReveal();
+
         // Email form handler
         const form = document.querySelector('#notify-form');
         if (form) {
@@ -1292,7 +3893,7 @@
                         body: JSON.stringify({ email, secret: SECRET })
                     });
                     input.value = '';
-                    tsToast('Tack! Vi meddelar när det är dags att revolutionera B2B-handeln.', true);
+                    tsToast('Tack! Vi hör av oss när betan öppnar den 14 september.', true);
                 } catch (err) {
                     console.error(err);
                     tsToast('Vänligen kontrollera e-postadressen.', false);
@@ -1419,16 +4020,93 @@
             observer.observe(card);
         });
 
+        // Network scale stat counters
+        const networkScaleSection = document.getElementById('network-scale');
+        if (networkScaleSection && 'IntersectionObserver' in window) {
+            const formatStatValue = (value, format) => {
+                if (format === 'decimal') {
+                    return value.toLocaleString('sv-SE', {
+                        minimumFractionDigits: 1,
+                        maximumFractionDigits: 1
+                    });
+                }
+
+                return Math.round(value).toLocaleString('sv-SE');
+            };
+
+            const animateStatValue = (element) => {
+                const target = parseFloat(element.dataset.value);
+                const format = element.dataset.format || 'integer';
+                const duration = 1800;
+                const startTime = performance.now();
+
+                const tick = (now) => {
+                    const progress = Math.min((now - startTime) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 5);
+                    element.textContent = formatStatValue(target * eased, format);
+
+                    if (progress < 1) {
+                        requestAnimationFrame(tick);
+                    }
+                };
+
+                requestAnimationFrame(tick);
+            };
+
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+
+                    const values = entry.target.querySelectorAll('[data-value]');
+                    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+                    values.forEach((element) => {
+                        if (prefersReducedMotion) {
+                            element.textContent = formatStatValue(
+                                parseFloat(element.dataset.value),
+                                element.dataset.format || 'integer'
+                            );
+                            return;
+                        }
+
+                        animateStatValue(element);
+                    });
+
+                    statsObserver.disconnect();
+                });
+            }, { threshold: 0.45 });
+
+            statsObserver.observe(networkScaleSection);
+        }
+
+        // Focus hero email signup
+        const focusHeroSignup = () => {
+            const heroEmail = document.querySelector('#sib-form #EMAIL');
+            const heroForm = document.getElementById('sib-form') || document.querySelector('.hero-section');
+            if (heroForm) {
+                heroForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            window.setTimeout(() => {
+                if (!heroEmail) return;
+                heroEmail.focus({ preventScroll: true });
+                heroEmail.dispatchEvent(new Event('focus', { bubbles: true }));
+            }, 450);
+        };
+
         // Scroll indicator click handler
         const scrollIndicator = document.getElementById('scroll-indicator');
         if (scrollIndicator) {
-            scrollIndicator.addEventListener('click', () => {
-                const videoSection = document.querySelector('.video-section');
-                if (videoSection) {
-                    videoSection.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
+            scrollIndicator.addEventListener('click', focusHeroSignup);
         }
+
+        document.querySelectorAll('.hero-nav-btn.primary').forEach((button) => {
+            button.addEventListener('click', focusHeroSignup);
+        });
 
         // Scroll to top button functionality
         const scrollToTopDiv = document.getElementById('scroll-to-top');
@@ -1448,15 +4126,125 @@
             });
         }
 
+        // Scroll-driven phone and verification animation
+        const setupTrustScroll = () => {
+            const trustSection = document.getElementById('trust-scroll');
+            if (!trustSection) return;
+
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            let ticking = false;
+
+            const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+            const lerp = (from, to, amount) => from + ((to - from) * amount);
+            const smoothstep = (from, to, value) => {
+                const amount = clamp((value - from) / (to - from), 0, 1);
+                return amount * amount * (3 - (2 * amount));
+            };
+
+            const renderTrustScroll = () => {
+                ticking = false;
+
+                if (reducedMotion.matches) {
+                    trustSection.dataset.step = '2';
+                    trustSection.style.setProperty('--trust-match', '1');
+                    trustSection.style.setProperty('--trust-logo-y', '0px');
+                    trustSection.style.setProperty('--trust-logo-opacity', '0');
+                    trustSection.style.setProperty('--trust-logo-tint', '1');
+                    trustSection.style.setProperty('--trust-check', '1');
+                    trustSection.style.setProperty('--trust-check-lift', '110px');
+                    trustSection.style.setProperty('--trust-result', '1');
+                    trustSection.style.setProperty('--trust-phone-y', '0px');
+                    trustSection.style.setProperty('--trust-phone-scale', '1');
+                    trustSection.style.setProperty('--trust-phone-opacity', '1');
+                    trustSection.style.setProperty('--trust-privacy-opacity', '1');
+                    trustSection.style.setProperty('--trust-copy-opacity', '1');
+                    trustSection.style.setProperty('--trust-copy-y', '0px');
+                    trustSection.style.setProperty('--trust-glow-opacity', '0.86');
+                    trustSection.style.setProperty('--trust-glow-scale', '1.1');
+                    return;
+                }
+
+                const rect = trustSection.getBoundingClientRect();
+                const range = trustSection.offsetHeight - window.innerHeight;
+                const progress = range > 0 ? clamp(-rect.top / range, 0, 1) : 0;
+
+                // Beat 1: phone rises, logos enter from top/bottom
+                const phoneIntro = smoothstep(0, 0.18, progress);
+                const phoneTravel = smoothstep(0.02, 0.7, progress);
+                const mergeTravel = smoothstep(0.1, 0.5, progress);
+                // Opacity peaks mid-merge: 0 → 1 → 0
+                const logoOpacity = Math.sin(Math.PI * mergeTravel);
+                // Tint toward check green as logos converge/fade out
+                const logoTint = mergeTravel < 0.48
+                    ? 0
+                    : smoothstep(0.48, 1, mergeTravel);
+                // Beat 2: check replaces logos as they converge at center
+                const checkProgress = mergeTravel < 0.58
+                    ? 0
+                    : smoothstep(0.58, 0.98, mergeTravel);
+                // Beat 3: result copy inside phone, right after merge resolves
+                const resultIntro = smoothstep(0.52, 0.78, progress);
+                // Check lifts sooner/faster than the text settles
+                const checkLift = smoothstep(0.5, 0.62, progress);
+                const activeStep = progress < 0.36 ? 0 : progress < 0.54 ? 1 : 2;
+
+                trustSection.dataset.step = String(activeStep);
+                trustSection.style.setProperty('--trust-progress', progress.toFixed(4));
+                trustSection.style.setProperty('--trust-match', mergeTravel.toFixed(4));
+                trustSection.style.setProperty('--trust-logo-y', `${lerp(160, 0, mergeTravel).toFixed(1)}px`);
+                trustSection.style.setProperty('--trust-logo-opacity', logoOpacity.toFixed(4));
+                trustSection.style.setProperty('--trust-logo-tint', logoTint.toFixed(4));
+                trustSection.style.setProperty('--trust-check', checkProgress.toFixed(4));
+                trustSection.style.setProperty('--trust-check-lift', `${lerp(0, 110, checkLift).toFixed(1)}px`);
+                trustSection.style.setProperty('--trust-result', resultIntro.toFixed(4));
+                trustSection.style.setProperty('--trust-phone-opacity', lerp(0.35, 1, phoneIntro).toFixed(4));
+                trustSection.style.setProperty('--trust-phone-y', `${lerp(12, 0, phoneTravel).toFixed(1)}px`);
+                trustSection.style.setProperty('--trust-phone-scale', lerp(0.96, 1, phoneIntro).toFixed(4));
+                trustSection.style.setProperty('--trust-privacy-opacity', lerp(0.72, 1, checkProgress).toFixed(4));
+                trustSection.style.setProperty('--trust-copy-opacity', lerp(0.7, 1, phoneIntro).toFixed(4));
+                trustSection.style.setProperty('--trust-copy-y', `${lerp(18, 0, phoneIntro).toFixed(1)}px`);
+                trustSection.style.setProperty('--trust-glow-opacity', lerp(0.22, 0.78, Math.max(phoneIntro, checkProgress)).toFixed(4));
+                trustSection.style.setProperty('--trust-glow-scale', lerp(0.9, 1.1, Math.max(phoneIntro, resultIntro)).toFixed(4));
+            };
+
+            const requestRender = () => {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(renderTrustScroll);
+            };
+
+            window.addEventListener('scroll', requestRender, { passive: true });
+            window.addEventListener('resize', requestRender);
+
+            if (typeof reducedMotion.addEventListener === 'function') {
+                reducedMotion.addEventListener('change', requestRender);
+            } else if (typeof reducedMotion.addListener === 'function') {
+                reducedMotion.addListener(requestRender);
+            }
+
+            renderTrustScroll();
+        };
+
+        setupTrustScroll();
+
         // Value image fullscreen viewer
         const imageFullscreen = document.getElementById('image-fullscreen');
         const fullscreenImage = document.getElementById('image-fullscreen-img');
         const closeImageFullscreen = document.getElementById('close-image-fullscreen');
 
+        const setImageOverlayOpen = (open) => {
+            if (!imageFullscreen) return;
+            imageFullscreen.classList.toggle('active', open);
+            imageFullscreen.setAttribute('aria-hidden', open ? 'false' : 'true');
+            imageFullscreen.inert = !open;
+            if (closeImageFullscreen) {
+                closeImageFullscreen.tabIndex = open ? 0 : -1;
+            }
+        };
+
         const closeImageOverlay = () => {
             if (!imageFullscreen) return;
-            imageFullscreen.classList.remove('active');
-            imageFullscreen.setAttribute('aria-hidden', 'true');
+            setImageOverlayOpen(false);
             document.body.style.overflowY = '';
             document.documentElement.style.overflowY = '';
             if (fullscreenImage) {
@@ -1466,16 +4254,23 @@
         };
 
         document.querySelectorAll('.value-image').forEach((cardImage) => {
-            cardImage.addEventListener('click', () => {
+            const openShot = () => {
                 const source = cardImage.dataset.image || cardImage.querySelector('img')?.getAttribute('src');
                 const description = cardImage.querySelector('img')?.getAttribute('alt') || 'Tradespace exempel';
                 if (!source || !imageFullscreen || !fullscreenImage) return;
                 fullscreenImage.src = source;
                 fullscreenImage.alt = description;
-                imageFullscreen.classList.add('active');
-                imageFullscreen.setAttribute('aria-hidden', 'false');
+                setImageOverlayOpen(true);
                 document.body.style.overflowY = 'hidden';
                 document.documentElement.style.overflowY = 'hidden';
+            };
+
+            cardImage.addEventListener('click', openShot);
+            cardImage.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    openShot();
+                }
             });
         });
 
@@ -1528,32 +4323,75 @@
             const text = privacyLink.textContent;
             const newText = text.replace('integritetspolicyn', '<a href="#" class="privacy-link">integritetspolicyn</a>');
             privacyLink.innerHTML = newText;
-
-            const privacyLinkElement = document.querySelector('.privacy-link');
-            if (privacyLinkElement) {
-                privacyLinkElement.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    openPrivacyPopup();
-                });
-            }
         }
+
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('.privacy-link');
+            if (!link) return;
+            e.preventDefault();
+            openPrivacyPopup();
+        });
 
     });
 </script>
 
 <body>
-<div class="bg-light"></div>
-
-<div class="blur"></div>
 
 <div class="main-container">
     <!-- Hero Section (Email Input) -->
     <section class="hero-section" lang="sv">
+        <div class="hero-map" aria-hidden="true">
+            <canvas id="hero-map-canvas" data-dots-src="assets/images/hero-map-dots.json"></canvas>
+        </div>
+
+        <nav class="hero-nav" aria-label="Primär navigering">
+            <a class="hero-brand" href="#" aria-label="Tradespace startsida">
+                <img src="TS_Logo_White_SVG.svg" alt="Tradespace-logotyp">
+            </a>
+            <div class="hero-actions">
+                <button class="hero-nav-btn primary" type="button">Säkra er plats</button>
+            </div>
+        </nav>
+
         <main class="card">
             <div class="content">
-                <h1>Vi omdefinierar hur svenska  <br> företag gör affärer!</h1>
-                <h2>Snart kan du vara med på Sveriges tryggaste B2B-marknadsplats</h2>
-                <p class="tagline">Missa inte starten. Få 25% rabatt på alla annonser första året och gratis lanseringsannonser:</p>
+                <div class="hero-badges" aria-label="Tradespaces förtroendesignaler">
+                    <span class="hero-badge">
+                        <span class="hero-badge-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <path d="M3.6 9h16.8"></path>
+                                <path d="M3.6 15h16.8"></path>
+                                <path d="M12 3a14 14 0 0 1 0 18"></path>
+                                <path d="M12 3a14 14 0 0 0 0 18"></path>
+                            </svg>
+                        </span>
+                        Utvecklat i Sverige
+                    </span>
+                    <span class="hero-badge">
+                        <span class="hero-badge-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 7h16"></path>
+                                <path d="M4 12h16"></path>
+                                <path d="M4 17h10"></path>
+                            </svg>
+                        </span>
+                        Byggt för B2B-handel
+                    </span>
+                    <span class="hero-badge">
+                        <span class="hero-badge-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                <path d="M9 12l2 2 4-4"></path>
+                            </svg>
+                        </span>
+                        Verifierade företag
+                    </span>
+                </div>
+
+                <h1>Handla med <span class="hero-title-rest">förtroende.</span></h1>
+                <h2>Tradespace är en verifierad B2B-marknadsplats för svenska företag. För trygg sourcing, pålitliga relationer och affärsdialoger som leder vidare.</h2>
+                <p class="tagline">Publik beta öppnar 14 september.<br>Säkra er plats och få 20 gratis annonser samt 25% rabatt året ut.</p>
 
                 <!-- Begin Brevo Form (Captcha animeras in när användaren skriver i e-postfältet) -->
 
@@ -1566,7 +4404,7 @@
             <path d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-11.49 120h22.979c6.823 0 12.274 5.682 11.99 12.5l-7 168c-.268 6.428-5.556 11.5-11.99 11.5h-8.979c-6.433 0-11.722-5.073-11.99-11.5l-7-168c-.283-6.818 5.167-12.5 11.99-12.5zM256 340c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28z" />
           </svg>
           <span class="sib-form-message-panel__inner-text">
-                            Din ansökan kunde inte skickas, vänligen försök igen.
+                            Det gick inte att skicka. Försök igen.
                         </span>
         </div>
       </div>
@@ -1577,7 +4415,7 @@
             <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z" />
           </svg>
           <span class="sib-form-message-panel__inner-text">
-                            Tack! Du har fått en bekräftelse på din e-post. Vi meddelar när det är dags att revolutionera B2B-handeln.
+                            Tack! Ni har fått en bekräftelse på er e-post. Vi hör av oss när betan öppnar den 14 september.
                         </span>
         </div>
       </div>
@@ -1590,13 +4428,13 @@
                 <div class="form__entry entry_block">
                   <div class="form__label-row form__label-row--horizontal">
                     <div class="entry__field" style="width:100%;">
-                      <div class="input-wrap ts-hero-email-wrap" style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 999px; justify-content: center; max-width: fit-content; margin: 0 auto;">
-                        <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="Ange din e-postadress" data-required="true" required style="width: min(420px, 62vw); border: none; outline: none; font-size: 15px; padding: 10px 16px; border-radius: 13px; color: white; background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.06)); height: 41px; box-sizing: border-box;" />
-                        <button class="sib-form-block__button sib-form-block__button-with-loader" style="font-size:16px; text-align:center; font-weight:700; font-family:Helvetica, sans-serif; color:#FFFFFF; background-color:#2093c6; border-radius:13px; border-width:0px; padding: 10px 18px; height: 41px; box-sizing: border-box;" type="submit">
+                      <div class="input-wrap ts-hero-email-wrap" style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: var(--radius); justify-content: center; max-width: fit-content; margin: 0 auto;">
+                        <input class="input" type="email" id="EMAIL" name="EMAIL" autocomplete="email" placeholder="Ange er e-postadress" data-required="true" required style="width: min(420px, 62vw); border: none; outline: none; font-size: 15px; padding: 10px 16px; border-radius: 13px; color: white; background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.06)); height: 41px; box-sizing: border-box;" />
+                        <button class="sib-form-block__button sib-form-block__button-with-loader" style="font-size:16px; text-align:center; font-weight:700; font-family:Helvetica, sans-serif; color:#FFFFFF; background-color:#0f74a0; border-radius:13px; border-width:0px; padding: 10px 18px; height: 41px; box-sizing: border-box;" type="submit">
                           <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512">
                             <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
                           </svg>
-                          Meddela mig
+                          Säkra er plats
                         </button>
                       </div>
                     </div>
@@ -1635,7 +4473,7 @@
                 <div class="form__label-row form__label-row--horizontal">
                   <div class="entry__choice">
                     <label>
-                      <input type="checkbox" class="input_replaced" value="1" id="OPT_IN" name="OPT_IN" required />
+                      <input type="checkbox" class="input_replaced" value="1" id="OPT_IN" name="OPT_IN" required checked />
                       <span class="checkbox checkbox_tick_positive" style="margin-left:0px;"></span>
                       <span style="font-size:14px; text-align:left; font-family:Helvetica, sans-serif; color:#979797; background-color:transparent;"><p>Jag godkänner att ta emot nyheter från Tradespace Sweden AB och integritetspolicyn enligt GDPR.&nbsp;</p><span data-required="*" style="display: inline;" class="entry__label entry__label_optin"></span></span>
                     </label>
@@ -1644,22 +4482,22 @@
                 <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#661d1d; background-color:#ffeded; border-radius:3px; border-color:#ff4949;">
                 </label>
                 <label class="entry__specification" style="font-size:12px; text-align:left; font-family:Helvetica, sans-serif; color:#666; text-align:left">
-                  Du kan avbryta när som helst genom länken i våra mailutskick.
+                  Ni kan avbryta när som helst genom länken i våra mejl.
                 </label>
               </div>
             </div>
           </div>
 
           <input type="text" name="email_address_check" value="" class="input--hidden">
-          <input type="hidden" name="locale" value="en">
+          <input type="hidden" name="locale" value="sv">
         </form>
       </div>
     </div>
   </div>
 
   <script>
-    window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
-    window.LOCALE = 'en';
+    window.REQUIRED_CODE_ERROR_MESSAGE = 'Välj en landskod';
+    window.LOCALE = 'sv';
     window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "Den angivna informationen stämmer inte. Vänligen titta igenom.";
   
     window.REQUIRED_ERROR_MESSAGE = "Detta fält kan inte vara tomt. ";
@@ -1671,10 +4509,10 @@
   
     window.translation = {
       common: {
-        selectedList: '{quantity} list selected',
-        selectedLists: '{quantity} lists selected',
-        selectedOption: '{quantity} selected',
-        selectedOptions: '{quantity} selected',
+        selectedList: '{quantity} lista vald',
+        selectedLists: '{quantity} listor valda',
+        selectedOption: '{quantity} vald',
+        selectedOptions: '{quantity} valda',
       }
     };
   
@@ -1682,10 +4520,19 @@
   </script>
   
   <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
-  <script src="https://www.google.com/recaptcha/api.js?hl=sv"></script>
 
   <script>
     (function () {
+      function loadRecaptcha() {
+        if (document.getElementById('ts-recaptcha-script')) return;
+        var script = document.createElement('script');
+        script.id = 'ts-recaptcha-script';
+        script.src = 'https://www.google.com/recaptcha/api.js?hl=sv';
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+      }
+
       function tryRevealCaptcha() {
         var email = document.querySelector('#sib-form #EMAIL');
         var wrap = document.getElementById('ts-captcha-reveal');
@@ -1693,6 +4540,7 @@
         if (!email.value.trim()) return;
         wrap.classList.add('is-visible');
         wrap.setAttribute('aria-hidden', 'false');
+        loadRecaptcha();
         requestAnimationFrame(function () {
           wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         });
@@ -1713,15 +4561,170 @@
         bind();
       }
     })();
+
+    (function () {
+      function handoffToHeroSignup(emailValue) {
+        var heroEmail = document.querySelector('#sib-form #EMAIL');
+        var heroForm = document.getElementById('sib-form');
+        if (!heroEmail || !heroForm) return;
+
+        heroEmail.value = emailValue;
+        heroEmail.dispatchEvent(new Event('input', { bubbles: true }));
+
+        heroForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        window.setTimeout(function () {
+          heroEmail.focus();
+        }, 450);
+      }
+
+      function bindBetaCta() {
+        var form = document.getElementById('beta-cta-form');
+        var input = document.getElementById('beta-cta-email');
+        if (!form || !input) return;
+
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          if (!input.reportValidity()) return;
+          handoffToHeroSignup(input.value.trim());
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bindBetaCta);
+      } else {
+        bindBetaCta();
+      }
+    })();
+
+    (function () {
+      function fireWaitlistLead() {
+        if (window.__tsWaitlistLeadFired) return;
+        window.__tsWaitlistLeadFired = true;
+        if (typeof gtag === 'function') {
+          gtag('event', 'generate_lead', { method: 'waitlist' });
+        }
+      }
+
+      function successLooksVisible(el) {
+        if (!el) return false;
+        if (el.classList.contains('sib-form-message-panel--active')) return true;
+        if (el.style.display && el.style.display !== 'none') return true;
+        var style = window.getComputedStyle(el);
+        return style.display !== 'none' && style.visibility !== 'hidden' && el.getAttribute('aria-hidden') !== 'true';
+      }
+
+      function bindLeadEvent() {
+        var success = document.getElementById('success-message');
+        if (!success) return;
+        if (successLooksVisible(success)) {
+          fireWaitlistLead();
+          return;
+        }
+        var observer = new MutationObserver(function () {
+          if (successLooksVisible(success)) {
+            fireWaitlistLead();
+            observer.disconnect();
+          }
+        });
+        observer.observe(success, { attributes: true, attributeFilter: ['style', 'class', 'aria-hidden'] });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bindLeadEvent);
+      } else {
+        bindLeadEvent();
+      }
+    })();
   </script>
   <!-- End Brevo Form -->
               
             </div>
         </main>
-        <img class="logo" src="logo.svg" alt="Tradespace logo" />
+        <div class="hero-ad-feed" aria-hidden="true">
+            <div class="hero-ad-column">
+                <article class="hero-social-card example-mark ad-1">
+                    <div class="hero-social-head">
+                        <span class="hero-avatar">NK</span>
+                        <span>
+                            <span class="hero-social-name">Nordkomponent AB</span>
+                            <span class="hero-social-meta">för 2 tim sedan</span>
+                        </span>
+                    </div>
+                    <span class="hero-ad-chip">Tillverkning</span>
+                    <p>Ledig CNC-kapacitet i Västerås. Vi levererar frästa aluminiumdetaljer i små och medelstora serier med mätprotokoll inkluderat.</p>
+                    <img class="hero-ad-image" src="assets/images/ads/nordkomponent-cnc-card.jpg" alt="" loading="lazy" decoding="async">
+                </article>
+                <article class="hero-social-card example-mark ad-2">
+                    <div class="hero-social-head">
+                        <span class="hero-avatar">KL</span>
+                        <span>
+                            <span class="hero-social-name">Klarbäck Logistik</span>
+                            <span class="hero-social-meta">för 4 tim sedan</span>
+                        </span>
+                    </div>
+                    <span class="hero-ad-chip">Lager & distribution</span>
+                    <p>Återanvändbara transportlådor och 3PL-yta i Jönköping. Perfekt för e-handel, reservdelar och B2B-flöden med snabba ledtider.</p>
+                    <img class="hero-ad-image" src="assets/images/ads/klarback-logistik-crates-card.jpg" alt="" loading="lazy" decoding="async">
+                </article>
+            </div>
+            <div class="hero-ad-column center">
+                <article class="hero-social-card example-mark ad-3">
+                    <div class="hero-social-head">
+                        <span class="hero-avatar">SE</span>
+                        <span>
+                            <span class="hero-social-name">Solsken Energi Partner</span>
+                            <span class="hero-social-meta">för 6 tim sedan</span>
+                        </span>
+                    </div>
+                    <span class="hero-ad-chip">Energi</span>
+                    <p>Kompletta solcellspaket för lager och industrifastigheter. Vi söker installatörer och fastighetsägare inför vårens projektstarter.</p>
+                    <img class="hero-ad-image" src="assets/images/ads/solsken-energy-rooftop-card.jpg" alt="" loading="lazy" decoding="async">
+                </article>
+                <article class="hero-social-card example-mark ad-7">
+                    <div class="hero-social-head">
+                        <span class="hero-avatar">VV</span>
+                        <span>
+                            <span class="hero-social-name">Voltverk Fleet Parts</span>
+                            <span class="hero-social-meta">för 11 tim sedan</span>
+                        </span>
+                    </div>
+                    <span class="hero-ad-chip">Fordonsdelar</span>
+                    <p>EV-komponenter för serviceverkstäder: batterimoduler, kablage och laddkontakter med verifierad dokumentation.</p>
+                    <img class="hero-ad-image" src="assets/images/ads/voltverk-ev-parts-card.jpg" alt="" loading="lazy" decoding="async">
+                </article>
+            </div>
+            <div class="hero-ad-column">
+                <article class="hero-social-card example-mark ad-4">
+                    <div class="hero-social-head">
+                        <span class="hero-avatar">NT</span>
+                        <span>
+                            <span class="hero-social-name">Norrtimmer Supply</span>
+                            <span class="hero-social-meta">för 7 tim sedan</span>
+                        </span>
+                    </div>
+                    <span class="hero-ad-chip">Byggmaterial</span>
+                    <p>Kilntorkad konstruktionsfuru från certifierade sågverk. Direktleverans till byggare och prefab-producenter i hela Sverige.</p>
+                    <img class="hero-ad-image" src="assets/images/ads/norrtimmer-lumber-card.jpg" alt="" loading="lazy" decoding="async">
+                </article>
+                <article class="hero-social-card example-mark ad-5">
+                    <div class="hero-social-head">
+                        <span class="hero-avatar">MF</span>
+                        <span>
+                            <span class="hero-social-name">Mediform Components</span>
+                            <span class="hero-social-meta">för 9 tim sedan</span>
+                        </span>
+                    </div>
+                    <span class="hero-ad-chip">Medtech</span>
+                    <p>Sterila plastdetaljer och kapslingar för medicintekniska produkter. Renrumsproduktion, spårbarhet och korta offerttider.</p>
+                    <img class="hero-ad-image" src="assets/images/ads/mediform-components-card.jpg" alt="" loading="lazy" decoding="async">
+                </article>
+            </div>
+        </div>
+        <div class="hero-bottom-fade" aria-hidden="true"></div>
         <div class="scroll-indicator" id="scroll-indicator">
-            <p class="scroll-indicator-text">Läs mer</p>
+            <p class="scroll-indicator-text">Vill ni annonsera här?</p>
             <div class="scroll-indicator-arrow">
+                <span>Säkra er plats</span>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                      stroke-linejoin="round">
                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -1730,179 +4733,282 @@
         </div>
     </section>
 
-    <!-- Video Section -->
-    <section class="video-section">
-        <div class="video-content-wrapper">
-            <div class="about-text">
-                <h2>Vårt uppdrag</h2>
-                <p><b>Vi bygger plattformen som svensk B2B har saknat.</b> Här möts företag för att handla med allt från produkter till tjänster och skapa värdefulla affärsrelationer i sin bransch. 
-                    <br><br>
-                    Vår filosofi är att den trygga och robusta lösningen inte behöver vara komplicerad och vi har utformat sidan med våra svenska företag i fokus. Alla funktioner för annonsering eller nätverkande är bara ett klick ifrån.
-                    </p>
+    <!-- Trust scroll section -->
+    <section class="trust-scroll-section" id="trust-scroll" data-step="0">
+        <div class="trust-sticky-stage">
+            <div class="trust-copy trust-copy-left">
+                <h2>
+                    <span>Riktiga företag.</span>
+                    <span>Verklig behörighet.</span>
+                </h2>
+                <p class="trust-mobile-copy">BankID möter Bolagsverket. När personen och bolaget matchar öppnas kontot, och ni kan göra affärer tryggt.</p>
             </div>
 
-            
-            <div class="video-column">
-               <!-- <h2 class="video-section-title">Upptäck hur Tradespace </br>gör handel och nätverkande </br>enklare
-                    än någonsin!</h2>-->
-                <div class="video-upload-section">
-                    <!--<div class="video-player-container" id="video-player-container">
-                        <video id="video-player" class="video-player"></video>
-                        <div class="video-controls">
-                            <button class="video-btn" id="play-btn" title="Spela upp">▶</button>
-                            <button class="video-btn fullscreen" id="fullscreen-btn" title="Fullskärm">⛶</button>
-                        </div>-->
-                    <div class="logo-container">
-                        <img src="TS_Logo_White_SVG.svg" alt="Tradespace logo" class="section-logo" />
+            <div class="trust-device-area" aria-label="Förhandsvisning av Tradespace-verifiering">
+                <div class="trust-phone-wrap">
+                    <div class="trust-phone">
+                        <span class="trust-phone-side one" aria-hidden="true"></span>
+                        <span class="trust-phone-side two" aria-hidden="true"></span>
+                        <span class="trust-phone-side three" aria-hidden="true"></span>
+                        <span class="trust-phone-side four" aria-hidden="true"></span>
+                        <div class="trust-phone-screen">
+                            <div class="trust-merge-logo trust-merge-logo-bankid" aria-hidden="true">
+                                <img src="assets/images/logos/bankid.svg" alt="" width="200" height="64" />
+                            </div>
+                            <div class="trust-merge-logo trust-merge-logo-bolagsverket" aria-hidden="true">
+                                <img src="assets/images/logos/bolagsverket.svg" alt="" width="200" height="64" />
+                            </div>
+                            <div class="trust-check" aria-hidden="true">
+                                <div class="trust-check-badge">
+                                    <svg viewBox="0 0 24 24">
+                                        <path pathLength="1" d="M5 12.5 10 17l9-10"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="trust-theatre">
+                                <div class="trust-result">
+                                    <h3>Nu kan ni göra <span>affärer</span> tryggt.</h3>
+                                    <p>Verifierad person. Verifierat bolag. Behörighet bekräftad.</p>
+                                    <div class="trust-result-meta">
+                                        <span>BankID-verifierad användare</span>
+                                        <span>Bolag kontrollerat via Bolagsverket</span>
+                                        <span>Ägare eller firmatecknare bekräftad</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="trust-copy trust-copy-right">
+                <p>Ni startar som företagsägare, verifierar er med BankID och vi verifierar er via Bolagsverket. När behörigheten stämmer är kontot sedan öppet för en trygg och säker B2B-handel.</p>
             </div>
         </div>
     </section>
 
-    <!-- About Us Extended Section -->
-    <section class="about-section">
-        <h2 class="about-section-title">Mer än bara annonser - ett ekosystem</h2>
-        <p class="about-section-text">Vi har tröttnat på stökig B2B-handel. Tradespace samlar allt på ett ställe: sälj överskottslager, hyr ut stillastående maskiner eller hitta nya leverantörer. Vi gör ditt företags resurser till likvida medel, i en miljö där alla är verifierade.
-        </p>
+    <!-- Network scale section -->
+    <section class="network-scale-section" id="network-scale">
+        <div class="network-scale-inner">
+            <div class="network-flow-lines" aria-hidden="true">
+                <svg width="1440" height="320" viewBox="0 0 1440 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="ts-flow-segment" x1="0" y1="0" x2="36" y2="0" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="var(--network-particle-color)" stop-opacity="0" />
+                            <stop offset="0.45" stop-color="var(--network-particle-color)" />
+                            <stop offset="1" stop-color="var(--network-particle-color)" stop-opacity="0" />
+                        </linearGradient>
+                        <linearGradient id="ts-flow-fade-x" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="black" />
+                            <stop offset="0.08" stop-color="white" />
+                            <stop offset="0.92" stop-color="white" />
+                            <stop offset="1" stop-color="black" />
+                        </linearGradient>
+                        <clipPath id="ts-flow-clip">
+                            <rect width="1440" height="320" fill="white" />
+                        </clipPath>
+                        <mask id="ts-flow-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1440" height="320">
+                            <rect width="1440" height="320" fill="url(#ts-flow-fade-x)" />
+                        </mask>
+                    </defs>
+                    <g clip-path="url(#ts-flow-clip)" mask="url(#ts-flow-mask)">
+                        <path id="ts-flow-path-a" class="network-flow-line" d="M-48 248C180 96 360 52 620 148C860 236 1040 292 1240 176C1360 108 1420 72 1504 44" />
+                        <path id="ts-flow-path-b" class="network-flow-line network-flow-line-accent" d="M-72 196C120 308 340 88 560 204C780 320 980 72 1188 188C1316 256 1396 132 1512 228" />
+                        <path id="ts-flow-path-c" class="network-flow-line" d="M-24 132C220 248 460 36 708 156C936 268 1148 104 1372 212C1436 248 1476 176 1528 120" />
+                        <path id="ts-flow-path-d" class="network-flow-line" d="M-96 284C140 168 320 276 520 188C720 100 940 248 1160 156C1288 96 1408 204 1540 132" />
+                        <path id="ts-flow-path-e" class="network-flow-line network-flow-line-accent" d="M-36 88C200 176 420 24 660 108C900 192 1096 56 1296 144C1388 188 1456 236 1516 268" />
+                        <g class="network-flow-particle">
+                            <path d="M0 0H36" stroke="url(#ts-flow-segment)" stroke-width="0.55" stroke-linecap="round" />
+                            <animateMotion dur="13.5s" repeatCount="indefinite" rotate="auto" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines="0.65 0 0.35 1" begin="-3.4s">
+                                <mpath href="#ts-flow-path-a" />
+                            </animateMotion>
+                        </g>
+                        <g class="network-flow-particle network-flow-particle-soft">
+                            <path d="M0 0H36" stroke="url(#ts-flow-segment)" stroke-width="0.55" stroke-linecap="round" />
+                            <animateMotion dur="9.8s" repeatCount="indefinite" rotate="auto" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines="0.4 0 0.2 1" begin="-7.1s">
+                                <mpath href="#ts-flow-path-b" />
+                            </animateMotion>
+                        </g>
+                        <g class="network-flow-particle">
+                            <path d="M0 0H36" stroke="url(#ts-flow-segment)" stroke-width="0.55" stroke-linecap="round" />
+                            <animateMotion dur="16s" repeatCount="indefinite" rotate="auto" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines="0.78 0 0.22 1" begin="-11.2s">
+                                <mpath href="#ts-flow-path-c" />
+                            </animateMotion>
+                        </g>
+                        <g class="network-flow-particle network-flow-particle-soft">
+                            <path d="M0 0H36" stroke="url(#ts-flow-segment)" stroke-width="0.55" stroke-linecap="round" />
+                            <animateMotion dur="11.2s" repeatCount="indefinite" rotate="auto" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines="0.55 0 0.45 1" begin="-1.8s">
+                                <mpath href="#ts-flow-path-d" />
+                            </animateMotion>
+                        </g>
+                        <g class="network-flow-particle">
+                            <path d="M0 0H36" stroke="url(#ts-flow-segment)" stroke-width="0.55" stroke-linecap="round" />
+                            <animateMotion dur="10.4s" repeatCount="indefinite" rotate="auto" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines="0.62 0 0.38 1" begin="-5.6s">
+                                <mpath href="#ts-flow-path-e" />
+                            </animateMotion>
+                        </g>
+                        <g class="network-flow-particle network-flow-particle-soft">
+                            <path d="M0 0H36" stroke="url(#ts-flow-segment)" stroke-width="0.55" stroke-linecap="round" />
+                            <animateMotion dur="8.5s" repeatCount="indefinite" rotate="auto" keyPoints="1;0" keyTimes="0;1" calcMode="spline" keySplines="0.7 0 0.3 1" begin="-2.9s">
+                                <mpath href="#ts-flow-path-c" />
+                            </animateMotion>
+                        </g>
+                    </g>
+                </svg>
+            </div>
 
-        <!-- Feature Cards -->
-        <div class="feature-cards">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="M21 21l-4.35-4.35" />
-                    </svg>
-                </div>
-                <h3>Endast Verifierade Företag</h3>
-                <p>Slut på bedrägerier och oseriösa aktörer. Vi verifierar alla bolag via API och alla användare med BankID. Ni gör affärer med riktiga företag, punkt.
+            <div class="network-scale-header">
+                <h2 class="network-scale-title">Alla på ett ställe.</h2>
+                <p class="network-scale-text">1,2 miljoner potentiella kunder och leverantörer. Verifierade, på ett ställe.</p>
+            </div>
+
+            <div class="network-scale-stats">
+                <article class="network-scale-stat">
+                    <span class="network-scale-value" data-value="1.2" data-format="decimal">0,0</span>
+                    <div class="network-scale-labels">
+                        <p class="network-scale-label-primary">miljoner+ företag</p>
+                        <p class="network-scale-label-secondary">att göra affärer med.</p>
+                    </div>
+                </article>
+
+                <article class="network-scale-stat">
+                    <span class="network-scale-value" data-value="200" data-format="integer">0</span>
+                    <div class="network-scale-labels">
+                        <p class="network-scale-label-primary">+ nya företag</p>
+                        <p class="network-scale-label-secondary">att nå varje dag.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why / mission -->
+    <section class="why-section" id="why" aria-labelledby="why-title">
+        <div class="why-inner">
+            <div class="why-header">
+                <h2 class="why-title" id="why-title">Mer än bara annonser</h2>
+                <p class="why-lead">
+                    <strong>Det här är plattformen som svensk B2B har saknat.</strong>
+                    Här möts företag för att handla med produkter och tjänster, och skapa affärsrelationer som håller.
+                    Den trygga lösningen behöver inte vara komplicerad, allt är utformat med svenska företag i fokus.
                 </p>
             </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                        <circle cx="9" cy="7" r="4" />
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                    </svg>
-                </div>
-                <h3>Bygg ditt nätverk</h3>
-                <p>Stora som små, nystartade eller etablerade sedan länge - alla bolag är en del av gemenskapen som kommer hjälpa er att skapa relationer och hitta partners för framtiden.</p>
+            <div class="why-grid">
+                <article class="why-item">
+                    <h3>Endast verifierade företag</h3>
+                    <p>BankID och Bolagsverket bakom varje konto. Ni gör affärer med riktiga bolag och behöriga personer.</p>
+                </article>
+                <article class="why-item">
+                    <h3>Bygg ert nätverk</h3>
+                    <p>Från nystartade till etablerade aktörer, hitta partners, leverantörer och kunder i er bransch.</p>
+                </article>
+                <article class="why-item">
+                    <h3>Teknik &amp; säkerhet</h3>
+                    <p>GDPR-säkrat och byggt för svensk B2B. Vi sköter tekniken så ni kan fokusera på affären.</p>
+                </article>
             </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <polyline points="3 17 9 11 13 15 21 7" stroke-width="2" />
-                        <polyline points="16 7 21 7 21 12" stroke-width="2" />
-                    </svg>
-                </div>
-                <h3>Verktyg för Tillväxt</h3>
-                <p>Kraftfulla verktyg som hjälper er att nå ut till leverantörer eller kunder som just ert företag behöver. Vi värnar om  er upplevelse oavsett vilken sida av affären ni är på.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                        <path d="M9 12l2 2 4-4" />
-                    </svg>
-                </div>
-                <h3>Teknik & Säkerhet</h3>
-                <p>Vi har utformat tjänsten med högsta säkerhetsstandard. Blixtsnabb, krypterad och GDPR-säkrad. Vi sköter tekniken så att du kan fokusera på affären.</p>
-            </div>
-        </div>
-
-        <!-- Values Section -->
-        <div class="values-section">
-            <div class="value-card">
-                <div class="value-content">
-                    <h3>Total överblick från start</h3>
-                    <p>Vi har skalat bort röran. Med en kraftfull sökfunktion, 
-                        branschanpassade kategorier och ett intelligent flöde hittar du snabbt det du söker.</p>
-                    <p>Hantera dina bevakningar, meddelanden och annonser direkt från startvyn. 
-                        Oavsett om du ska hyra en lokal eller köpa en lastbil - här börjar din nästa affär.</p>
-                </div>
-                <div class="value-image" data-image="Exempelbild1.jpg">
-                    <img src="Exempelbild1.jpg" alt="Överblick av Tradespace-gränssnitt" loading="lazy" />
-                    <div class="value-image-magnifier" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
-                            <circle cx="11" cy="11" r="7"></circle>
-                            <line x1="16.65" y1="16.65" x2="22" y2="22"></line>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-
-            <div class="value-card reverse">
-                <div class="value-content">
-                    <h3>Företagsprofilen - Ditt space</h3>
-                    <p>Kärnan för Tradespace är inte annonserna - utan ni som företagare. 
-                        Därför hjälper vi er att synas genom attraktiva, anpassningsbara profiler som ni kan utforma efter
-                         ert företags behov. </p>
-                    <p>Publicera inlägg och evenemang för andra företagare, understryk annonser 
-                        genom att fästa dem högst upp och lägg till kontaktpersoner för företaget och ange deras roller. 
-                        Lär känna era affärspartners på bästa sätt oavsett om du är köpare eller säljare.</p>
-                </div>
-                <div class="value-image" data-image="Exempelbild2.jpg">
-                    <img src="Exempelbild2.jpg" alt="Anpassningsbar företagsprofil i Tradespace" loading="lazy" />
-                    <div class="value-image-magnifier" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
-                            <circle cx="11" cy="11" r="7"></circle>
-                            <line x1="16.65" y1="16.65" x2="22" y2="22"></line>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-
-            
-                <div class="value-card">
-                    <div class="value-content">
-                        <h3>Annonsering anpassad för verkligheten</h3>
-                        <p>Tydlig kommunikation med högt antal bilder, tydliga upplägg och prissättningsalternativ. 
-                            Allt detta gör Tradespace till den överlägset bästa sidan för både annonsering och sökning. </p>
-                        <p>Oavsett om det är ett leasingsavtal på maskiner med månadspris, 
-                            ett fordon med fast kostnad eller ett tonpris på makadamm så finns inga kompromisser i annonserna.</p>
-                    </div>
-                <div class="value-image" data-image="Exempelbild3.jpg">
-                    <img src="Exempelbild3.jpg" alt="Tradespace-annonsexempel" loading="lazy" />
-                    <div class="value-image-magnifier" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
-                            <circle cx="11" cy="11" r="7"></circle>
-                            <line x1="16.65" y1="16.65" x2="22" y2="22"></line>
-                        </svg>
-                    </div>
-                </div>
-                </div>
-            
         </div>
     </section>
 
-    <!-- Scroll to top section -->
-    <section class="scroll-to-top-section">
-        <div class="scroll-to-top" id="scroll-to-top">
-            <p class="scroll-to-top-text">Är du redo?</p>
-            <button class="scroll-to-top-btn">Meddela mig</button>
-            <br><br>
+    <!-- Product proof -->
+    <section class="product-proof-section" id="product" aria-labelledby="product-title">
+        <div class="product-proof-inner">
+            <div class="product-proof-header">
+                <h2 class="product-proof-title" id="product-title">Plattformen i praktiken</h2>
+                <p>Se hur Tradespace ger överblick, synlighet och annonsering som speglar hur affärer faktiskt görs.</p>
+            </div>
+
+            <article class="product-row">
+                <div class="product-copy">
+                    <h3>Total överblick från start</h3>
+                    <p>Kraftfull sök, branschanpassade kategorier och ett tydligt flöde. Bevakningar, meddelanden och annonser samlade i en vy, så nästa affär börjar snabbare.</p>
+                </div>
+                <figure class="product-shot value-image" data-image="Exempelbild1.jpg" role="button" tabindex="0" aria-label="Visa större bild: Överblick av Tradespace-gränssnitt">
+                    <img src="Exempelbild1.jpg" alt="Överblick av Tradespace-gränssnitt" loading="lazy" decoding="async" />
+                    <span class="product-shot-magnifier" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <line x1="16.65" y1="16.65" x2="22" y2="22"></line>
+                        </svg>
+                    </span>
+                </figure>
+            </article>
+
+            <article class="product-row reverse">
+                <div class="product-copy">
+                    <h3>Företagsprofilen, ert space</h3>
+                    <p>Visa upp bolaget med anpassningsbar profil, inlägg och kontaktpersoner. Annonser kan fästas högst upp så partners snabbt förstår vad ni erbjuder.</p>
+                </div>
+                <figure class="product-shot value-image" data-image="Exempelbild2.jpg" role="button" tabindex="0" aria-label="Visa större bild: Anpassningsbar företagsprofil i Tradespace">
+                    <img src="Exempelbild2.jpg" alt="Anpassningsbar företagsprofil i Tradespace" loading="lazy" decoding="async" />
+                    <span class="product-shot-magnifier" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <line x1="16.65" y1="16.65" x2="22" y2="22"></line>
+                        </svg>
+                    </span>
+                </figure>
+            </article>
+
+            <article class="product-row">
+                <div class="product-copy">
+                    <h3>Annonsering för verkligheten</h3>
+                    <p>Flera bilder, tydliga upplägg och prissättning som passar fast priser eller pris per enhet (vikt, tid, längd mm). Inga kompromisser, bara annonser som speglar affären.</p>
+                </div>
+                <figure class="product-shot value-image" data-image="Exempelbild3.jpg" role="button" tabindex="0" aria-label="Visa större bild: Tradespace-annonsexempel">
+                    <img src="Exempelbild3.jpg" alt="Tradespace-annonsexempel" loading="lazy" decoding="async" />
+                    <span class="product-shot-magnifier" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <line x1="16.65" y1="16.65" x2="22" y2="22"></line>
+                        </svg>
+                    </span>
+                </figure>
+            </article>
+        </div>
+    </section>
+
+    <!-- Beta launch CTA -->
+    <section class="beta-cta-section" id="beta-cta" aria-labelledby="beta-cta-title">
+        <div class="beta-cta-inner">
+            <h2 class="beta-cta-title" id="beta-cta-title">Publik beta öppnar <span>14 september.</span></h2>
+            <p class="beta-cta-text">Säkra er plats och få 20 gratis annonser samt 25% rabatt året ut.</p>
+            <form class="beta-cta-form" id="beta-cta-form" action="#sib-form" method="get">
+                <div class="beta-cta-field">
+                    <label class="visually-hidden" for="beta-cta-email">E-postadress</label>
+                    <input id="beta-cta-email" name="email" type="email" autocomplete="email" placeholder="Ange er e-postadress" required />
+                    <button type="submit">Säkra er plats</button>
+                </div>
+            </form>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
-            <p class="footer-company">Tradespace Sweden AB</p>
-            <p class="footer-email">E-post: info@tradespace.se</p>
+        <div class="footer-inner">
+            <div class="footer-top">
+                <h2 class="footer-title">Handla med förtroende.</h2>
+                <a class="footer-contact-btn" href="mailto:info@tradespace.se">Kontakta oss</a>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-meta">
+                    <p class="footer-company">© 2026 Tradespace Sweden AB (559544-9751), Lund, Sweden</p>
+                    <p class="footer-note">* Annonskorten är exempel</p>
+                </div>
+                <ul class="footer-links">
+                    <li><a href="mailto:info@tradespace.se">Tradespace Användarvillkor</a></li>
+                    <li><a href="#" class="privacy-link">Tradespace Integritetspolicy</a></li>
+                </ul>
+            </div>
         </div>
     </footer>
 </div>
 
 <!-- Value image fullscreen -->
-<div class="image-fullscreen" id="image-fullscreen" aria-hidden="true">
-    <button class="close-image-fullscreen" id="close-image-fullscreen" title="Stäng bild">×</button>
-    <img src="" alt="" id="image-fullscreen-img" />
+<div class="image-fullscreen" id="image-fullscreen" aria-hidden="true" inert>
+    <button class="close-image-fullscreen" id="close-image-fullscreen" type="button" title="Stäng bild" tabindex="-1">×</button>
+    <img src="" alt="" id="image-fullscreen-img" width="1100" height="700" />
 </div>
 
 <!-- Fullscreen Video -->
@@ -1918,7 +5024,7 @@
         <h3>Integritetspolicy för Tradespace Sweden AB nyhetsbrev inför lansering</h3>
         <div class="privacy-text">
             <p><strong>1. Insamling av personuppgifter</strong></p>
-            <p>Tradespace Sweden AB är personuppgiftsansvarig för behandlingen av dina personuppgifter. Vi samlar endast in den information (e-postadress) du frivilling anger i formuläret vid registering.</p>
+            <p>Tradespace Sweden AB är personuppgiftsansvarig för behandlingen av dina personuppgifter. Vi samlar endast in den information (e-postadress) du frivilligt anger i formuläret vid registrering.</p>
 
             <p><strong>2. Användning av personuppgifter</strong></p>
             <p>Dina personuppgifter används enbart för att:</p>
@@ -1942,7 +5048,7 @@
             <p><strong>6. Kontakt</strong></p>
             <p>Tradespace Sweden AB (559544-9751) <br>Scheelevägen 17, 223 63 Lund <br>E-post: info@tradespace.se</p>
 
-            <p class="privacy-date">Senast uppdaterad: 2025-11-27</p>
+            <p class="privacy-date">Senast uppdaterad: 2026-08-17</p>
         </div>
     </div>
 </div>
