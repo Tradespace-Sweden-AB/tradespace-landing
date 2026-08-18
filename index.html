@@ -3,6 +3,9 @@
 
 <head>
     <meta charset="utf-8" />
+    <!-- CookieFirst CMP. Ligger före all spårning så att den hinner blockera den.
+         Charset står kvar först (måste ligga inom sidans första 1024 byte). -->
+    <script src="https://consent.cookiefirst.com/sites/tradespace.se-ff376c72-6d01-4006-ac26-f929a827636c/consent.js"></script>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tradespace | Handla med förtroende.</title>
@@ -22,13 +25,55 @@
     <meta name="twitter:title" content="Tradespace | Handla med förtroende." />
     <meta name="twitter:description" content="Verifierad B2B-marknadsplats för svenska företag. Publik beta öppnar 14 september. Säkra er plats och få 20 gratis annonser samt 25% rabatt året ut." />
     <meta name="twitter:image" content="https://tradespace.se/assets/images/og-image.png" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-30SEFBVGXZ"></script>
-    <script>
+    <!-- All spårning nedan är blockerad av CookieFirst tills besökaren samtycker:
+         type="text/plain" gör att webbläsaren inte kör skriptet, och CookieFirst
+         aktiverar det när rätt kategori accepteras. Koden som anropar gtag/lintrk/fbq
+         är därför alltid skyddad med en typeof-koll. -->
+    <script type="text/plain" data-cookiefirst-category="performance" async src="https://www.googletagmanager.com/gtag/js?id=G-30SEFBVGXZ"></script>
+    <script type="text/plain" data-cookiefirst-category="performance">
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-30SEFBVGXZ');
     </script>
+
+    <!-- LinkedIn Insight Tag -->
+    <script type="text/plain" data-cookiefirst-category="advertising">
+        _linkedin_partner_id = "10681985";
+        window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+        window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+    </script>
+    <script type="text/plain" data-cookiefirst-category="advertising">
+        (function(l) {
+            if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
+            window.lintrk.q=[]}
+            var s = document.getElementsByTagName("script")[0];
+            var b = document.createElement("script");
+            b.type = "text/javascript";b.async = true;
+            b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+            s.parentNode.insertBefore(b, s);})(window.lintrk);
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=10681985&amp;fmt=gif" />
+    </noscript>
+
+    <!-- Meta Pixel Code -->
+    <script type="text/plain" data-cookiefirst-category="advertising">
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1561336405691270');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=1561336405691270&amp;ev=PageView&amp;noscript=1"
+        alt="" /></noscript>
+    <!-- End Meta Pixel Code -->
     <style>
         :root {
             --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -110,6 +155,11 @@
             -webkit-font-smoothing: antialiased;
             text-rendering: geometricPrecision;
             font-synthesis: none;
+        }
+
+        /* <picture> ska inte skapa en egen box: img ärver layouten som förut */
+        picture {
+            display: contents;
         }
 
         /* make sure content sits on top */
@@ -270,6 +320,23 @@
             text-align: center;
         }
 
+        /* Desktop: indikatorn ligger över annonskorten (de fyller hela bredden i tre
+           kolumner, så det finns ingen fri yta att flytta den till). Scrimmen gör
+           texten läsbar och överlappet avsiktligt. Mobil/tablet flyttar den i stället
+           ned i flödet under korten, se media queries längre ned. */
+        .scroll-indicator::before {
+            content: "";
+            position: absolute;
+            inset: -30px -46px -34px;
+            z-index: -1;
+            border-radius: 26px;
+            background: radial-gradient(62% 58% at 50% 50%,
+                rgba(3, 8, 16, 0.94) 0%,
+                rgba(3, 8, 16, 0.78) 54%,
+                rgba(3, 8, 16, 0) 100%);
+            pointer-events: none;
+        }
+
         .scroll-indicator-text {
             color: white;
             font-size: clamp(18px, 1.45vw, 24px);
@@ -380,7 +447,10 @@
 
         /* Hero section (email input) */
         .hero-section {
-            min-height: max(1420px, 155vh);
+            /* Sätts av JS till captcha-utfällningens verkliga höjd. Annonskorten
+               ligger absolut positionerade och flyttar sig inte av sig själva. */
+            --hero-captcha-space: 0px;
+            min-height: calc(max(1240px, 140vh) + var(--hero-captcha-space, 0px));
             display: grid;
             grid-template-rows: auto 1fr;
             align-items: stretch;
@@ -422,7 +492,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            height: min(30vh, 340px);
+            height: min(15vh, 220px);
             z-index: 4;
             background: linear-gradient(180deg, rgba(2, 7, 19, 0), var(--background-deep) 72%);
             pointer-events: none;
@@ -506,7 +576,7 @@
             margin: 0 auto;
             box-sizing: border-box;
             align-self: start;
-            padding: clamp(172px, 23vh, 252px) 0 18vh;
+            padding: clamp(96px, 13vh, 170px) 0 12vh;
         }
 
         .hero-section .content {
@@ -548,6 +618,7 @@
         html.hero-intro-active .hero-section h2,
         html.hero-intro-active .hero-section .tagline,
         html.hero-intro-active .hero-section .sib-form,
+        html.hero-intro-active .hero-section .hero-consent,
         html.hero-intro-active .hero-social-card,
         html.hero-intro-active .scroll-indicator {
             opacity: 0;
@@ -557,7 +628,8 @@
         html.hero-intro-active.hero-intro-badges .hero-badges,
         html.hero-intro-active.hero-intro-copy .hero-section h2,
         html.hero-intro-active.hero-intro-copy .hero-section .tagline,
-        html.hero-intro-active.hero-intro-copy .hero-section .sib-form {
+        html.hero-intro-active.hero-intro-copy .hero-section .sib-form,
+        html.hero-intro-active.hero-intro-copy .hero-section .hero-consent {
             opacity: 1;
             pointer-events: auto;
         }
@@ -568,6 +640,7 @@
         .hero-section h2,
         .hero-section .tagline,
         .hero-section .sib-form,
+        .hero-section .hero-consent,
         .hero-social-card,
         .scroll-indicator {
             transition: opacity 0.38s var(--ease-out, cubic-bezier(0, 0, .2, 1));
@@ -669,8 +742,10 @@
 
         .hero-ad-feed {
             --hero-ad-gap: clamp(24px, 2vw, 32px);
+            /* Måste ligga under hero-copyn (badges → h1 → h2 → tagline → formulär →
+               samtyckestext). Ändras copyns höjd behöver detta värde mätas om. */
             position: absolute;
-            top: clamp(720px, 86vh, 880px);
+            top: calc(clamp(704px, 81vh, 810px) + var(--hero-captcha-space, 0px));
             left: clamp(24px, 3.4vw, 72px);
             right: clamp(24px, 3.4vw, 72px);
             z-index: 3;
@@ -884,16 +959,22 @@
             display: none;
         }
 
-        .hero-section .entry__choice,
-        .hero-section .entry__specification {
-            display: none !important;
-        }
-
         .hero-section .sib-optin {
             height: 0;
             overflow: hidden;
             padding: 0 !important;
             margin: 0 !important;
+        }
+
+        /* Synligt samtycke intill knappen, ersätter den gömda kryssrutan */
+        .hero-section .hero-consent {
+            width: min(410px, 92vw);
+            margin: 12px auto 0;
+            font-family: var(--font-inter-tight);
+            font-size: 12px;
+            line-height: 1.5;
+            color: var(--text-tertiary);
+            text-align: center;
         }
 
         /* iPad / tablet portrait: same card look as landscape, stacked in flow */
@@ -1023,14 +1104,20 @@
                 );
             }
 
+            /* I flödet under korten: kan inte överlappa dem */
             .scroll-indicator {
-                position: absolute;
-                left: 50%;
-                bottom: clamp(180px, 22vh, 260px);
-                transform: translateX(-50%);
-                margin: 0;
+                position: relative;
+                left: auto;
+                bottom: auto;
+                transform: none;
+                margin: 24px auto 0;
                 gap: 16px;
                 z-index: 6;
+                flex: 0 0 auto;
+            }
+
+            .scroll-indicator::before {
+                display: none;
             }
         }
 
@@ -1236,14 +1323,21 @@
                 );
             }
 
+            /* I flödet under korten: kan inte landa i mitten av en annonsbild */
             .scroll-indicator {
-                position: absolute;
-                left: 50%;
-                bottom: clamp(36px, 8vh, 64px);
-                transform: translateX(-50%);
+                position: relative;
+                left: auto;
+                bottom: auto;
+                transform: none;
+                margin: 18px auto 0;
                 gap: 16px;
                 width: min(210px, calc(100% - 40px));
                 z-index: 6;
+                flex: 0 0 auto;
+            }
+
+            .scroll-indicator::before {
+                display: none;
             }
 
             .scroll-indicator-arrow {
@@ -2397,6 +2491,53 @@
 
         .beta-cta-form {
             width: min(410px, 92vw);
+            flex-direction: column;
+            align-items: stretch;
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        .beta-cta-form .input--hidden {
+            display: none !important;
+        }
+
+        .beta-cta-form .ts-captcha-reveal__pad {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 4px;
+        }
+
+        .beta-cta-form .ts-captcha-reveal iframe[src*="recaptcha"] {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #beta-cta-captcha {
+            display: flex;
+            justify-content: center;
+            transform-origin: top center;
+        }
+
+        .beta-cta-status {
+            margin: 0;
+            font-family: var(--font-inter-tight);
+            font-size: 14px;
+            line-height: 1.45;
+            color: var(--ts-primary-300);
+        }
+
+        .beta-cta-status[data-state="error"] {
+            color: #ff9d9d;
+        }
+
+        .beta-cta-consent {
+            margin: 0;
+            font-family: var(--font-inter-tight);
+            font-size: 12px;
+            line-height: 1.5;
+            color: var(--text-tertiary);
         }
 
         .beta-cta-field {
@@ -3263,34 +3404,8 @@
             box-shadow: none !important;
         }
 
-        .checkbox_tick_positive {
-            background: transparent !important;
-            border-color: #666 !important;
-        }
-
-        .sib-form .input_replaced:checked + .checkbox_tick_positive {
-            background: #2093C6 !important;
-            border-color: #2093C6 !important;
-        }
-
-        .checkbox_tick_positive:before {
-            display: none !important;
-        }
-
-        .sib-form .input_replaced:checked + .checkbox_tick_positive:before {
-            display: block !important;
-            border-color: #fff !important;
-            border-style: solid !important;
-            border-width: 0 2px 2px 0 !important;
-            bottom: 1px !important;
-            content: "" !important;
-            left: 50% !important;
-            margin-left: -25% !important;
-            position: absolute !important;
-            top: 1px !important;
-            transform-origin: 80% 45% !important;
-            width: 50% !important;
-        }
+        /* (Styling för Brevos samtyckeskryssruta togs bort med kryssrutan själv:
+           samtycket ges nu genom att skicka formuläret, se .hero-consent.) */
 
         /*
          Brevo reCAPTCHA: dold tills minst ett tecken fyllts i #EMAIL; .ts-captcha-reveal får .is-visible via JS.
@@ -3501,6 +3616,170 @@
 
             .ts-captcha-reveal {
                 transition: none;
+            }
+        }
+
+        /* Sticky signup CTA: visible between the hero and the bottom form */
+        .ts-sticky-cta {
+            position: fixed;
+            right: clamp(16px, 2.4vw, 34px);
+            bottom: clamp(16px, 2.4vh, 28px);
+            z-index: 40;
+            opacity: 0;
+            transform: translateY(16px);
+            pointer-events: none;
+            transition: opacity 0.26s ease, transform 0.26s ease;
+        }
+
+        .ts-sticky-cta.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Anmäld besökare behöver ingen flytande CTA resten av sessionen */
+        html.ts-waitlist-joined .ts-sticky-cta {
+            display: none;
+        }
+
+        .ts-sticky-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 52px;
+            padding: 0 22px;
+            border: 1px solid rgba(108, 200, 236, 0.3);
+            border-radius: var(--radius);
+            background: var(--ts-primary-600);
+            color: white;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: var(--font-weight-semibold);
+            letter-spacing: -0.01em;
+            cursor: pointer;
+            box-shadow: 0 18px 44px rgba(0, 0, 0, 0.48), 0 10px 26px rgba(32, 147, 198, 0.26);
+            transition: transform 0.15s ease, filter 0.15s ease;
+        }
+
+        .ts-sticky-cta-btn:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.06);
+        }
+
+        .ts-sticky-cta-btn svg {
+            width: 17px;
+            height: 17px;
+            flex: 0 0 auto;
+        }
+
+        @media (max-width: 600px) {
+            .ts-sticky-cta {
+                left: 12px;
+                right: 12px;
+                bottom: 12px;
+            }
+
+            .ts-sticky-cta-btn {
+                width: 100%;
+                justify-content: center;
+                min-height: 50px;
+            }
+        }
+
+        /* Waitlist confirmation dialog */
+        .ts-dialog {
+            width: min(440px, calc(100vw - 40px));
+            max-width: none;
+            padding: 0;
+            border: 1px solid rgba(108, 200, 236, 0.22);
+            border-radius: 18px;
+            background:
+                linear-gradient(180deg, rgba(19, 55, 82, 0.98), rgba(7, 22, 37, 0.98)),
+                var(--base);
+            color: var(--text-primary);
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55);
+        }
+
+        .ts-dialog::backdrop {
+            background: rgba(3, 8, 16, 0.84);
+        }
+
+        .ts-dialog-inner {
+            padding: 34px 30px 28px;
+            text-align: center;
+        }
+
+        .ts-dialog-icon {
+            display: grid;
+            place-items: center;
+            width: 52px;
+            height: 52px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: rgba(32, 147, 198, 0.18);
+            border: 1px solid rgba(32, 147, 198, 0.42);
+            color: var(--ts-primary-300);
+        }
+
+        .ts-dialog-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .ts-dialog h2 {
+            margin: 0 0 12px;
+            font-family: var(--font-inter-tight);
+            font-size: clamp(21px, 2.4vw, 26px);
+            line-height: 1.15;
+            font-weight: var(--font-weight-semibold);
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+        }
+
+        .ts-dialog p {
+            margin: 0 0 24px;
+            font-family: var(--font-inter-tight);
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-dim);
+        }
+
+        .ts-dialog-ok {
+            min-width: 148px;
+            height: 46px;
+            border: 0;
+            border-radius: var(--radius);
+            padding: 0 24px;
+            background: var(--ts-primary-600);
+            color: white;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            cursor: pointer;
+            box-shadow: 0 12px 30px rgba(32, 147, 198, 0.32);
+            transition: transform 0.15s ease, filter 0.15s ease;
+        }
+
+        .ts-dialog-ok:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.06);
+        }
+
+        .beta-cta-field button[disabled],
+        #sib-form .ts-hero-email-wrap button[type="submit"][disabled] {
+            opacity: 0.72;
+            cursor: progress;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ts-sticky-cta {
+                transition: none;
+            }
+
+            .ts-sticky-cta-btn:hover,
+            .ts-dialog-ok:hover {
+                transform: none;
             }
         }
     </style>
@@ -3874,33 +4153,6 @@
 
         setupHeroAdReveal();
 
-        // Email form handler
-        const form = document.querySelector('#notify-form');
-        if (form) {
-            const EMAIL_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw8xy92QQxTxXHmh6uM-7QNX2JQ-zI0TpBDVzYKboJKqSBGuzej20xJ-x9DUrIQnWHW/exec';
-            const SECRET = 'Tradespace';
-
-            form.addEventListener('submit', async (ev) => {
-                ev.preventDefault();
-                const input = form.querySelector('input[type="email"]');
-                const btn = form.querySelector('button');
-                const email = (input?.value || '').trim();
-                if (!email) return;
-                btn.disabled = true; btn.style.opacity = '.7';
-                try {
-                    await fetch(EMAIL_ENDPOINT, {
-                        method: 'POST',
-                        body: JSON.stringify({ email, secret: SECRET })
-                    });
-                    input.value = '';
-                    tsToast('Tack! Vi hör av oss när betan öppnar den 14 september.', true);
-                } catch (err) {
-                    console.error(err);
-                    tsToast('Vänligen kontrollera e-postadressen.', false);
-                } finally { btn.disabled = false; btn.style.opacity = '1'; }
-            });
-        }
-
         // Video player functionality - commented out since we replaced video with logo
         /*
         const videoPlayerContainer = document.getElementById('video-player-container');
@@ -4168,25 +4420,32 @@
                 const range = trustSection.offsetHeight - window.innerHeight;
                 const progress = range > 0 ? clamp(-rect.top / range, 0, 1) : 0;
 
-                // Beat 1: phone rises, logos enter from top/bottom
-                const phoneIntro = smoothstep(0, 0.18, progress);
-                const phoneTravel = smoothstep(0.02, 0.7, progress);
-                const mergeTravel = smoothstep(0.1, 0.5, progress);
+                // Beat 1: phone rises, logos enter from top/bottom.
+                // Sammanslagningen får nu 70 % av scrollsträckan i stället för 50 %:
+                // BankID och Bolagsverket närmar sig varandra ~40 % långsammare.
+                // Den döda svansen på slutet (där inget hände) är borttagen och
+                // omfördelad hit, så sektionen är lika lång men inget scroll slösas.
+                const phoneIntro = smoothstep(0, 0.16, progress);
+                const phoneTravel = smoothstep(0.02, 0.68, progress);
+                const mergeTravel = smoothstep(0.06, 0.70, progress);
                 // Opacity peaks mid-merge: 0 → 1 → 0
                 const logoOpacity = Math.sin(Math.PI * mergeTravel);
                 // Tint toward check green as logos converge/fade out
                 const logoTint = mergeTravel < 0.48
                     ? 0
                     : smoothstep(0.48, 1, mergeTravel);
-                // Beat 2: check replaces logos as they converge at center
+                // Beat 2: check replaces logos as they converge at center.
+                // Ligger i mergeTravel-rymden och följer därför den nya takten av sig själv.
                 const checkProgress = mergeTravel < 0.58
                     ? 0
                     : smoothstep(0.58, 0.98, mergeTravel);
-                // Beat 3: result copy inside phone, right after merge resolves
-                const resultIntro = smoothstep(0.52, 0.78, progress);
+                // Beat 3: result copy inside phone, right after merge resolves.
+                // Behåller ungefär samma antal pixlar som förut, så upplösningen
+                // känns lika lugn som i dag.
+                const resultIntro = smoothstep(0.72, 0.97, progress);
                 // Check lifts sooner/faster than the text settles
-                const checkLift = smoothstep(0.5, 0.62, progress);
-                const activeStep = progress < 0.36 ? 0 : progress < 0.54 ? 1 : 2;
+                const checkLift = smoothstep(0.70, 0.80, progress);
+                const activeStep = progress < 0.50 ? 0 : progress < 0.72 ? 1 : 2;
 
                 trustSection.dataset.step = String(activeStep);
                 trustSection.style.setProperty('--trust-progress', progress.toFixed(4));
@@ -4317,19 +4576,41 @@
             }
         });
 
-        // Make "integritetspolicyn" clickable
-        const privacyLink = document.querySelector('.entry__choice span p');
-        if (privacyLink) {
-            const text = privacyLink.textContent;
-            const newText = text.replace('integritetspolicyn', '<a href="#" class="privacy-link">integritetspolicyn</a>');
-            privacyLink.innerHTML = newText;
-        }
-
+        // Samtyckestexterna i hero och botten-CTA har egna .privacy-link-ankare i markupen.
         document.addEventListener('click', (e) => {
             const link = e.target.closest('.privacy-link');
             if (!link) return;
             e.preventDefault();
             openPrivacyPopup();
+        });
+
+        // Cookiepolicyn: samma popup-beteende, innehållet kommer från CookieFirst.
+        const cookiePopup = document.getElementById('cookie-popup');
+
+        const closeCookiePopup = () => {
+            if (!cookiePopup) return;
+            cookiePopup.classList.remove('active');
+            document.body.style.overflowY = '';
+            document.documentElement.style.overflowY = '';
+        };
+
+        document.getElementById('close-cookie-popup')?.addEventListener('click', closeCookiePopup);
+
+        cookiePopup?.addEventListener('click', (event) => {
+            if (event.target === cookiePopup) closeCookiePopup();
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') closeCookiePopup();
+        });
+
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('.cookie-link');
+            if (!link || !cookiePopup) return;
+            e.preventDefault();
+            cookiePopup.classList.add('active');
+            document.body.style.overflowY = 'hidden';
+            document.documentElement.style.overflowY = 'hidden';
         });
 
     });
@@ -4467,24 +4748,17 @@
             </div>
           </div>
 
-          <div style="padding: 8px 0;">
-            <div class="sib-optin sib-form-block" data-required="true">
-              <div class="form__entry entry_mcq">
-                <div class="form__label-row form__label-row--horizontal">
-                  <div class="entry__choice">
-                    <label>
-                      <input type="checkbox" class="input_replaced" value="1" id="OPT_IN" name="OPT_IN" required checked />
-                      <span class="checkbox checkbox_tick_positive" style="margin-left:0px;"></span>
-                      <span style="font-size:14px; text-align:left; font-family:Helvetica, sans-serif; color:#979797; background-color:transparent;"><p>Jag godkänner att ta emot nyheter från Tradespace Sweden AB och integritetspolicyn enligt GDPR.&nbsp;</p><span data-required="*" style="display: inline;" class="entry__label entry__label_optin"></span></span>
-                    </label>
-                  </div>
-                </div>
-                <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#661d1d; background-color:#ffeded; border-radius:3px; border-color:#ff4949;">
-                </label>
-                <label class="entry__specification" style="font-size:12px; text-align:left; font-family:Helvetica, sans-serif; color:#666; text-align:left">
-                  Ni kan avbryta när som helst genom länken i våra mejl.
-                </label>
-              </div>
+          <!-- Samtycke: låg tidigare i en förikryssad kryssruta som dessutom var CSS-gömd,
+               vilket inte är giltigt samtycke. Nu ges det genom att besökaren skickar
+               formuläret, med villkoret synligt intill knappen (.hero-consent nedan). -->
+          <!-- Inget data-required här: Brevos klientvalidering letar efter en ikryssad
+               kryssruta och blockerar annars hela submiten. Wrappern behålls så Brevos
+               felhantering hittar ett .form__entry för OPT_IN. -->
+          <div class="sib-optin sib-form-block">
+            <div class="form__entry entry_mcq">
+              <input type="hidden" value="1" id="OPT_IN" name="OPT_IN" />
+              <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#661d1d; background-color:#ffeded; border-radius:3px; border-color:#ff4949;">
+              </label>
             </div>
           </div>
 
@@ -4533,6 +4807,36 @@
         document.head.appendChild(script);
       }
 
+      /* Annonskorten ligger absolut positionerade i hero och flyttar sig inte av sig
+         själva när captchan fälls ut. Utan detta glider samtyckestexten under
+         formuläret ovanpå exempelannonserna. --hero-captcha-space speglar
+         utfällningens verkliga höjd, så korten och hero-höjden följer med. */
+      function captchaInner() {
+        return document.querySelector('#ts-captcha-reveal .ts-captcha-reveal__inner');
+      }
+
+      function syncCaptchaSpace() {
+        var hero = document.querySelector('.hero-section');
+        var inner = captchaInner();
+        if (!hero || !inner) return;
+        hero.style.setProperty('--hero-captcha-space', Math.round(inner.getBoundingClientRect().height) + 'px');
+      }
+
+      function watchCaptchaSpace() {
+        var inner = captchaInner();
+        if (!inner || typeof ResizeObserver !== 'function') return;
+        // Följer utfällningen bildruta för bildruta: korten glider ned i samma takt.
+        new ResizeObserver(syncCaptchaSpace).observe(inner);
+      }
+
+      // reCAPTCHA-widgeten renderas asynkront efter utfällningen, så en enda mätning
+      // vid klicket fångar bara padding och marginaler. Mät om tills den är på plats.
+      function resyncCaptchaSpace() {
+        [120, 600, 1400, 3000, 6000].forEach(function (delay) {
+          window.setTimeout(syncCaptchaSpace, delay);
+        });
+      }
+
       function tryRevealCaptcha() {
         var email = document.querySelector('#sib-form #EMAIL');
         var wrap = document.getElementById('ts-captcha-reveal');
@@ -4541,6 +4845,8 @@
         wrap.classList.add('is-visible');
         wrap.setAttribute('aria-hidden', 'false');
         loadRecaptcha();
+        syncCaptchaSpace();
+        resyncCaptchaSpace();
         requestAnimationFrame(function () {
           wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         });
@@ -4549,6 +4855,7 @@
       function bind() {
         var email = document.querySelector('#sib-form #EMAIL');
         if (!email) return;
+        watchCaptchaSpace();
         email.addEventListener('input', tryRevealCaptcha);
         email.addEventListener('focus', function () {
           if (email.value.trim()) tryRevealCaptcha();
@@ -4562,81 +4869,12 @@
       }
     })();
 
-    (function () {
-      function handoffToHeroSignup(emailValue) {
-        var heroEmail = document.querySelector('#sib-form #EMAIL');
-        var heroForm = document.getElementById('sib-form');
-        if (!heroEmail || !heroForm) return;
-
-        heroEmail.value = emailValue;
-        heroEmail.dispatchEvent(new Event('input', { bubbles: true }));
-
-        heroForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        window.setTimeout(function () {
-          heroEmail.focus();
-        }, 450);
-      }
-
-      function bindBetaCta() {
-        var form = document.getElementById('beta-cta-form');
-        var input = document.getElementById('beta-cta-email');
-        if (!form || !input) return;
-
-        form.addEventListener('submit', function (event) {
-          event.preventDefault();
-          if (!input.reportValidity()) return;
-          handoffToHeroSignup(input.value.trim());
-        });
-      }
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', bindBetaCta);
-      } else {
-        bindBetaCta();
-      }
-    })();
-
-    (function () {
-      function fireWaitlistLead() {
-        if (window.__tsWaitlistLeadFired) return;
-        window.__tsWaitlistLeadFired = true;
-        if (typeof gtag === 'function') {
-          gtag('event', 'generate_lead', { method: 'waitlist' });
-        }
-      }
-
-      function successLooksVisible(el) {
-        if (!el) return false;
-        if (el.classList.contains('sib-form-message-panel--active')) return true;
-        if (el.style.display && el.style.display !== 'none') return true;
-        var style = window.getComputedStyle(el);
-        return style.display !== 'none' && style.visibility !== 'hidden' && el.getAttribute('aria-hidden') !== 'true';
-      }
-
-      function bindLeadEvent() {
-        var success = document.getElementById('success-message');
-        if (!success) return;
-        if (successLooksVisible(success)) {
-          fireWaitlistLead();
-          return;
-        }
-        var observer = new MutationObserver(function () {
-          if (successLooksVisible(success)) {
-            fireWaitlistLead();
-            observer.disconnect();
-          }
-        });
-        observer.observe(success, { attributes: true, attributeFilter: ['style', 'class', 'aria-hidden'] });
-      }
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', bindLeadEvent);
-      } else {
-        bindLeadEvent();
-      }
-    })();
+    /* Bekräftelse (tack-dialog), generate_lead, bottenformulärets Brevo-POST och
+       den sticky CTA:n ligger i ts-waitlist-skriptet längst ned i body. */
   </script>
   <!-- End Brevo Form -->
+
+                <p class="hero-consent">Genom att anmäla er godkänner ni att ta emot nyheter från Tradespace Sweden AB enligt <a href="#" class="privacy-link">integritetspolicyn</a>. Ni kan avbryta när som helst via länken i våra mejl.</p>
               
             </div>
         </main>
@@ -4646,13 +4884,16 @@
                     <div class="hero-social-head">
                         <span class="hero-avatar">NK</span>
                         <span>
-                            <span class="hero-social-name">Nordkomponent AB</span>
+                            <span class="hero-social-name">Nordkomponenter AB</span>
                             <span class="hero-social-meta">för 2 tim sedan</span>
                         </span>
                     </div>
                     <span class="hero-ad-chip">Tillverkning</span>
                     <p>Ledig CNC-kapacitet i Västerås. Vi levererar frästa aluminiumdetaljer i små och medelstora serier med mätprotokoll inkluderat.</p>
-                    <img class="hero-ad-image" src="assets/images/ads/nordkomponent-cnc-card.jpg" alt="" loading="lazy" decoding="async">
+                    <picture>
+                        <source type="image/webp" srcset="assets/images/ads/nordkomponent-cnc-card.webp">
+                        <img class="hero-ad-image" src="assets/images/ads/nordkomponent-cnc-card.jpg" alt="" loading="lazy" decoding="async">
+                    </picture>
                 </article>
                 <article class="hero-social-card example-mark ad-2">
                     <div class="hero-social-head">
@@ -4664,7 +4905,10 @@
                     </div>
                     <span class="hero-ad-chip">Lager & distribution</span>
                     <p>Återanvändbara transportlådor och 3PL-yta i Jönköping. Perfekt för e-handel, reservdelar och B2B-flöden med snabba ledtider.</p>
-                    <img class="hero-ad-image" src="assets/images/ads/klarback-logistik-crates-card.jpg" alt="" loading="lazy" decoding="async">
+                    <picture>
+                        <source type="image/webp" srcset="assets/images/ads/klarback-logistik-crates-card.webp">
+                        <img class="hero-ad-image" src="assets/images/ads/klarback-logistik-crates-card.jpg" alt="" loading="lazy" decoding="async">
+                    </picture>
                 </article>
             </div>
             <div class="hero-ad-column center">
@@ -4678,7 +4922,10 @@
                     </div>
                     <span class="hero-ad-chip">Energi</span>
                     <p>Kompletta solcellspaket för lager och industrifastigheter. Vi söker installatörer och fastighetsägare inför vårens projektstarter.</p>
-                    <img class="hero-ad-image" src="assets/images/ads/solsken-energy-rooftop-card.jpg" alt="" loading="lazy" decoding="async">
+                    <picture>
+                        <source type="image/webp" srcset="assets/images/ads/solsken-energy-rooftop-card.webp">
+                        <img class="hero-ad-image" src="assets/images/ads/solsken-energy-rooftop-card.jpg" alt="" loading="lazy" decoding="async">
+                    </picture>
                 </article>
                 <article class="hero-social-card example-mark ad-7">
                     <div class="hero-social-head">
@@ -4690,7 +4937,10 @@
                     </div>
                     <span class="hero-ad-chip">Fordonsdelar</span>
                     <p>EV-komponenter för serviceverkstäder: batterimoduler, kablage och laddkontakter med verifierad dokumentation.</p>
-                    <img class="hero-ad-image" src="assets/images/ads/voltverk-ev-parts-card.jpg" alt="" loading="lazy" decoding="async">
+                    <picture>
+                        <source type="image/webp" srcset="assets/images/ads/voltverk-ev-parts-card.webp">
+                        <img class="hero-ad-image" src="assets/images/ads/voltverk-ev-parts-card.jpg" alt="" loading="lazy" decoding="async">
+                    </picture>
                 </article>
             </div>
             <div class="hero-ad-column">
@@ -4704,7 +4954,10 @@
                     </div>
                     <span class="hero-ad-chip">Byggmaterial</span>
                     <p>Kilntorkad konstruktionsfuru från certifierade sågverk. Direktleverans till byggare och prefab-producenter i hela Sverige.</p>
-                    <img class="hero-ad-image" src="assets/images/ads/norrtimmer-lumber-card.jpg" alt="" loading="lazy" decoding="async">
+                    <picture>
+                        <source type="image/webp" srcset="assets/images/ads/norrtimmer-lumber-card.webp">
+                        <img class="hero-ad-image" src="assets/images/ads/norrtimmer-lumber-card.jpg" alt="" loading="lazy" decoding="async">
+                    </picture>
                 </article>
                 <article class="hero-social-card example-mark ad-5">
                     <div class="hero-social-head">
@@ -4716,7 +4969,10 @@
                     </div>
                     <span class="hero-ad-chip">Medtech</span>
                     <p>Sterila plastdetaljer och kapslingar för medicintekniska produkter. Renrumsproduktion, spårbarhet och korta offerttider.</p>
-                    <img class="hero-ad-image" src="assets/images/ads/mediform-components-card.jpg" alt="" loading="lazy" decoding="async">
+                    <picture>
+                        <source type="image/webp" srcset="assets/images/ads/mediform-components-card.webp">
+                        <img class="hero-ad-image" src="assets/images/ads/mediform-components-card.jpg" alt="" loading="lazy" decoding="async">
+                    </picture>
                 </article>
             </div>
         </div>
@@ -4770,9 +5026,9 @@
                                     <h3>Nu kan ni göra <span>affärer</span> tryggt.</h3>
                                     <p>Verifierad person. Verifierat bolag. Behörighet bekräftad.</p>
                                     <div class="trust-result-meta">
-                                        <span>BankID-verifierad användare</span>
+                                        <span>BankID-verifierad kontoägare</span>
                                         <span>Bolag kontrollerat via Bolagsverket</span>
-                                        <span>Ägare eller firmatecknare bekräftad</span>
+                                        <span>Firmatecknares behörighet bekräftad</span>
                                     </div>
                                 </div>
                             </div>
@@ -4896,7 +5152,7 @@
             <div class="why-grid">
                 <article class="why-item">
                     <h3>Endast verifierade företag</h3>
-                    <p>BankID och Bolagsverket bakom varje konto. Ni gör affärer med riktiga bolag och behöriga personer.</p>
+                    <p>BankID och Bolagsverket bakom varje företagsprofil. Ni gör affärer med riktiga bolag och behöriga personer.</p>
                 </article>
                 <article class="why-item">
                     <h3>Bygg ert nätverk</h3>
@@ -4923,8 +5179,11 @@
                     <h3>Total överblick från start</h3>
                     <p>Kraftfull sök, branschanpassade kategorier och ett tydligt flöde. Bevakningar, meddelanden och annonser samlade i en vy, så nästa affär börjar snabbare.</p>
                 </div>
-                <figure class="product-shot value-image" data-image="Exempelbild1.jpg" role="button" tabindex="0" aria-label="Visa större bild: Överblick av Tradespace-gränssnitt">
-                    <img src="Exempelbild1.jpg" alt="Överblick av Tradespace-gränssnitt" loading="lazy" decoding="async" />
+                <figure class="product-shot value-image" data-image="Exempelbild1.webp" role="button" tabindex="0" aria-label="Visa större bild: Överblick av Tradespace-gränssnitt">
+                    <picture>
+                        <source type="image/webp" srcset="Exempelbild1.webp">
+                        <img src="Exempelbild1.jpg" alt="Överblick av Tradespace-gränssnitt" loading="lazy" decoding="async" />
+                    </picture>
                     <span class="product-shot-magnifier" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
                             <circle cx="11" cy="11" r="7"></circle>
@@ -4939,8 +5198,11 @@
                     <h3>Företagsprofilen, ert space</h3>
                     <p>Visa upp bolaget med anpassningsbar profil, inlägg och kontaktpersoner. Annonser kan fästas högst upp så partners snabbt förstår vad ni erbjuder.</p>
                 </div>
-                <figure class="product-shot value-image" data-image="Exempelbild2.jpg" role="button" tabindex="0" aria-label="Visa större bild: Anpassningsbar företagsprofil i Tradespace">
-                    <img src="Exempelbild2.jpg" alt="Anpassningsbar företagsprofil i Tradespace" loading="lazy" decoding="async" />
+                <figure class="product-shot value-image" data-image="Exempelbild2.webp" role="button" tabindex="0" aria-label="Visa större bild: Anpassningsbar företagsprofil i Tradespace">
+                    <picture>
+                        <source type="image/webp" srcset="Exempelbild2.webp">
+                        <img src="Exempelbild2.jpg" alt="Anpassningsbar företagsprofil i Tradespace" loading="lazy" decoding="async" />
+                    </picture>
                     <span class="product-shot-magnifier" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
                             <circle cx="11" cy="11" r="7"></circle>
@@ -4955,8 +5217,11 @@
                     <h3>Annonsering för verkligheten</h3>
                     <p>Flera bilder, tydliga upplägg och prissättning som passar fast priser eller pris per enhet (vikt, tid, längd mm). Inga kompromisser, bara annonser som speglar affären.</p>
                 </div>
-                <figure class="product-shot value-image" data-image="Exempelbild3.jpg" role="button" tabindex="0" aria-label="Visa större bild: Tradespace-annonsexempel">
-                    <img src="Exempelbild3.jpg" alt="Tradespace-annonsexempel" loading="lazy" decoding="async" />
+                <figure class="product-shot value-image" data-image="Exempelbild3.webp" role="button" tabindex="0" aria-label="Visa större bild: Tradespace-annonsexempel">
+                    <picture>
+                        <source type="image/webp" srcset="Exempelbild3.webp">
+                        <img src="Exempelbild3.jpg" alt="Tradespace-annonsexempel" loading="lazy" decoding="async" />
+                    </picture>
                     <span class="product-shot-magnifier" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
                             <circle cx="11" cy="11" r="7"></circle>
@@ -4973,12 +5238,31 @@
         <div class="beta-cta-inner">
             <h2 class="beta-cta-title" id="beta-cta-title">Publik beta öppnar <span>14 september.</span></h2>
             <p class="beta-cta-text">Säkra er plats och få 20 gratis annonser samt 25% rabatt året ut.</p>
-            <form class="beta-cta-form" id="beta-cta-form" action="#sib-form" method="get">
+            <!-- Samma Brevo-lista som hero-formuläret. Utan JS postar den direkt till Brevo;
+                 med JS skickas den via fetch och bekräftas i tack-dialogen. -->
+            <form class="beta-cta-form" id="beta-cta-form" method="POST" data-type="subscription"
+                action="https://cbebf07e.sibforms.com/serve/MUIFAM3QB9NpbUFFEYbcbr59Z0T2GS7cF0h7TyLkppvlYd96ksAjCXQLPZLhzYboPzDIP_UA_f6VTeZfp6_qK2Fb5S1UuMEmWUDrw1JeOMOr4KfGjynMkN4JD0YzpEaGJRDaSyWzwLmYFnW1ptn5UGcMYjpI0hTxDMdEtDwyfOXZClHRAklILUr4Kq3BDJqoPchwAUQ3ntfy9OzRpg==">
                 <div class="beta-cta-field">
                     <label class="visually-hidden" for="beta-cta-email">E-postadress</label>
-                    <input id="beta-cta-email" name="email" type="email" autocomplete="email" placeholder="Ange er e-postadress" required />
-                    <button type="submit">Säkra er plats</button>
+                    <input id="beta-cta-email" name="EMAIL" type="email" autocomplete="email" placeholder="Ange er e-postadress" required />
+                    <button type="submit" id="beta-cta-submit">Säkra er plats</button>
                 </div>
+                <!-- reCAPTCHA renderas explicit av JS när besökaren börjar skriva (Brevo kräver token serverside) -->
+                <div class="ts-captcha-reveal beta-cta-captcha" id="beta-cta-captcha-reveal" aria-hidden="true">
+                    <div class="ts-captcha-reveal__inner">
+                        <div class="ts-captcha-reveal__pad">
+                            <div id="beta-cta-captcha"></div>
+                        </div>
+                    </div>
+                </div>
+                <input class="input--hidden" type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" />
+                <input type="hidden" name="OPT_IN" value="1" />
+                <input type="hidden" name="locale" value="sv" />
+                <p class="beta-cta-status" id="beta-cta-status" role="status" aria-live="polite" hidden></p>
+                <noscript>
+                    <p class="beta-cta-consent">Anmälan kräver JavaScript. Mejla <a href="mailto:info@tradespace.se">info@tradespace.se</a> så lägger vi till er manuellt.</p>
+                </noscript>
+                <p class="beta-cta-consent">Genom att anmäla er godkänner ni att ta emot nyheter från Tradespace Sweden AB enligt <a href="#" class="privacy-link">integritetspolicyn</a>. Ni kan avbryta när som helst via länken i våra mejl.</p>
             </form>
         </div>
     </section>
@@ -4996,9 +5280,11 @@
                     <p class="footer-company">© 2026 Tradespace Sweden AB (559544-9751), Lund, Sweden</p>
                     <p class="footer-note">* Annonskorten är exempel</p>
                 </div>
+                <!-- Användarvillkoren är inte publicerade. Länken låg som mailto: och
+                     öppnade e-postklienten i stället för villkor: borttagen tills de finns. -->
                 <ul class="footer-links">
-                    <li><a href="mailto:info@tradespace.se">Tradespace Användarvillkor</a></li>
                     <li><a href="#" class="privacy-link">Tradespace Integritetspolicy</a></li>
+                    <li><a href="#" class="cookie-link">Tradespace Cookiepolicy</a></li>
                 </ul>
             </div>
         </div>
@@ -5052,6 +5338,439 @@
         </div>
     </div>
 </div>
+
+<!-- Cookiepolicy. Innehållet genereras av CookieFirst i #cookiefirst-policy-page. -->
+<div class="privacy-popup" id="cookie-popup">
+    <button class="close-privacy-popup" id="close-cookie-popup" title="Stäng">×</button>
+    <div class="privacy-content">
+        <h3>Cookiepolicy</h3>
+        <div class="privacy-text">
+            <div id="cookiefirst-policy-page"></div>
+            <p>This cookie policy has been created and updated by <a href="https://cookiefirst.com">CookieFirst CMP</a>.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Sticky signup CTA: syns mellan hero-formuläret och botten-CTA:n -->
+<div class="ts-sticky-cta" id="ts-sticky-cta" aria-hidden="true">
+    <button class="ts-sticky-cta-btn" id="ts-sticky-cta-btn" type="button" tabindex="-1">
+        Säkra er plats
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 5v14"></path>
+            <path d="M19 12l-7 7-7-7"></path>
+        </svg>
+    </button>
+</div>
+
+<!-- Bekräftelse efter anmälan: stängs bara med OK-knappen, inte genom klick utanför -->
+<dialog class="ts-dialog" id="ts-thanks-dialog" aria-labelledby="ts-thanks-title">
+    <div class="ts-dialog-inner">
+        <span class="ts-dialog-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6L9 17l-5-5"></path>
+            </svg>
+        </span>
+        <h2 id="ts-thanks-title">Tack för er anmälan.</h2>
+        <p>Er e-postadress är registrerad för den publika betan. Ni får en bekräftelse via e-post och vi hör av oss när betan öppnar den 14 september.</p>
+        <button class="ts-dialog-ok" id="ts-thanks-ok" type="button" autofocus>OK</button>
+    </div>
+</dialog>
+
+<script>
+    /* Väntelistans gemensamma logik: bekräftelsedialog, generate_lead,
+       bottenformulärets Brevo-POST och den sticky CTA:n. */
+    (function () {
+        var docEl = document.documentElement;
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        // --- UTM → Brevo ---------------------------------------------------------
+        // Skickas som dolda fält på båda formulären. Detta KRÄVER att attributen
+        // UTM_SOURCE / UTM_MEDIUM / UTM_CAMPAIGN / UTM_CONTENT / UTM_TERM finns i
+        // Brevo (Settings → Contact attributes). Om Brevo ändå avvisar dem tas de
+        // bort så nästa försök går igenom: en kontakt utan källa slår en förlorad lead.
+        var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+        var UTM_STORAGE_KEY = 'ts_utm';
+
+        function readUtm() {
+            var stored = {};
+            try {
+                stored = JSON.parse(window.sessionStorage.getItem(UTM_STORAGE_KEY) || '{}') || {};
+            } catch (error) {
+                stored = {};
+            }
+
+            var params = new URLSearchParams(window.location.search);
+            var fromUrl = {};
+            UTM_KEYS.forEach(function (key) {
+                var value = (params.get(key) || '').trim();
+                if (value) fromUrl[key] = value.slice(0, 200);
+            });
+
+            // Senaste kampanjen vinner, annars behålls sessionens tidigare värden.
+            if (Object.keys(fromUrl).length) {
+                stored = fromUrl;
+                try {
+                    window.sessionStorage.setItem(UTM_STORAGE_KEY, JSON.stringify(stored));
+                } catch (error) { /* privat läge: kör vidare utan att spara */ }
+            }
+            return stored;
+        }
+
+        var utm = readUtm();
+        var hasUtm = Object.keys(utm).length > 0;
+
+        function attachUtm(form) {
+            if (!form || !hasUtm) return;
+            Object.keys(utm).forEach(function (key) {
+                var name = key.toUpperCase();
+                if (form.querySelector('[name="' + name + '"]')) return;
+                var field = document.createElement('input');
+                field.type = 'hidden';
+                field.name = name;
+                field.value = utm[key];
+                field.setAttribute('data-ts-utm', '1');
+                form.appendChild(field);
+            });
+        }
+
+        function stripUtm(form) {
+            if (!form) return false;
+            var fields = form.querySelectorAll('[data-ts-utm]');
+            if (!fields.length) return false;
+            Array.prototype.forEach.call(fields, function (field) {
+                field.parentNode.removeChild(field);
+            });
+            return true;
+        }
+
+        // --- Bekräftelsedialog + konverteringshändelse ---------------------------
+        // Konverteringen rapporteras till alla tre kanalerna. Varje anrop är skyddat:
+        // utan samtycke till respektive cookiekategori är funktionen inte definierad.
+        function fireWaitlistLead() {
+            if (window.__tsWaitlistLeadFired) return;
+            window.__tsWaitlistLeadFired = true;
+            if (typeof gtag === 'function') {
+                gtag('event', 'generate_lead', { method: 'waitlist' });
+            }
+            if (typeof window.lintrk === 'function') {
+                window.lintrk('track', { conversion_id: 30047233 });
+            }
+            if (typeof window.fbq === 'function') {
+                window.fbq('track', 'Lead');
+            }
+        }
+
+        var dialog = document.getElementById('ts-thanks-dialog');
+        var okButton = document.getElementById('ts-thanks-ok');
+        var lockedScroll = false;
+
+        function unlockScroll() {
+            if (!lockedScroll) return;
+            lockedScroll = false;
+            document.body.style.overflowY = '';
+            docEl.style.overflowY = '';
+        }
+
+        if (dialog) {
+            // Scrollen låses upp i klicket självt, inte bara via close-eventet:
+            // annars riskerar sidan att bli låst om eventet aldrig levereras.
+            okButton?.addEventListener('click', function () {
+                unlockScroll();
+                if (dialog.open) dialog.close();
+            });
+            dialog.addEventListener('cancel', unlockScroll); // Escape
+            dialog.addEventListener('close', unlockScroll);  // backstopp
+        }
+
+        window.tsShowWaitlistThanks = function () {
+            fireWaitlistLead();
+            docEl.classList.add('ts-waitlist-joined');
+
+            if (!dialog || typeof dialog.showModal !== 'function') {
+                tsToast('Tack! Vi hör av oss när betan öppnar den 14 september.', true);
+                return;
+            }
+            if (dialog.open) return;
+
+            document.body.style.overflowY = 'hidden';
+            docEl.style.overflowY = 'hidden';
+            lockedScroll = true;
+            dialog.showModal();
+        };
+
+        // Hero-formuläret postas av Brevos eget script, som bygger sin FormData från
+        // formuläret: dolda UTM-fält följer därför med automatiskt.
+        (function wireHeroUtm() {
+            var heroForm = document.getElementById('sib-form');
+            var errorPanel = document.getElementById('error-message');
+            if (!heroForm || !hasUtm) return;
+
+            attachUtm(heroForm);
+            if (!errorPanel) return;
+
+            // Brevo nollställer captchan vid fel, så vi kan inte skicka om automatiskt.
+            // Vi tar bort UTM-fälten så besökarens nästa försök går igenom.
+            var observer = new MutationObserver(function () {
+                if (!errorPanel.classList.contains('sib-form-message-panel--active')) return;
+                observer.disconnect();
+                if (stripUtm(heroForm)) {
+                    console.warn('[vantelista] Brevo avvisade hero-anmälan. UTM-fälten är borttagna inför nästa försök — saknas UTM-attributen i Brevo?');
+                }
+            });
+            observer.observe(errorPanel, { attributes: true, attributeFilter: ['class', 'style'] });
+        })();
+
+        // Hero-formuläret sköts av Brevos eget script: vi lyssnar på dess successpanel.
+        (function watchHeroSuccess() {
+            var success = document.getElementById('success-message');
+            if (!success) return;
+
+            // Bara Brevos egna signaler räknas. En bredare koll (t.ex. computed style)
+            // slår till av misstag om sib-styles.css inte laddar, och skulle då visa
+            // tack-dialogen direkt vid sidladdning.
+            function looksVisible(el) {
+                if (el.classList.contains('sib-form-message-panel--active')) return true;
+                return Boolean(el.style.display) && el.style.display !== 'none';
+            }
+
+            if (looksVisible(success)) {
+                window.tsShowWaitlistThanks();
+                return;
+            }
+
+            var observer = new MutationObserver(function () {
+                if (!looksVisible(success)) return;
+                observer.disconnect();
+                window.tsShowWaitlistThanks();
+            });
+            observer.observe(success, { attributes: true, attributeFilter: ['style', 'class', 'aria-hidden'] });
+        })();
+
+        // --- Botten-CTA: riktig anmälan mot samma Brevo-lista som hero ------------
+        (function bindBetaCtaForm() {
+            var form = document.getElementById('beta-cta-form');
+            var input = document.getElementById('beta-cta-email');
+            var button = document.getElementById('beta-cta-submit');
+            var status = document.getElementById('beta-cta-status');
+            var action = form && form.getAttribute('action');
+
+            // Utan fetch/FormData låter vi formuläret posta till Brevo på vanligt sätt.
+            if (!form || !input || !button || !action || !window.fetch || !window.FormData) return;
+
+            var idleLabel = button.textContent;
+
+            function setStatus(message, state) {
+                if (!status) return;
+                status.textContent = message || '';
+                status.hidden = !message;
+                if (state) {
+                    status.setAttribute('data-state', state);
+                } else {
+                    status.removeAttribute('data-state');
+                }
+            }
+
+            // --- reCAPTCHA: Brevo avvisar POST utan giltig token -----------------
+            var captchaWrap = document.getElementById('beta-cta-captcha-reveal');
+            var captchaHost = document.getElementById('beta-cta-captcha');
+            var heroCaptcha = document.getElementById('sib-captcha');
+            // Samma nyckel som Brevos hero-widget, läst vid runtime så de aldrig glider isär.
+            var siteKey = heroCaptcha && heroCaptcha.getAttribute('data-sitekey');
+            var widgetId = null;
+            var captchaRequested = false;
+
+            function loadRecaptchaScript() {
+                // Samma id som hero-formulärets loader: bara ett script laddas.
+                if (document.getElementById('ts-recaptcha-script')) return;
+                var script = document.createElement('script');
+                script.id = 'ts-recaptcha-script';
+                script.src = 'https://www.google.com/recaptcha/api.js?hl=sv';
+                script.async = true;
+                script.defer = true;
+                document.head.appendChild(script);
+            }
+
+            function renderCaptcha() {
+                if (widgetId !== null || !captchaHost || !siteKey) return;
+                if (!window.grecaptcha || typeof window.grecaptcha.render !== 'function') return;
+                try {
+                    widgetId = window.grecaptcha.render(captchaHost, { sitekey: siteKey });
+                } catch (error) {
+                    console.error('[vantelista] kunde inte rendera captcha', error);
+                }
+            }
+
+            function revealCaptcha() {
+                if (!captchaWrap || !siteKey) return;
+                captchaWrap.classList.add('is-visible');
+                captchaWrap.setAttribute('aria-hidden', 'false');
+                if (captchaRequested) {
+                    renderCaptcha();
+                    return;
+                }
+                captchaRequested = true;
+                loadRecaptchaScript();
+                var tries = 0;
+                var timer = window.setInterval(function () {
+                    if (window.grecaptcha && typeof window.grecaptcha.render === 'function') {
+                        window.clearInterval(timer);
+                        renderCaptcha();
+                    } else if (++tries > 120) {
+                        window.clearInterval(timer);
+                    }
+                }, 200);
+            }
+
+            function captchaToken() {
+                if (!window.grecaptcha || widgetId === null) return '';
+                try {
+                    return window.grecaptcha.getResponse(widgetId) || '';
+                } catch (error) {
+                    return '';
+                }
+            }
+
+            function resetCaptcha() {
+                if (!window.grecaptcha || widgetId === null) return;
+                try {
+                    window.grecaptcha.reset(widgetId);
+                } catch (error) { /* widget borta, strunta i det */ }
+            }
+
+            input.addEventListener('input', function () {
+                if (input.value.trim()) revealCaptcha();
+            });
+            input.addEventListener('focus', function () {
+                if (input.value.trim()) revealCaptcha();
+            });
+
+            function releaseButton() {
+                button.disabled = false;
+                button.textContent = idleLabel;
+            }
+
+            function send(token, isRetry) {
+                var body = new FormData(form);
+                if (token) body.set('g-recaptcha-response', token);
+
+                fetch(action + '?isAjax=1', { method: 'POST', body: body })
+                    .then(function (response) {
+                        return response.json().catch(function () { return null; });
+                    })
+                    .then(function (data) {
+                        if (!data || data.success !== true) {
+                            // Kan Brevo ha avvisat UTM-attributen? Skicka om utan dem innan
+                            // vi visar ett fel. Lyckas det inte heller går vi vidare nedan.
+                            if (!isRetry && stripUtm(form)) {
+                                console.warn('[vantelista] Brevo avvisade anmälan; skickar om utan UTM-fält.', data);
+                                send(token, true);
+                                return;
+                            }
+
+                            var fields = (data && data.errors) || {};
+                            var message = 'Det gick inte att skicka. Försök igen, eller mejla info@tradespace.se.';
+                            if (fields.EMAIL) {
+                                message = 'Kontrollera e-postadressen och försök igen.';
+                            } else if (fields['g-recaptcha-response']) {
+                                message = 'Captcha-kontrollen gick ut. Kryssa i rutan igen och skicka.';
+                            } else if (data && data.message) {
+                                message = data.message;
+                            }
+                            console.error('[vantelista] botten-CTA avvisad av Brevo', data);
+                            setStatus(message, 'error');
+                            resetCaptcha();
+                            releaseButton();
+                            return;
+                        }
+
+                        form.reset();
+                        resetCaptcha();
+                        if (captchaWrap) {
+                            captchaWrap.classList.remove('is-visible');
+                            captchaWrap.setAttribute('aria-hidden', 'true');
+                        }
+                        setStatus('Tack! Er plats är säkrad.', 'ok');
+                        releaseButton();
+                        window.tsShowWaitlistThanks();
+                    })
+                    .catch(function (error) {
+                        console.error('[vantelista] botten-CTA', error);
+                        setStatus('Det gick inte att skicka. Kontrollera anslutningen och försök igen.', 'error');
+                        resetCaptcha();
+                        releaseButton();
+                    });
+            }
+
+            attachUtm(form);
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                if (!input.checkValidity()) {
+                    input.reportValidity();
+                    return;
+                }
+
+                var token = captchaToken();
+                if (siteKey && !token) {
+                    revealCaptcha();
+                    setStatus('Kryssa i rutan "Jag är inte en robot" innan ni skickar.', 'error');
+                    return;
+                }
+
+                button.disabled = true;
+                button.textContent = 'Skickar…';
+                setStatus('');
+                send(token, false);
+            });
+        })();
+
+        // --- Sticky CTA: visas när hero-formuläret lämnat vyn, göms vid botten-CTA:n
+        (function setupStickyCta() {
+            var wrap = document.getElementById('ts-sticky-cta');
+            var button = document.getElementById('ts-sticky-cta-btn');
+            var heroForm = document.getElementById('sib-form') || document.querySelector('.hero-section');
+            var target = document.getElementById('beta-cta');
+            var targetInput = document.getElementById('beta-cta-email');
+
+            if (!wrap || !button || !heroForm || !target) return;
+            if (!('IntersectionObserver' in window)) return;
+
+            var pastHero = false;
+            var atBottomForm = false;
+
+            function apply() {
+                var show = pastHero && !atBottomForm;
+                wrap.classList.toggle('is-visible', show);
+                wrap.setAttribute('aria-hidden', show ? 'false' : 'true');
+                button.tabIndex = show ? 0 : -1;
+            }
+
+            // Visa CTA:n när hero-formuläret lämnat vyn ...
+            var heroWatcher = new IntersectionObserver(function (entries) {
+                pastHero = !entries[entries.length - 1].isIntersecting;
+                apply();
+            });
+            heroWatcher.observe(heroForm);
+
+            // ... och göm den igen när botten-CTA:n är på väg in.
+            var targetWatcher = new IntersectionObserver(function (entries) {
+                atBottomForm = entries[entries.length - 1].isIntersecting;
+                apply();
+            }, { rootMargin: '0px 0px -20% 0px' });
+            targetWatcher.observe(target);
+
+            button.addEventListener('click', function () {
+                target.scrollIntoView({
+                    behavior: reduceMotion.matches ? 'auto' : 'smooth',
+                    block: 'center'
+                });
+                window.setTimeout(function () {
+                    if (targetInput) targetInput.focus({ preventScroll: true });
+                }, reduceMotion.matches ? 60 : 620);
+            });
+        })();
+    })();
+</script>
 </body>
 
 </html>
