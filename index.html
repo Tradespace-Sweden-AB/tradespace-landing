@@ -10,6 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tradespace | Handla med förtroende.</title>
     <meta name="description" content="Verifierad B2B-marknadsplats för svenska företag. Publik beta öppnar 14 september. Säkra er plats och få 20 gratis annonser samt 25% rabatt året ut." />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#050b14" />
     <link rel="canonical" href="https://tradespace.se/" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="sv_SE" />
@@ -25,6 +27,37 @@
     <meta name="twitter:title" content="Tradespace | Handla med förtroende." />
     <meta name="twitter:description" content="Verifierad B2B-marknadsplats för svenska företag. Publik beta öppnar 14 september. Säkra er plats och få 20 gratis annonser samt 25% rabatt året ut." />
     <meta name="twitter:image" content="https://tradespace.se/assets/images/og-image.png" />
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                    "@type": "Organization",
+                    "@id": "https://tradespace.se/#organization",
+                    "name": "Tradespace",
+                    "legalName": "Tradespace Sweden AB",
+                    "url": "https://tradespace.se/",
+                    "logo": "https://tradespace.se/TS_Logo_White_SVG.svg",
+                    "email": "info@tradespace.se",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": "Lund",
+                        "addressCountry": "SE"
+                    }
+                },
+                {
+                    "@type": "WebSite",
+                    "@id": "https://tradespace.se/#website",
+                    "url": "https://tradespace.se/",
+                    "name": "Tradespace",
+                    "inLanguage": "sv-SE",
+                    "publisher": {
+                        "@id": "https://tradespace.se/#organization"
+                    }
+                }
+            ]
+        }
+    </script>
     <!-- All spårning nedan är blockerad av CookieFirst tills besökaren samtycker:
          type="text/plain" gör att webbläsaren inte kör skriptet, och CookieFirst
          aktiverar det när rätt kategori accepteras. Koden som anropar gtag/lintrk/fbq
